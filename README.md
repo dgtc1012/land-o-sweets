@@ -1,2 +1,2 @@
-# land-o-sweets
+# World-o-Sweets
 CS1530 Project
