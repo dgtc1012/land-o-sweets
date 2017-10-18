@@ -1,0 +1,25 @@
+group 'Land-o-Sweets'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'application'
+mainClassName = 'LandOfSweets'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+run {
+    try {
+        systemProperties System.getProperties()
+        args System.getProperty("args").split()
+    } catch (Exception e) {
+
+    }
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
