@@ -1,18 +1,18 @@
 public class Card {
 
-    private Color color;
+    private CardColor color;
     private int value;
 
-    public Card(Color color, int value) {
+    public Card(CardColor color, int value) {
         this.color = color;
         this.value = value;
     }
 
-    public void setColor(Color color) {
+    public void setColor(CardColor color) {
         this.color = color;
     }
 
-    public Color getColor() {
+    public CardColor getColor() {
         return color;
     }
 

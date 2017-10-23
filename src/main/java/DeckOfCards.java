@@ -19,7 +19,7 @@ public class DeckOfCards {
 
     public void populateDeck() {
         deck = new ArrayList<>();
-        for (Color color:Color.values()) {
+        for (CardColor color:CardColor.values()) {
             for (int i = 0; i < 10; i++) {
                 deck.add(new Card(color, SINGLE));
             }
@@ -37,7 +37,8 @@ public class DeckOfCards {
         if (!deck.isEmpty()) {
             return deck.remove(0);
         } else {
-            throw new NoSuchElementException();
+            //throw new NoSuchElementException();
+            return null;
         }
     }
 }
