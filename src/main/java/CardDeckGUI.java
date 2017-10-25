@@ -21,6 +21,16 @@ public class CardDeckGUI extends JPanel implements ActionListener{
     Font bigFont;
 
     CardDeckGUI(){
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                if(e.getX() >= MINSPACING + CARDWIDTH/2 && e.getX() < MINSPACING + CARDWIDTH/2 + CARDWIDTH && e.getY() >= MINSPACING && e.getY() < MINSPACING + CARDHEIGHT) {
+                    doDraw();
+                }
+            }
+        });
+
         setBackground(Color.LIGHT_GRAY);
         setForeground(Color.CYAN);
         bigFont = new Font("Serif", Font.BOLD, 14);
@@ -30,16 +40,12 @@ public class CardDeckGUI extends JPanel implements ActionListener{
     }
 
     public void actionPerformed(ActionEvent evt){
-        String command = evt.getActionCommand();
-        if(command.equals("Draw"))
-            doDraw();
-        else if(command.equals("New Game"))
-            doNewGame();
+
     }
 
     void doDraw(){
         if(!gameInProgress) {
-            message = "Click \"New Game\" to start a new game!";
+            //message = "Click \"New Game\" to start a new game!";
             cardDrawn = false;
             lastCard = null;
             repaint();
