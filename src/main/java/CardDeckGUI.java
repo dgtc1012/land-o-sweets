@@ -31,8 +31,7 @@ public class CardDeckGUI extends JPanel implements ActionListener{
             }
         });
 
-        setBackground(Color.LIGHT_GRAY);
-        setForeground(Color.CYAN);
+        setForeground(Color.BLACK);
         bigFont = new Font("Serif", Font.BOLD, 14);
         setPreferredSize( new Dimension(DECKSIZE_X, DECKSIZE_Y));
         lastCard = null;
@@ -45,7 +44,6 @@ public class CardDeckGUI extends JPanel implements ActionListener{
 
     void doDraw(){
         if(!gameInProgress) {
-            //message = "Click \"New Game\" to start a new game!";
             cardDrawn = false;
             lastCard = null;
             repaint();
@@ -63,7 +61,7 @@ public class CardDeckGUI extends JPanel implements ActionListener{
         }
         deck = new DeckOfCards();
         deck.shuffleDeck();
-        message = "Player 1 clock draw to start the game!";
+        message = "Player 1 draw to start the game!";
         gameInProgress = true;
         lastCard = null;
         cardDrawn = false;

@@ -21,9 +21,9 @@ public class Gameboard {
         _frame.setVisible(true);
     }
 
-    public static void main(String[] args) {
-      new Changes();
-    }
+    //public static void main(String[] args) {
+    //  new Gameboard();
+    //}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -128,12 +128,11 @@ public class Gameboard {
         sq42 = new JPanel();
         sq74 = new JPanel();
     ///////////////////////////////////
-        deck = new JPanel();
-        flip = new JPanel();
+        deckArea = new JPanel();
     ///////////////////////////////////
 
         _frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        _frame.setSize(1050, 700);
+        _frame.setSize(1250, 700);
         _frame.setLayout(null);
 
         start.setBackground(new Color(255, 255, 255));
@@ -911,29 +910,6 @@ public class Gameboard {
 
         _frame.add(sq33);
         sq33.setBounds(500, 260, 40, 40);
-
-///////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////
-//Current flip settings
-        flip.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
-        flip.setMinimumSize(new Dimension(120, 180));
-        flip.setPreferredSize(new Dimension(120, 180));
-
-        GroupLayout flipLayout = new GroupLayout(flip);
-        flip.setLayout(flipLayout);
-        flipLayout.setHorizontalGroup(
-            flipLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGap(0, 118, Short.MAX_VALUE)
-        );
-        flipLayout.setVerticalGroup(
-            flipLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGap(0, 178, Short.MAX_VALUE)
-        );
-
-        _frame.add(flip);
-        flip.setBounds(750, 360, 120, 180);
-//////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////
 
         sq45.setBackground(Color.orange);
         sq45.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
@@ -1820,27 +1796,12 @@ public class Gameboard {
 //////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////
 //Current deck settings
-        deck.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
-        deck.setPreferredSize(new Dimension(120, 180));
-        deck.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent evt) {
-               deckMouseClicked(evt);
-            }
-        });
+        deckArea.setPreferredSize(new Dimension(300, 180));
 
-        GroupLayout deckLayout = new GroupLayout(deck);
-        deck.setLayout(deckLayout);
-        deckLayout.setHorizontalGroup(
-            deckLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        deckLayout.setVerticalGroup(
-            deckLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        _frame.add(deck);
-        deck.setBounds(890, 360, 120, 180);
+        _frame.add(deckArea);
+        deckArea.setBounds(780, 360, 300, 180);
+        CardDeckGUILayout cardDeck = new CardDeckGUILayout();
+        deckArea.add(cardDeck);
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -1859,8 +1820,7 @@ public class Gameboard {
     // Variables declaration
     private JFrame _frame;
   ////////////////////////////////////////////////////
-    private JPanel deck;
-    private JPanel flip;
+    private JPanel deckArea;
   ////////////////////////////////////////////////////
     private JPanel grandmasHouse;
     private JPanel sq1;

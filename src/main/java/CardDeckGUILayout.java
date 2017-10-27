@@ -6,8 +6,8 @@ public class CardDeckGUILayout extends JPanel {
     public CardDeckGUILayout(){
 
 
-        setBackground( new Color(100, 120, 10));
-        setLayout(new BorderLayout(3, 3));
+        //setBackground( new Color(100, 120, 10));
+        //setLayout(new BorderLayout(3, 3));
 
         CardDeckGUI board = new CardDeckGUI();
         add(board, BorderLayout.CENTER);
@@ -16,6 +16,6 @@ public class CardDeckGUILayout extends JPanel {
         //buttonPanel.setBackground(Color.GRAY);
         //add(buttonPanel, BorderLayout.SOUTH);
 
-        setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
+        //setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
     }
 }
