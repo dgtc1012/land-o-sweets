@@ -13,7 +13,6 @@ public class CardDeckGUI extends JPanel implements ActionListener{
 
     DeckOfCards deck;
     String message;
-    int player;
 
     boolean gameInProgress;
     boolean cardDrawn;
@@ -51,6 +50,7 @@ public class CardDeckGUI extends JPanel implements ActionListener{
             return;
         }
         cardDrawn = true;
+
         repaint();
     }
 
@@ -62,6 +62,7 @@ public class CardDeckGUI extends JPanel implements ActionListener{
         }
         deck = new DeckOfCards();
         deck.shuffleDeck();
+        message = WorldOfSweets.pNames[0] + "'s draw to start the game!";
         gameInProgress = true;
         lastCard = null;
         cardDrawn = false;
@@ -71,6 +72,7 @@ public class CardDeckGUI extends JPanel implements ActionListener{
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         g.setFont(bigFont);
+        g.drawString(message, MINSPACING, CARDHEIGHT + MINSPACING*4);
         drawCard(g, null, MINSPACING + CARDWIDTH/2, MINSPACING);
         if(gameInProgress && cardDrawn) {
             lastCard = newCard();
@@ -79,10 +81,14 @@ public class CardDeckGUI extends JPanel implements ActionListener{
         }
         else
             drawCard(g, lastCard, MINSPACING + CARDWIDTH/2 + CARDWIDTH + MINSPACING, MINSPACING);
+
+        message = WorldOfSweets.nextPlayer() + "'s turn to draw";
     }
 
     Card newCard(){
         Card card = deck.drawCard();
+
+        
         if(card == null){
             deck.populateDeck();
             deck.shuffleDeck();

@@ -6,6 +6,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Scanner;
 /**
  *
  * @author Justin Keenan
@@ -18,8 +19,16 @@ public class Gameboard {
      */
     public Gameboard() {
         initComponents();
+        //getPlayers();
+        for (int i =0; i< WorldOfSweets.players.length; i++){
+           
+            _frame.add(WorldOfSweets.players[i]);
+
+        }
         _frame.setVisible(true);
+        
     }
+
 
     //public static void main(String[] args) {
     //  new Gameboard();
@@ -35,7 +44,7 @@ public class Gameboard {
     private void initComponents() {
 
         _frame = new JFrame();
-        start = new JPanel();
+        start = new StartSquare(new ImageIcon("src/main/java/rainbow2.jpg").getImage());
         sq1 = new JPanel();
         sq2 = new JPanel();
         sq3 = new JPanel();
@@ -103,7 +112,7 @@ public class Gameboard {
         sq75 = new JPanel();
         sq80 = new JPanel();
         sq81 = new JPanel();
-        grandmasHouse = new JPanel();
+        grandmasHouse = new GrannysHouse(new ImageIcon("src/main/java/rainbow1.jpg").getImage());
         sq87 = new JPanel();
         sq86 = new JPanel();
         sq85 = new JPanel();
@@ -135,9 +144,9 @@ public class Gameboard {
         _frame.setSize(1250, 700);
         _frame.setLayout(null);
 
-        start.setBackground(new Color(255, 255, 255));
-        start.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
-        start.setPreferredSize(new Dimension(80, 80));
+        //start.setBackground(new Color(255, 255, 255));
+        //start.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
+        //start.setPreferredSize(new Dimension(80, 80));
 
         GroupLayout startLayout = new GroupLayout(start);
         start.setLayout(startLayout);
@@ -1361,8 +1370,8 @@ public class Gameboard {
         _frame.add(sq81);
         sq81.setBounds(540, 60, 40, 40);
 
-        grandmasHouse.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
-        grandmasHouse.setPreferredSize(new Dimension(80, 80));
+        //grandmasHouse.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
+        //grandmasHouse.setPreferredSize(new Dimension(80, 80));
 
         GroupLayout grandmasHouseLayout = new GroupLayout(grandmasHouse);
         grandmasHouse.setLayout(grandmasHouseLayout);
@@ -1914,5 +1923,7 @@ public class Gameboard {
     private JPanel sq9;
     private JPanel sq90;
     private JPanel start;
+    ////////////////////////////////////////////////////////////////
+    
     // End of variables declaration//GEN-END:variables
 }
