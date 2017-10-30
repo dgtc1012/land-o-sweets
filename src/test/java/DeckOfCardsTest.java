@@ -16,6 +16,7 @@ public class DeckOfCardsTest {
     }
 
     @Test
+    //US-14
     // Check deck contains 60 cards after populated
     public void checkDeckSize() throws Exception {
         deck.populateDeck();
@@ -23,6 +24,7 @@ public class DeckOfCardsTest {
     }
 
     @Test
+    //US-14
     // Check deck contains 10 single RED cards
     public void check10RedSingle() throws Exception {
         deck.populateDeck();
@@ -36,6 +38,7 @@ public class DeckOfCardsTest {
     }
 
     @Test
+    //US-14
     // Check deck contains 10 single YELLOW cards
     public void check10YellowSingle() throws Exception {
         deck.populateDeck();
@@ -49,6 +52,7 @@ public class DeckOfCardsTest {
     }
 
     @Test
+    //US-14
     // Check deck contains 10 single BLUE cards
     public void check10BlueSingle() throws Exception {
         deck.populateDeck();
@@ -62,6 +66,7 @@ public class DeckOfCardsTest {
     }
 
     @Test
+    //US-14
     // Check deck contains 10 single GREEN cards
     public void check10GreenSingle() throws Exception {
         deck.populateDeck();
@@ -75,6 +80,7 @@ public class DeckOfCardsTest {
     }
 
     @Test
+    //US-14
     // Check deck contains 10 single ORANGE cards
     public void check10OrangeSingle() throws Exception {
         deck.populateDeck();
@@ -88,6 +94,7 @@ public class DeckOfCardsTest {
     }
 
     @Test
+    //US-14
     // Check deck contains 2 double RED cards
     public void check10RedDouble() throws Exception {
         deck.populateDeck();
@@ -101,6 +108,7 @@ public class DeckOfCardsTest {
     }
 
     @Test
+    //US-14
     // Check deck contains 2 double YELLOW cards
     public void check10YellowDouble() throws Exception {
         deck.populateDeck();
@@ -114,6 +122,7 @@ public class DeckOfCardsTest {
     }
 
     @Test
+    //US-14
     // Check deck contains 2 double BLUE cards
     public void check10BlueDouble() throws Exception {
         deck.populateDeck();
@@ -127,6 +136,7 @@ public class DeckOfCardsTest {
     }
 
     @Test
+    //US-14
     // Check deck contains 2 double GREEN cards
     public void check10GreenDouble() throws Exception {
         deck.populateDeck();
@@ -140,6 +150,7 @@ public class DeckOfCardsTest {
     }
 
     @Test
+    //US-14
     // Check deck contains 2 double ORANGE cards
     public void check10OrangeDouble() throws Exception {
         deck.populateDeck();
@@ -153,6 +164,7 @@ public class DeckOfCardsTest {
     }
 
     @Test
+    //US-19
     // Check to see if deck size is same after shuffle
     public void testDeckSizeAfterShuffle() throws Exception {
         deck.shuffleDeck();
@@ -161,6 +173,7 @@ public class DeckOfCardsTest {
     }
 
     @Test
+    //US-19
     // Check to see if card was removed
     public void testDrawCard() throws Exception {
         deck.drawCard();
@@ -168,6 +181,7 @@ public class DeckOfCardsTest {
     }
 
     @Test
+    //US-19
     // Check to see if 2 cards were removed
     public void testDrawCard2() throws Exception {
         deck.drawCard();
@@ -176,6 +190,7 @@ public class DeckOfCardsTest {
     }
 
     @Test
+    //US-19
     // Check to see if 20 cards were removed
     public void testDrawCard20() throws Exception {
         int i = 0;
@@ -187,7 +202,8 @@ public class DeckOfCardsTest {
     }
 
     @Test
-    // Check to see if exception thrown for empty deck
+    //US-19
+    // Check to see if null is returned for empty deck
     public void testDrawCardEmptyDeck() {
         int i = 0;
         while (i < 80) {
