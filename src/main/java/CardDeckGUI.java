@@ -62,7 +62,7 @@ public class CardDeckGUI extends JPanel implements ActionListener{
         }
         deck = new DeckOfCards();
         deck.shuffleDeck();
-        message = WorldOfSweets.pNames[0] + "'s draw to start the game!";
+        message = WorldOfSweets.nextPlayer() + "'s draw to start the game!";
         gameInProgress = true;
         lastCard = null;
         cardDrawn = false;
