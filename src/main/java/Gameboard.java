@@ -21,12 +21,12 @@ public class Gameboard {
         initComponents();
         //getPlayers();
         for (int i =0; i< WorldOfSweets.players.length; i++){
-           
+
             _frame.add(WorldOfSweets.players[i]);
 
         }
         _frame.setVisible(true);
-        
+
     }
 
 
@@ -44,7 +44,7 @@ public class Gameboard {
     private void initComponents() {
 
         _frame = new JFrame();
-        start = new StartSquare(new ImageIcon("src/main/java/rainbow2.jpg").getImage());
+        start = new StartSquare(new ImageIcon("src/main/resources/images/rainbow2.jpg").getImage());
         sq1 = new JPanel();
         sq2 = new JPanel();
         sq3 = new JPanel();
@@ -112,7 +112,7 @@ public class Gameboard {
         sq75 = new JPanel();
         sq80 = new JPanel();
         sq81 = new JPanel();
-        grandmasHouse = new GrannysHouse(new ImageIcon("src/main/java/rainbow1.jpg").getImage());
+        grandmasHouse = new GrannysHouse(new ImageIcon("src/main/resources/images/rainbow1.jpg").getImage());
         sq87 = new JPanel();
         sq86 = new JPanel();
         sq85 = new JPanel();
@@ -1924,6 +1924,6 @@ public class Gameboard {
     private JPanel sq90;
     private JPanel start;
     ////////////////////////////////////////////////////////////////
-    
+
     // End of variables declaration//GEN-END:variables
 }
