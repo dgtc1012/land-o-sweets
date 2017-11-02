@@ -31,12 +31,12 @@ public class Gameboard {
         initComponents();
         //getPlayers();
         for (int i =0; i< WorldOfSweets.players.length; i++){
-           
+
             _frame.add(WorldOfSweets.players[i]);
 
         }
         _frame.setVisible(true);
-        
+
     }
 
     /**
@@ -57,6 +57,8 @@ public class Gameboard {
         }
         System.out.println("Making " + numberOfSquares + " sqaures!");
 
+        start = new StartSquare(new ImageIcon("src/main/resources/images/rainbow2.jpg").getImage());
+        grandmasHouse = new GrannysHouse(new ImageIcon("src/main/resources/images/rainbow1.jpg").getImage());
         deckArea = new JPanel();
 
         _frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -192,6 +194,6 @@ public class Gameboard {
     private JPanel grandmasHouse;
     ArrayList<JPanel> squares = new ArrayList<JPanel>();
     ////////////////////////////////////////////////////////////////
-    
+
     // End of variables declaration//GEN-END:variables
 }

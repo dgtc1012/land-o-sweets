@@ -3,7 +3,7 @@ import javax.swing.*;
 
 public class CardDeckGUILayout extends JPanel {
 
-    public CardDeckGUILayout(){
+    public CardDeckGUILayout() {
 
 
         //setBackground( new Color(100, 120, 10));

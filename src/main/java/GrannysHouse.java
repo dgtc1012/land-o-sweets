@@ -8,7 +8,8 @@ import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.LineBorder;
-public class GrannysHouse extends JPanel{
+
+public class GrannysHouse extends JPanel {
     private Image img;
 
     public GrannysHouse(String img) {

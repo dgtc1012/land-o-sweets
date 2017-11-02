@@ -7,7 +7,8 @@ import javax.swing.JLabel;
 import javax.swing.*;
 import java.awt.Graphics;
 import javax.swing.border.BevelBorder;
-public class Token extends JPanel{
+
+public class Token extends JPanel {
     private static final JPanel square = new JPanel();
     public JLabel label;
     private static int x;
@@ -15,14 +16,15 @@ public class Token extends JPanel{
     private static int width;
     private static int height;
     private static String name;
-    public Token(int pNum, String pName){
+
+    public Token(int pNum, String pName) {
         JLabel j = new JLabel(pName);
-        x=20;
-        y=20;
-        width=50;
-        height=50;
+        x = 20;
+        y = 20;
+        width = 50;
+        height = 50;
         name = pName;
-        setBounds(x,y,width,height);
+        setBounds(x, y, width, height);
         setBorder(new BevelBorder(BevelBorder.RAISED));
 
         if (pNum == 1)
@@ -36,22 +38,21 @@ public class Token extends JPanel{
         add(j);
     }
 
-
-    public void setCoords(int newX, int newY){
+    public void setCoords(int newX, int newY) {
         x = newX;
         y = newY;
-        setBounds(x,y,width,height);
+        setBounds(x, y, width, height);
     }
-    public void setSize(int newW, int newH){
+
+    public void setSize(int newW, int newH) {
         width = newW;
         height = newH;
-        setBounds(x,y,width,height);
+        setBounds(x, y, width, height);
     }
-    public String getName(){
+
+    public String getName() {
         return name;
     }
-
-
 
 
 }

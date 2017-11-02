@@ -2,7 +2,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.NoSuchElementException;
 
 import static org.junit.Assert.*;
 
@@ -20,7 +19,7 @@ public class DeckOfCardsTest {
     // Check deck contains 60 cards after populated
     public void checkDeckSize() throws Exception {
         deck.populateDeck();
-        assertEquals(60, deck.getDeck().size());
+        assertEquals(68, deck.getDeck().size());
     }
 
     @Test
@@ -30,7 +29,7 @@ public class DeckOfCardsTest {
         deck.populateDeck();
         int redSingleCount = 0;
         for (int i = 0; i < deck.getDeck().size(); i++) {
-            if (deck.getDeck().get(i).getColor().equals(CardColor.RED) && deck.getDeck().get(i).getValue() == 1) {
+            if (deck.getDeck().get(i).getColor() != null && deck.getDeck().get(i).getColor().equals(CardColor.RED) && deck.getDeck().get(i).getValue() == 1) {
                 redSingleCount++;
             }
         }
@@ -44,7 +43,7 @@ public class DeckOfCardsTest {
         deck.populateDeck();
         int yellowSingleCount = 0;
         for (int i = 0; i < deck.getDeck().size(); i++) {
-            if (deck.getDeck().get(i).getColor().equals(CardColor.YELLOW) && deck.getDeck().get(i).getValue() == 1) {
+            if (deck.getDeck().get(i).getColor() != null && deck.getDeck().get(i).getColor().equals(CardColor.YELLOW) && deck.getDeck().get(i).getValue() == 1) {
                 yellowSingleCount++;
             }
         }
@@ -58,7 +57,7 @@ public class DeckOfCardsTest {
         deck.populateDeck();
         int blueSingleCount = 0;
         for (int i = 0; i < deck.getDeck().size(); i++) {
-            if (deck.getDeck().get(i).getColor().equals(CardColor.BLUE) && deck.getDeck().get(i).getValue() == 1) {
+            if (deck.getDeck().get(i).getColor() != null && deck.getDeck().get(i).getColor().equals(CardColor.BLUE) && deck.getDeck().get(i).getValue() == 1) {
                 blueSingleCount++;
             }
         }
@@ -72,7 +71,7 @@ public class DeckOfCardsTest {
         deck.populateDeck();
         int greenSingleCount = 0;
         for (int i = 0; i < deck.getDeck().size(); i++) {
-            if (deck.getDeck().get(i).getColor().equals(CardColor.GREEN) && deck.getDeck().get(i).getValue() == 1) {
+            if (deck.getDeck().get(i).getColor() != null && deck.getDeck().get(i).getColor().equals(CardColor.GREEN) && deck.getDeck().get(i).getValue() == 1) {
                 greenSingleCount++;
             }
         }
@@ -86,7 +85,7 @@ public class DeckOfCardsTest {
         deck.populateDeck();
         int orangeSingleCount = 0;
         for (int i = 0; i < deck.getDeck().size(); i++) {
-            if (deck.getDeck().get(i).getColor().equals(CardColor.ORANGE) && deck.getDeck().get(i).getValue() == 1) {
+            if (deck.getDeck().get(i).getColor() != null && deck.getDeck().get(i).getColor().equals(CardColor.ORANGE) && deck.getDeck().get(i).getValue() == 1) {
                 orangeSingleCount++;
             }
         }
@@ -100,7 +99,7 @@ public class DeckOfCardsTest {
         deck.populateDeck();
         int redDoubleCount = 0;
         for (int i = 0; i < deck.getDeck().size(); i++) {
-            if (deck.getDeck().get(i).getColor().equals(CardColor.RED) && deck.getDeck().get(i).getValue() == 2) {
+            if (deck.getDeck().get(i).getColor() != null && deck.getDeck().get(i).getColor().equals(CardColor.RED) && deck.getDeck().get(i).getValue() == 2) {
                 redDoubleCount++;
             }
         }
@@ -114,7 +113,7 @@ public class DeckOfCardsTest {
         deck.populateDeck();
         int yellowDoubleCount = 0;
         for (int i = 0; i < deck.getDeck().size(); i++) {
-            if (deck.getDeck().get(i).getColor().equals(CardColor.YELLOW) && deck.getDeck().get(i).getValue() == 2) {
+            if (deck.getDeck().get(i).getColor() != null && deck.getDeck().get(i).getColor().equals(CardColor.YELLOW) && deck.getDeck().get(i).getValue() == 2) {
                 yellowDoubleCount++;
             }
         }
@@ -128,7 +127,7 @@ public class DeckOfCardsTest {
         deck.populateDeck();
         int blueDoubleCount = 0;
         for (int i = 0; i < deck.getDeck().size(); i++) {
-            if (deck.getDeck().get(i).getColor().equals(CardColor.BLUE) && deck.getDeck().get(i).getValue() == 2) {
+            if (deck.getDeck().get(i).getColor() != null && deck.getDeck().get(i).getColor().equals(CardColor.BLUE) && deck.getDeck().get(i).getValue() == 2) {
                 blueDoubleCount++;
             }
         }
@@ -142,7 +141,7 @@ public class DeckOfCardsTest {
         deck.populateDeck();
         int greenDoubleCount = 0;
         for (int i = 0; i < deck.getDeck().size(); i++) {
-            if (deck.getDeck().get(i).getColor().equals(CardColor.GREEN) && deck.getDeck().get(i).getValue() == 2) {
+            if (deck.getDeck().get(i).getColor() != null && deck.getDeck().get(i).getColor().equals(CardColor.GREEN) && deck.getDeck().get(i).getValue() == 2) {
                 greenDoubleCount++;
             }
         }
@@ -156,7 +155,7 @@ public class DeckOfCardsTest {
         deck.populateDeck();
         int orangeDoubleCount = 0;
         for (int i = 0; i < deck.getDeck().size(); i++) {
-            if (deck.getDeck().get(i).getColor().equals(CardColor.ORANGE) && deck.getDeck().get(i).getValue() == 2) {
+            if (deck.getDeck().get(i).getColor() != null && deck.getDeck().get(i).getColor().equals(CardColor.ORANGE) && deck.getDeck().get(i).getValue() == 2) {
                 orangeDoubleCount++;
             }
         }
@@ -169,7 +168,7 @@ public class DeckOfCardsTest {
     public void testDeckSizeAfterShuffle() throws Exception {
         deck.shuffleDeck();
         ArrayList<Card> deckOfCards = deck.getDeck();
-        assertEquals(60, deck.getDeck().size());
+        assertEquals(68, deck.getDeck().size());
     }
 
     @Test
@@ -177,7 +176,7 @@ public class DeckOfCardsTest {
     // Check to see if card was removed
     public void testDrawCard() throws Exception {
         deck.drawCard();
-        assertEquals(59, deck.getDeck().size());
+        assertEquals(67, deck.getDeck().size());
     }
 
     @Test
@@ -186,7 +185,7 @@ public class DeckOfCardsTest {
     public void testDrawCard2() throws Exception {
         deck.drawCard();
         deck.drawCard();
-        assertEquals(58, deck.getDeck().size());
+        assertEquals(66, deck.getDeck().size());
     }
 
     @Test
@@ -198,7 +197,7 @@ public class DeckOfCardsTest {
             deck.drawCard();
             i++;
         }
-        assertEquals(40, deck.getDeck().size());
+        assertEquals(48, deck.getDeck().size());
     }
 
     @Test
@@ -211,6 +210,34 @@ public class DeckOfCardsTest {
             i++;
         }
         assertEquals(null, deck.drawCard());
+    }
+
+    @Test
+    //US-27
+    // Check to see if there are 5 skip cards
+    public void check5SkipCards() {
+        deck.populateDeck();
+        int skipCount = 0;
+        for (int i = 0; i < deck.getDeck().size(); i++) {
+            if (deck.getDeck().get(i).getColor() == null && deck.getDeck().get(i).getValue() == 0) {
+                skipCount++;
+            }
+        }
+        assertEquals(5, skipCount);
+    }
+
+    @Test
+    //US-27
+    // Check to see if there are 3 GoToMiddle cards
+    public void check3GoToMiddleCards() {
+        deck.populateDeck();
+        int goToMiddleCount = 0;
+        for (int i = 0; i < deck.getDeck().size(); i++) {
+            if (deck.getDeck().get(i).getColor() == null && deck.getDeck().get(i).getValue() == 45) {
+                goToMiddleCount++;
+            }
+        }
+        assertEquals(3, goToMiddleCount);
     }
 
 }
