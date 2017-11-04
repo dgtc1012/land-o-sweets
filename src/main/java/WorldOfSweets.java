@@ -58,7 +58,7 @@ public class WorldOfSweets {
 
                 Player p1 = new Player(1, p1Name.getText().toString());
                 pNames[0] = p1.getToken().getName();
-                Player p2 = new Player(1, p2Name.getText().toString());
+                Player p2 = new Player(2, p2Name.getText().toString());
                 pNames[1] = p2.getToken().getName();
 
 

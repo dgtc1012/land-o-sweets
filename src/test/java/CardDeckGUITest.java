@@ -34,7 +34,7 @@ public class CardDeckGUITest {
     // US-27
     public void testGoToMiddleCard() throws Exception {
         Mockito.when(card.getColor()).thenReturn(null);
-        Mockito.when(card.getValue()).thenReturn(20);
+        Mockito.when(card.getValue()).thenReturn(45);
         cardDeckGUI.drawCard(graphics, card, 0, 0);
         Mockito.verify(graphics, Mockito.times(1)).drawString("Go To", (CardDeckGUI.CARDWIDTH / 2 - CardDeckGUI.BLOCKSIZE / 2),
                 CardDeckGUI.CARDHEIGHT / 3 - CardDeckGUI.BLOCKSIZE / 3);

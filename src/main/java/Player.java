@@ -28,9 +28,9 @@ public class Player {
     public int newCardDrawn(int value, CardColor color){
         //single card
         if(value == 1) {
-            switch (color) {
+            switch (currentSquareColor) {
                 case RED:
-                    switch (currentSquareColor) {
+                    switch (color) {
                         case RED:
                             this.currentSquareValue += 5;
                             this.currentSquareColor = CardColor.RED;
@@ -54,7 +54,7 @@ public class Player {
                     }
                     break;
                 case YELLOW:
-                    switch (currentSquareColor) {
+                    switch (color) {
                         case RED:
                             this.currentSquareValue += 4;
                             this.currentSquareColor = CardColor.RED;
@@ -78,7 +78,7 @@ public class Player {
                     }
                     break;
                 case BLUE:
-                    switch (currentSquareColor) {
+                    switch (color) {
                         case RED:
                             this.currentSquareValue += 3;
                             this.currentSquareColor = CardColor.RED;
@@ -102,7 +102,7 @@ public class Player {
                     }
                     break;
                 case GREEN:
-                    switch (currentSquareColor) {
+                    switch (color) {
                         case RED:
                             this.currentSquareValue += 2;
                             this.currentSquareColor = CardColor.RED;
@@ -126,7 +126,7 @@ public class Player {
                     }
                     break;
                 case ORANGE:
-                    switch (currentSquareColor) {
+                    switch (color) {
                         case RED:
                             this.currentSquareValue += 1;
                             this.currentSquareColor = CardColor.RED;
@@ -154,9 +154,9 @@ public class Player {
         }
         //double card
         else if(value == 2){
-            switch (color) {
+            switch (currentSquareColor) {
                 case RED:
-                    switch (currentSquareColor) {
+                    switch (color) {
                         case RED:
                             this.currentSquareValue += 5+5;
                             this.currentSquareColor = CardColor.RED;
@@ -180,7 +180,7 @@ public class Player {
                     }
                     break;
                 case YELLOW:
-                    switch (currentSquareColor) {
+                    switch (color) {
                         case RED:
                             this.currentSquareValue += 4+5;
                             this.currentSquareColor = CardColor.RED;
@@ -204,7 +204,7 @@ public class Player {
                     }
                     break;
                 case BLUE:
-                    switch (currentSquareColor) {
+                    switch (color) {
                         case RED:
                             this.currentSquareValue += 3+5;
                             this.currentSquareColor = CardColor.RED;
@@ -228,7 +228,7 @@ public class Player {
                     }
                     break;
                 case GREEN:
-                    switch (currentSquareColor) {
+                    switch (color) {
                         case RED:
                             this.currentSquareValue += 2+5;
                             this.currentSquareColor = CardColor.RED;
@@ -252,7 +252,7 @@ public class Player {
                     }
                     break;
                 case ORANGE:
-                    switch (currentSquareColor) {
+                    switch (color) {
                         case RED:
                             this.currentSquareValue += 1+5;
                             this.currentSquareColor = CardColor.RED;
