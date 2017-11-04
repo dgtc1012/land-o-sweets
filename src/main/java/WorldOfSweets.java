@@ -16,13 +16,19 @@ import javax.swing.event.AncestorListener;
 
 public class WorldOfSweets {
 
-    public static Token[] players;
+    //public static Token[] playerTokens;
     public static String[] pNames;
+    public static Player[] players;
     public static int currentPlayerIndex = -1;
+    public static Gameboard gameboard;
 
     public static void main(String[] args) {
         getPlayers();
-        new Gameboard();
+        gameboard = new Gameboard();
+    }
+
+    public static int getBoardLength(){
+        return gameboard.getNumberOfSquares();
     }
 
     public static void getPlayers() {
@@ -50,15 +56,15 @@ public class WorldOfSweets {
                         f, p, "Player Names", JOptionPane.QUESTION_MESSAGE);
                 pNames = new String[2];
 
-                Token p1 = new Token(1, p1Name.getText().toString());
-                pNames[0] = p1.getName();
-                Token p2 = new Token(2, p2Name.getText().toString());
-                pNames[1] = p2.getName();
+                Player p1 = new Player(1, p1Name.getText().toString());
+                pNames[0] = p1.getToken().getName();
+                Player p2 = new Player(1, p2Name.getText().toString());
+                pNames[1] = p2.getToken().getName();
 
 
-                p1.setCoords(0, 600);
-                p2.setCoords(60, 600);
-                players = new Token[2];
+                p1.getToken().setCoords(0, 600);
+                p2.getToken().setCoords(60, 600);
+                players = new Player[2];
                 players[0] = p1;
                 players[1] = p2;
                 //players = new Token[]{p1, p2};
@@ -75,16 +81,16 @@ public class WorldOfSweets {
                 JOptionPane.showMessageDialog(
                         f, p, "Player Names", JOptionPane.QUESTION_MESSAGE);
                 pNames = new String[3];
-                Token p1 = new Token(1, p1Name.getText().toString());
-                pNames[0] = p1.getName();
-                Token p2 = new Token(2, p2Name.getText().toString());
-                pNames[1] = p2.getName();
-                Token p3 = new Token(3, p3Name.getText().toString());
-                pNames[2] = p3.getName();
-                p1.setCoords(0, 600);
-                p2.setCoords(60, 600);
-                p3.setCoords(120, 600);
-                players = new Token[]{p1, p2, p3};
+                Player p1 = new Player(1, p1Name.getText().toString());
+                pNames[0] = p1.getToken().getName();
+                Player p2 = new Player(2, p2Name.getText().toString());
+                pNames[1] = p2.getToken().getName();
+                Player p3 = new Player(3, p3Name.getText().toString());
+                pNames[2] = p3.getToken().getName();
+                p1.getToken().setCoords(0, 600);
+                p2.getToken().setCoords(60, 600);
+                p3.getToken().setCoords(120, 600);
+                players = new Player[]{p1, p2, p3};
             } else if (selected.toString().equalsIgnoreCase("4")) {
 
                 labels.add(new JLabel("Player 1", SwingConstants.RIGHT));
@@ -100,19 +106,19 @@ public class WorldOfSweets {
                 JOptionPane.showMessageDialog(
                         f, p, "Player Names", JOptionPane.QUESTION_MESSAGE);
                 pNames = new String[4];
-                Token p1 = new Token(1, p1Name.getText().toString());
-                pNames[0] = p1.getName();
-                Token p2 = new Token(2, p2Name.getText().toString());
-                pNames[1] = p2.getName();
-                Token p3 = new Token(3, p3Name.getText().toString());
-                pNames[2] = p3.getName();
-                Token p4 = new Token(4, p4Name.getText().toString());
-                pNames[3] = p4.getName();
-                p1.setCoords(0, 600);
-                p2.setCoords(60, 600);
-                p3.setCoords(120, 600);
-                p4.setCoords(180, 600);
-                players = new Token[]{p1, p2, p3, p4};
+                Player p1 = new Player(1, p1Name.getText().toString());
+                pNames[0] = p1.getToken().getName();
+                Player p2 = new Player(2, p2Name.getText().toString());
+                pNames[1] = p2.getToken().getName();
+                Player p3 = new Player(3, p3Name.getText().toString());
+                pNames[2] = p3.getToken().getName();
+                Player p4 = new Player(4, p4Name.getText().toString());
+                pNames[3] = p4.getToken().getName();
+                p1.getToken().setCoords(0, 600);
+                p2.getToken().setCoords(60, 600);
+                p3.getToken().setCoords(120, 600);
+                p4.getToken().setCoords(180, 600);
+                players = new Player[]{p1, p2, p3, p4};
             }
         } else {
             System.exit(1);
