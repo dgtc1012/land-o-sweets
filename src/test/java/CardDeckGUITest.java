@@ -1,23 +1,34 @@
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import java.awt.*;
 
+@RunWith(MockitoJUnitRunner.class)
 public class CardDeckGUITest {
 
+    @Mock
     Graphics graphics;
+    @Mock
     Card card;
+    @Mock
     DeckOfCards deck;
     CardDeckGUI cardDeckGUI;
+    CardDeckGUI spy;
 
     @Before
     public void setup() {
-        graphics = Mockito.mock(Graphics.class);
-        card = Mockito.mock(Card.class);
-        deck = Mockito.mock(DeckOfCards.class);
+        MockitoAnnotations.initMocks(this);
         WorldOfSweets.pNames = new String[2];
+        WorldOfSweets.pNames[0] = "Player 1";
+        WorldOfSweets.pNames[1] = "Player 2";
         cardDeckGUI = new CardDeckGUI();
+        spy = Mockito.spy(cardDeckGUI);
     }
 
     @Test
@@ -25,7 +36,7 @@ public class CardDeckGUITest {
     public void testSkipCard() throws Exception {
         Mockito.when(card.getColor()).thenReturn(null);
         Mockito.when(card.getValue()).thenReturn(0);
-        cardDeckGUI.drawCard(graphics, card, 0, 0);
+        spy.drawCard(graphics, card, 0, 0);
         Mockito.verify(graphics, Mockito.times(1)).drawString("SKIP!", (CardDeckGUI.CARDWIDTH / 2 - CardDeckGUI.BLOCKSIZE / 2),
                 CardDeckGUI.CARDHEIGHT / 2);
     }
@@ -125,5 +136,46 @@ public class CardDeckGUITest {
     public void testDrawCardNull() throws Exception {
         cardDeckGUI.drawCard(graphics, null, 0, 0);
         Mockito.verify(graphics, Mockito.times(1)).setColor(Color.WHITE);
+    }
+
+    @Test
+    // US-31
+    public void testDoDrawNoGameInProgress() throws Exception {
+        spy.gameInProgress = false;
+        spy.doDraw();
+        Assert.assertEquals(null, spy.lastCard);
+    }
+
+    @Test
+
+    // US-31
+    public void testDoDrawGameInProgress() throws Exception {
+        spy.doDraw();
+        Mockito.verify(spy).repaint();
+    }
+
+    @Test
+    // US-31
+    public void testDoNewGameGameInProgress() throws Exception {
+        spy.gameInProgress = true;
+        spy.doNewGame();
+        Assert.assertEquals("You still have to finish the game!", spy.message);
+    }
+
+    @Test
+    // US-31
+    public void testNewCard() throws Exception {
+        Card card = spy.newCard();
+        Assert.assertNotNull(card);
+    }
+
+    @Test
+    // US-31
+    public void testNewCardDeckEmpty() throws Exception {
+        for (int i = 0; i < 68; i++) {
+            spy.deck.drawCard();
+        }
+        Card card = spy.newCard();
+        Assert.assertNotNull(card);
     }
 }

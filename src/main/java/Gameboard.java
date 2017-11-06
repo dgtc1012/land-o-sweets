@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-import java.util.Scanner;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+
 /**
- *
  * @author Justin Keenan
  */
 public class Gameboard {
@@ -22,7 +22,7 @@ public class Gameboard {
     int numberOfRows = 5;
     int squaresBtwnRows = 2;
     int boardWidth = 16;
-    int numberOfSquares = boardWidth*numberOfRows+squaresBtwnRows*(numberOfRows-1);
+    int numberOfSquares = boardWidth * numberOfRows + squaresBtwnRows * (numberOfRows - 1);
 
     /**
      * Creates new form WorldOfCandy
@@ -30,7 +30,7 @@ public class Gameboard {
     public Gameboard() {
         initComponents();
         //getPlayers();
-        for (int i =0; i< WorldOfSweets.players.length; i++){
+        for (int i = 0; i < WorldOfSweets.players.length; i++) {
 
             _frame.add(WorldOfSweets.players[i]);
 
@@ -52,7 +52,7 @@ public class Gameboard {
         start = new StartSquare(new ImageIcon("src/main/java/rainbow2.jpg").getImage());
         grandmasHouse = new GrannysHouse(new ImageIcon("src/main/java/rainbow1.jpg").getImage());
 
-        for(int i = 1; i<=numberOfSquares; i++){
+        for (int i = 1; i <= numberOfSquares; i++) {
             squares.add(new JPanel());
         }
         System.out.println("Making " + numberOfSquares + " sqaures!");
@@ -68,12 +68,12 @@ public class Gameboard {
         GroupLayout startLayout = new GroupLayout(start);
         start.setLayout(startLayout);
         startLayout.setHorizontalGroup(
-            startLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+                startLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGap(0, 0, Short.MAX_VALUE)
         );
         startLayout.setVerticalGroup(
-            startLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+                startLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGap(0, 0, Short.MAX_VALUE)
         );
 
         _frame.add(start);
@@ -84,9 +84,9 @@ public class Gameboard {
         int rowCount = 1;
         int colCount = 0;
         boolean rowDirection = false; //false = row is building to the right, true, row is building to the left
-        for(int i = 0; i<numberOfSquares; i++){
-            System.out.println("creating square number "+i);
-            switch (colorindex){
+        for (int i = 0; i < numberOfSquares; i++) {
+            System.out.println("creating square number " + i);
+            switch (colorindex) {
                 case 0:
                     squares.get(i).setBackground(Color.red);
                     colorindex++;
@@ -105,18 +105,17 @@ public class Gameboard {
                     break;
                 case 4:
                     squares.get(i).setBackground(Color.orange);
-                    colorindex=0;
+                    colorindex = 0;
                     break;
                 default:
                     break;
             }
 
-            if(i == (numberOfSquares+1)/2){
+            if (i == (numberOfSquares + 1) / 2) {
                 squares.get(i).setBackground(Color.cyan);
-                if(colorindex>0){
-                    colorindex = colorindex-1;
-                }
-                else{
+                if (colorindex > 0) {
+                    colorindex = colorindex - 1;
+                } else {
                     colorindex = 4;
                 }
             }
@@ -139,21 +138,18 @@ public class Gameboard {
 
             squares.get(i).setBounds(xLoc, yLoc, squareSize, squareSize);
 
-            if(rowCount < boardWidth && !rowDirection){
+            if (rowCount < boardWidth && !rowDirection) {
                 rowCount++;
                 xLoc += squareSize;
-            }
-            else if(rowCount < boardWidth && rowDirection){
+            } else if (rowCount < boardWidth && rowDirection) {
                 rowCount++;
                 xLoc -= squareSize;
-            }
-            else if(colCount < squaresBtwnRows){
+            } else if (colCount < squaresBtwnRows) {
                 colCount++;
                 yLoc -= squareSize;
-            }
-            else{
-                rowCount=1;
-                colCount=0;
+            } else {
+                rowCount = 1;
+                colCount = 0;
                 rowDirection = !rowDirection;
                 yLoc -= squareSize;
             }
@@ -171,7 +167,7 @@ public class Gameboard {
         );
 
         _frame.add(grandmasHouse);
-        grandmasHouse.setBounds(xLoc+squareSize, yLoc+20, 80, 80);
+        grandmasHouse.setBounds(xLoc + squareSize, yLoc + 20, 80, 80);
 
         //Current deck settings
         deckArea.setPreferredSize(new Dimension(300, 180));
@@ -182,7 +178,7 @@ public class Gameboard {
         deckArea.add(cardDeck);
     }// </editor-fold>//GEN-END:initComponents
 
-//Deck event handler
+    //Deck event handler
     private void deckMouseClicked(MouseEvent evt) {//GEN-FIRST:event_deckMouseClicked
         // TODO add your handling code here:
     }
@@ -192,7 +188,7 @@ public class Gameboard {
     private JPanel deckArea;
     private JPanel start;
     private JPanel grandmasHouse;
-    ArrayList<JPanel> squares = new ArrayList<JPanel>();
+    ArrayList<JPanel> squares = new ArrayList<>();
     ////////////////////////////////////////////////////////////////
 
     // End of variables declaration//GEN-END:variables
