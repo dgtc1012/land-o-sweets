@@ -10,7 +10,8 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 /**
- * @author Justin Keenan
+ *
+ * @author Justin Keenan, Dannah Gersh
  */
 public class Gameboard {
 
@@ -32,7 +33,7 @@ public class Gameboard {
         //getPlayers();
         for (int i = 0; i < WorldOfSweets.players.length; i++) {
 
-            _frame.add(WorldOfSweets.players[i]);
+            _frame.add(WorldOfSweets.players[i].getToken());
 
         }
         _frame.setVisible(true);
@@ -49,13 +50,10 @@ public class Gameboard {
     private void initComponents() {
 
         _frame = new JFrame();
-        start = new StartSquare(new ImageIcon("src/main/java/rainbow2.jpg").getImage());
-        grandmasHouse = new GrannysHouse(new ImageIcon("src/main/java/rainbow1.jpg").getImage());
 
-        for (int i = 1; i <= numberOfSquares; i++) {
+        for(int i = 1; i<=numberOfSquares; i++){
             squares.add(new JPanel());
         }
-        System.out.println("Making " + numberOfSquares + " sqaures!");
 
         start = new StartSquare(new ImageIcon("src/main/resources/images/rainbow2.jpg").getImage());
         grandmasHouse = new GrannysHouse(new ImageIcon("src/main/resources/images/rainbow1.jpg").getImage());
@@ -84,9 +82,8 @@ public class Gameboard {
         int rowCount = 1;
         int colCount = 0;
         boolean rowDirection = false; //false = row is building to the right, true, row is building to the left
-        for (int i = 0; i < numberOfSquares; i++) {
-            System.out.println("creating square number " + i);
-            switch (colorindex) {
+        for(int i = 0; i<numberOfSquares; i++){
+            switch (colorindex){
                 case 0:
                     squares.get(i).setBackground(Color.red);
                     colorindex++;
@@ -111,11 +108,12 @@ public class Gameboard {
                     break;
             }
 
-            if (i == (numberOfSquares + 1) / 2) {
-                squares.get(i).setBackground(Color.cyan);
-                if (colorindex > 0) {
-                    colorindex = colorindex - 1;
-                } else {
+            if(i == (numberOfSquares+1)/2){
+                squares.get(i).setBackground(Color.magenta);
+                if(colorindex>0){
+                    colorindex = colorindex-1;
+                }
+                else{
                     colorindex = 4;
                 }
             }
@@ -181,6 +179,21 @@ public class Gameboard {
     //Deck event handler
     private void deckMouseClicked(MouseEvent evt) {//GEN-FIRST:event_deckMouseClicked
         // TODO add your handling code here:
+    }
+
+    public int getNumberOfSquares(){
+        return numberOfSquares;
+    }
+    public Color getSquareColor(int index){
+        return squares.get(index).getBackground();
+    }
+
+    public int getSquareXLocation(int index){
+        return squares.get(index).getX();
+    }
+
+    public int getSquareYLocation(int index){
+        return squares.get(index).getY();
     }
 
     // Variables declaration
