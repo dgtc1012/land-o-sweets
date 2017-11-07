@@ -1,31 +1,33 @@
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.runners.MockitoJUnitRunner;
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
-@RunWith(MockitoJUnitRunner.class)
 public class TurnTest {
 
-    Token token1;
-    Token token2;
-    Token token3;
-    Token token4;
+
+	Token token1;
+	Token token2;
+	Token token3;
+	Token token4;
 
     @Before
     public void setup() {
         token1 = new Token(1, "player1");
         token2 = new Token(2, "player2");
         token3 = new Token(3, "player3");
-        token4 = new Token(4, "player4");
-        WorldOfSweets.pNames = new String[4];
-        WorldOfSweets.pNames[0] = "player1";
-        WorldOfSweets.pNames[1] = "player2";
-        WorldOfSweets.pNames[2] = "player3";
-        WorldOfSweets.pNames[3] = "player4";
+		token4 = new Token(4, "player4");
+		WorldOfSweets.pNames = new String[4];
+		WorldOfSweets.pNames[0] = "player1";
+		WorldOfSweets.pNames[1] = "player2";
+		WorldOfSweets.pNames[2] = "player3";
+		WorldOfSweets.pNames[3] = "player4";
 
     }
+
 
     @Test
     //US-11
@@ -34,6 +36,7 @@ public class TurnTest {
         WorldOfSweets.currentPlayerIndex = 0;
         String playerTurn = WorldOfSweets.nextPlayer();
         assertEquals("player2", playerTurn);
+
     }
 
     @Test
@@ -43,6 +46,7 @@ public class TurnTest {
         WorldOfSweets.currentPlayerIndex = 3;
         String playerTurn = WorldOfSweets.nextPlayer();
         assertEquals("player1", playerTurn);
+
     }
 
 }

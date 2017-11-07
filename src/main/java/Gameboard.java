@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
+import java.util.Scanner;
 import java.util.ArrayList;
-
+import java.awt.BorderLayout;
 /**
  *
  * @author Justin Keenan, Dannah Gersh
@@ -23,7 +23,9 @@ public class Gameboard {
     int numberOfRows = 5;
     int squaresBtwnRows = 2;
     int boardWidth = 16;
-    int numberOfSquares = boardWidth * numberOfRows + squaresBtwnRows * (numberOfRows - 1);
+    int numberOfSquares = boardWidth*numberOfRows+squaresBtwnRows*(numberOfRows-1);
+    JLayeredPane lPane;
+    Container content;
 
     /**
      * Creates new form WorldOfCandy
@@ -31,11 +33,13 @@ public class Gameboard {
     public Gameboard() {
         initComponents();
         //getPlayers();
-        for (int i = 0; i < WorldOfSweets.players.length; i++) {
+        
+        for (int i =0; i< WorldOfSweets.players.length; i++){
 
-            _frame.add(WorldOfSweets.players[i].getToken());
+            lPane.add(WorldOfSweets.players[i].getToken(), new Integer(i+5));
 
         }
+        content.add(lPane, BorderLayout.CENTER);
         _frame.setVisible(true);
 
     }
@@ -50,7 +54,6 @@ public class Gameboard {
     private void initComponents() {
 
         _frame = new JFrame();
-
         for(int i = 1; i<=numberOfSquares; i++){
             squares.add(new JPanel());
         }
@@ -63,18 +66,24 @@ public class Gameboard {
         _frame.setSize(1250, 700);
         _frame.setLayout(null);
 
+        lPane = new JLayeredPane();
+        lPane.setBounds(0, 0, 1250, 700);
+        lPane.setPreferredSize(new Dimension(1250, 700));
+        content = _frame.getContentPane();
+
         GroupLayout startLayout = new GroupLayout(start);
         start.setLayout(startLayout);
         startLayout.setHorizontalGroup(
-                startLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGap(0, 0, Short.MAX_VALUE)
+            startLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         startLayout.setVerticalGroup(
-                startLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGap(0, 0, Short.MAX_VALUE)
+            startLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        _frame.add(start);
+        //_frame.add(start);
+        lPane.add(start, new Integer(1));
         start.setBounds(20, 480, 80, 80);
 
         int xLoc = startloc_x;
@@ -102,7 +111,7 @@ public class Gameboard {
                     break;
                 case 4:
                     squares.get(i).setBackground(Color.orange);
-                    colorindex = 0;
+                    colorindex=0;
                     break;
                 default:
                     break;
@@ -132,22 +141,26 @@ public class Gameboard {
                             .addGap(0, 0, Short.MAX_VALUE)
             );
 
-            _frame.add(squares.get(i));
+            //_frame.add(squares.get(i));
+            lPane.add(squares.get(i), new Integer(1));
 
             squares.get(i).setBounds(xLoc, yLoc, squareSize, squareSize);
 
-            if (rowCount < boardWidth && !rowDirection) {
+            if(rowCount < boardWidth && !rowDirection){
                 rowCount++;
                 xLoc += squareSize;
-            } else if (rowCount < boardWidth && rowDirection) {
+            }
+            else if(rowCount < boardWidth && rowDirection){
                 rowCount++;
                 xLoc -= squareSize;
-            } else if (colCount < squaresBtwnRows) {
+            }
+            else if(colCount < squaresBtwnRows){
                 colCount++;
                 yLoc -= squareSize;
-            } else {
-                rowCount = 1;
-                colCount = 0;
+            }
+            else{
+                rowCount=1;
+                colCount=0;
                 rowDirection = !rowDirection;
                 yLoc -= squareSize;
             }
@@ -164,19 +177,21 @@ public class Gameboard {
                         .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        _frame.add(grandmasHouse);
-        grandmasHouse.setBounds(xLoc + squareSize, yLoc + 20, 80, 80);
+        //_frame.add(grandmasHouse);
+        lPane.add(grandmasHouse, new Integer(1));
+        grandmasHouse.setBounds(xLoc+squareSize, yLoc+20, 80, 80);
 
         //Current deck settings
         deckArea.setPreferredSize(new Dimension(300, 180));
 
-        _frame.add(deckArea);
+        //_frame.add(deckArea);
+        lPane.add(deckArea, new Integer(1));
         deckArea.setBounds(780, 360, 300, 180);
         CardDeckGUILayout cardDeck = new CardDeckGUILayout();
         deckArea.add(cardDeck);
     }// </editor-fold>//GEN-END:initComponents
 
-    //Deck event handler
+//Deck event handler
     private void deckMouseClicked(MouseEvent evt) {//GEN-FIRST:event_deckMouseClicked
         // TODO add your handling code here:
     }
@@ -201,7 +216,7 @@ public class Gameboard {
     private JPanel deckArea;
     private JPanel start;
     private JPanel grandmasHouse;
-    ArrayList<JPanel> squares = new ArrayList<>();
+    ArrayList<JPanel> squares = new ArrayList<JPanel>();
     ////////////////////////////////////////////////////////////////
 
     // End of variables declaration//GEN-END:variables

@@ -2,11 +2,13 @@ public class Player {
     private int currentSquareValue;
     private CardColor currentSquareColor;
     private Token token;
+    private boolean middle;
 
     public Player(int pNum, String pName){
         this.currentSquareValue = -1;
         this.currentSquareColor = CardColor.ORANGE;
         this.token = new Token(pNum, pName);
+        middle = false;
     }
 
     public Token getToken(){
@@ -24,6 +26,7 @@ public class Player {
         this.currentSquareValue = newValue;
         this.currentSquareColor = newColor;
     }
+
 
     public int newCardDrawn(int value, CardColor color){
         //single card
@@ -276,14 +279,17 @@ public class Player {
                     }
                     break;
             }
+            
             return this.currentSquareValue;
         }
         //middle card
         else if(value == 45){
             this.currentSquareColor = CardColor.GREEN;
             this.currentSquareValue = (WorldOfSweets.getBoardLength()-1)/2;
-            return this.currentSquareValue;
+            middle = true;
+            return this.currentSquareValue++;       //increment fixs off by one movement bug
         }
+
         //skip turn
         else{
             return this.currentSquareValue;

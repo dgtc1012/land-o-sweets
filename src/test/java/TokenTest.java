@@ -10,13 +10,13 @@ import org.mockito.runners.MockitoJUnitRunner;
 public class TokenTest {
 
     @Spy
-    Token token = new Token(2, "Name");
+    Token token = new Token(1, "Name");
 
     @Test
     // US-31
     public void testSetCoords() throws Exception {
         token.setCoords(0, 0);
-        Mockito.verify(token).setBounds(0, 0, 50, 50);
+        Mockito.verify(token).setBounds(0, 0, 20, 39);
     }
 
     @Test

@@ -19,7 +19,6 @@ public class Card {
     public void setValue(int value) {
         this.value = value;
     }
-
     public int getValue() {
         return value;
     }

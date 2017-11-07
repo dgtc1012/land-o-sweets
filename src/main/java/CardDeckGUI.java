@@ -13,11 +13,12 @@ public class CardDeckGUI extends JPanel implements ActionListener {
 
     DeckOfCards deck;
     String message;
+    String currentPlayer;
 
     boolean gameInProgress;
     boolean cardDrawn;
     Card lastCard;
-
+    boolean firstTurn;
     Font bigFont;
 
     CardDeckGUI() {
@@ -26,7 +27,10 @@ public class CardDeckGUI extends JPanel implements ActionListener {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 if (e.getX() >= MINSPACING + CARDWIDTH / 2 && e.getX() < MINSPACING + CARDWIDTH / 2 + CARDWIDTH && e.getY() >= MINSPACING && e.getY() < MINSPACING + CARDHEIGHT) {
+                    currentPlayer = WorldOfSweets.nextPlayer();
                     doDraw();
+                    message = WorldOfSweets.pNames[WorldOfSweets.nextPlayerIndex()] + "'s turn to draw";
+                    
                 }
             }
         });
@@ -34,6 +38,8 @@ public class CardDeckGUI extends JPanel implements ActionListener {
         bigFont = new Font("Serif", Font.BOLD, 14);
         setPreferredSize(new Dimension(DECKSIZE_X, DECKSIZE_Y));
         lastCard = null;
+        firstTurn = true;
+        message = WorldOfSweets.pNames[0] + "'s draw to start the game!";
         doNewGame();
     }
 
@@ -59,7 +65,6 @@ public class CardDeckGUI extends JPanel implements ActionListener {
         }
         deck = new DeckOfCards();
         deck.shuffleDeck();
-        message = WorldOfSweets.nextPlayer() + "'s draw to start the game!";
         gameInProgress = true;
         lastCard = null;
         cardDrawn = false;
@@ -75,10 +80,11 @@ public class CardDeckGUI extends JPanel implements ActionListener {
             lastCard = newCard();
             drawCard(g, lastCard, MINSPACING + CARDWIDTH / 2 + CARDWIDTH + MINSPACING, MINSPACING);
             cardDrawn = false;
-        } else
+            WorldOfSweets.movePlayer(lastCard, WorldOfSweets.currentPlayerIndex);
+        } else{
             drawCard(g, lastCard, MINSPACING + CARDWIDTH / 2 + CARDWIDTH + MINSPACING, MINSPACING);
-
-        message = WorldOfSweets.nextPlayer() + "'s turn to draw";
+        }
+        
     }
 
     Card newCard() {
@@ -93,6 +99,7 @@ public class CardDeckGUI extends JPanel implements ActionListener {
     }
 
     void drawCard(Graphics g, Card card, int x, int y) {
+        
         if (card == null) {
             g.setColor(Color.BLUE);
             g.fillRect(x, y, CARDWIDTH, CARDHEIGHT);
