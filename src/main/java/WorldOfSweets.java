@@ -22,6 +22,7 @@ public class WorldOfSweets {
     public static int currentPlayerIndex = -1;
     public static Gameboard gameboard;
 
+    
     public static void main(String[] args) {
         getPlayers();
         gameboard = new Gameboard();
@@ -150,9 +151,5 @@ public class WorldOfSweets {
         return value;
     }
 
-    public static void printAll(int[] a){
-        for (int i : a ){
-            System.out.println(i);
-        }
-    }
+    
 }
