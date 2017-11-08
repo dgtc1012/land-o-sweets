@@ -144,9 +144,13 @@ public class WorldOfSweets {
         }
     }
     public static int movePlayer(Card c, int index){
+        //System.out.println((WorldOfSweets.getBoardLength()-1)/2+1);
         int value = players[index].newCardDrawn(c.getValue(), c.getColor());
         if (value > gameboard.getNumberOfSquares())
             System.exit(0);         //when someone reaches Grandmas House
+        /*if (gameboard.getSquareColor(value) != players[index].getCurrentSquareColor2() && value != (WorldOfSweets.getBoardLength()-1)/2+1){
+            value+=1;
+        }*/
         players[index].getToken().setCoords(gameboard.getSquareXLocation(value), gameboard.getSquareYLocation(value));
         return value;
     }
