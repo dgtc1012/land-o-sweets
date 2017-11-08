@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="TurnTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2017-10-30T14:23:08" hostname="DJ" time="0.082">
+<testsuite name="TurnTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2017-11-07T20:24:49" hostname="DJ" time="0.165">
   <properties/>
-  <testcase name="checkFourthToFirstPlayerTurn" classname="TurnTest" time="0.08"/>
+  <testcase name="checkFourthToFirstPlayerTurn" classname="TurnTest" time="0.164"/>
   <testcase name="checkFirstToSecondPlayerTurn" classname="TurnTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

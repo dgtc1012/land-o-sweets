@@ -22,6 +22,7 @@ public class WorldOfSweets {
     public static int currentPlayerIndex = -1;
     public static Gameboard gameboard;
 
+    
     public static void main(String[] args) {
         getPlayers();
         gameboard = new Gameboard();
@@ -62,8 +63,8 @@ public class WorldOfSweets {
                 pNames[1] = p2.getToken().getName();
 
 
-                p1.getToken().setCoords(0, 600);
-                p2.getToken().setCoords(60, 600);
+                p1.getToken().setCoords(20, 480);
+                p2.getToken().setCoords(60, 480);
                 players = new Player[2];
                 players[0] = p1;
                 players[1] = p2;
@@ -87,9 +88,9 @@ public class WorldOfSweets {
                 pNames[1] = p2.getToken().getName();
                 Player p3 = new Player(3, p3Name.getText().toString());
                 pNames[2] = p3.getToken().getName();
-                p1.getToken().setCoords(0, 600);
-                p2.getToken().setCoords(60, 600);
-                p3.getToken().setCoords(120, 600);
+                p1.getToken().setCoords(20, 480);
+                p2.getToken().setCoords(60, 480);
+                p3.getToken().setCoords(20, 520);
                 players = new Player[]{p1, p2, p3};
             } else if (selected.toString().equalsIgnoreCase("4")) {
 
@@ -114,10 +115,10 @@ public class WorldOfSweets {
                 pNames[2] = p3.getToken().getName();
                 Player p4 = new Player(4, p4Name.getText().toString());
                 pNames[3] = p4.getToken().getName();
-                p1.getToken().setCoords(0, 600);
-                p2.getToken().setCoords(60, 600);
-                p3.getToken().setCoords(120, 600);
-                p4.getToken().setCoords(180, 600);
+                p1.getToken().setCoords(20, 480);
+                p2.getToken().setCoords(60, 480);
+                p3.getToken().setCoords(20, 520);
+                p4.getToken().setCoords(60, 520);
                 players = new Player[]{p1, p2, p3, p4};
             }
         } else {
@@ -135,4 +136,20 @@ public class WorldOfSweets {
             return pNames[currentPlayerIndex];
         }
     }
+    public static int nextPlayerIndex() {
+        if (currentPlayerIndex == pNames.length - 1) {
+            return 0;
+        } else {
+            return currentPlayerIndex+1;
+        }
+    }
+    public static int movePlayer(Card c, int index){
+        int value = players[index].newCardDrawn(c.getValue(), c.getColor());
+        if (value > gameboard.getNumberOfSquares())
+            System.exit(0);         //when someone reaches Grandmas House
+        players[index].getToken().setCoords(gameboard.getSquareXLocation(value), gameboard.getSquareYLocation(value));
+        return value;
+    }
+
+    
 }

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="PlayerTest" tests="55" skipped="0" failures="0" errors="0" timestamp="2017-11-07T20:24:44" hostname="DJ" time="3.28">
+  <properties/>
+  <testcase name="checkBluetoRedSingleTransition" classname="PlayerTest" time="0.13"/>
+  <testcase name="checkRedtoYellowDoubleTransition" classname="PlayerTest" time="0.085"/>
+  <testcase name="checkYellowtoYellowSingleTransition" classname="PlayerTest" time="0.048"/>
+  <testcase name="checkSkipCardResponse" classname="PlayerTest" time="0.132"/>
+  <testcase name="checkBluetoOrangeSingleTransition" classname="PlayerTest" time="0.167"/>
+  <testcase name="checkOrangetoOrangeSingleTransition" classname="PlayerTest" time="0.046"/>
+  <testcase name="checkYellowtoRedSingleTransition" classname="PlayerTest" time="0.061"/>
+  <testcase name="checkYellowtoGreenSingleTransition" classname="PlayerTest" time="0.111"/>
+  <testcase name="checkGreentoGreenDoubleTransition" classname="PlayerTest" time="0.143"/>
+  <testcase name="checkGreentoOrangeDoubleTransition" classname="PlayerTest" time="0.072"/>
+  <testcase name="checkGreentoRedSingleTransition" classname="PlayerTest" time="0.078"/>
+  <testcase name="checkRedtoBlueDoubleTransition" classname="PlayerTest" time="0.084"/>
+  <testcase name="checkRedtoOrangeDoubleTransition" classname="PlayerTest" time="0.05"/>
+  <testcase name="checkOrangetoBlueDoubleTransition" classname="PlayerTest" time="0.032"/>
+  <testcase name="checkBluetoYellowDoubleTransition" classname="PlayerTest" time="0.032"/>
+  <testcase name="checkYellowtoOrangeSingleTransition" classname="PlayerTest" time="0.082"/>
+  <testcase name="checkOrangetoYellowDoubleTransition" classname="PlayerTest" time="0.069"/>
+  <testcase name="checkGreentoBlueSingleTransition" classname="PlayerTest" time="0.033"/>
+  <testcase name="checkBluetoGreenDoubleTransition" classname="PlayerTest" time="0.033"/>
+  <testcase name="checkStartColor" classname="PlayerTest" time="0.035"/>
+  <testcase name="checkBluetoRedDoubleTransition" classname="PlayerTest" time="0.034"/>
+  <testcase name="checkRedtoGreenSingleTransition" classname="PlayerTest" time="0.049"/>
+  <testcase name="checkOrangetoGreenSingleTransition" classname="PlayerTest" time="0.084"/>
+  <testcase name="checkYellowtoYellowDoubleTransition" classname="PlayerTest" time="0.061"/>
+  <testcase name="checkOrangetoRedSingleTransition" classname="PlayerTest" time="0.053"/>
+  <testcase name="checkYellowtoBlueSingleTransition" classname="PlayerTest" time="0.048"/>
+  <testcase name="checkBluetoOrangeDoubleTransition" classname="PlayerTest" time="0.044"/>
+  <testcase name="checkOrangetoOrangeDoubleTransition" classname="PlayerTest" time="0.067"/>
+  <testcase name="checkYellowtoRedDoubleTransition" classname="PlayerTest" time="0.029"/>
+  <testcase name="checkBluetoBlueSingleTransition" classname="PlayerTest" time="0.028"/>
+  <testcase name="checkYellowtoGreenDoubleTransition" classname="PlayerTest" time="0.05"/>
+  <testcase name="checkGreentoYellowSingleTransition" classname="PlayerTest" time="0.015"/>
+  <testcase name="checkRedtoRedSingleTransition" classname="PlayerTest" time="0.042"/>
+  <testcase name="checkMiddleCardResponse_Forward" classname="PlayerTest" time="0.042"/>
+  <testcase name="checkRedtoYellowSingleTransition" classname="PlayerTest" time="0.054"/>
+  <testcase name="checkGreentoRedDoubleTransition" classname="PlayerTest" time="0.038"/>
+  <testcase name="checkMiddleCardResponse_Back" classname="PlayerTest" time="0.033"/>
+  <testcase name="checkYellowtoOrangeDoubleTransition" classname="PlayerTest" time="0.04"/>
+  <testcase name="checkGreentoGreenSingleTransition" classname="PlayerTest" time="0.098"/>
+  <testcase name="checkGreentoBlueDoubleTransition" classname="PlayerTest" time="0.095"/>
+  <testcase name="checkGreentoOrangeSingleTransition" classname="PlayerTest" time="0.049"/>
+  <testcase name="checkStartPosition" classname="PlayerTest" time="0.038"/>
+  <testcase name="checkRedtoGreenDoubleTransition" classname="PlayerTest" time="0.04"/>
+  <testcase name="checkRedtoBlueSingleTransition" classname="PlayerTest" time="0.071"/>
+  <testcase name="checkRedtoOrangeSingleTransition" classname="PlayerTest" time="0.031"/>
+  <testcase name="checkOrangetoGreenDoubleTransition" classname="PlayerTest" time="0.038"/>
+  <testcase name="checkOrangetoBlueSingleTransition" classname="PlayerTest" time="0.044"/>
+  <testcase name="checkBluetoYellowSingleTransition" classname="PlayerTest" time="0.078"/>
+  <testcase name="checkOrangetoYellowSingleTransition" classname="PlayerTest" time="0.04"/>
+  <testcase name="checkOrangetoRedDoubleTransition" classname="PlayerTest" time="0.032"/>
+  <testcase name="checkYellowtoBlueDoubleTransition" classname="PlayerTest" time="0.038"/>
+  <testcase name="checkBluetoGreenSingleTransition" classname="PlayerTest" time="0.086"/>
+  <testcase name="checkBluetoBlueDoubleTransition" classname="PlayerTest" time="0.037"/>
+  <testcase name="checkGreentoYellowDoubleTransition" classname="PlayerTest" time="0.061"/>
+  <testcase name="checkRedtoRedDoubleTransition" classname="PlayerTest" time="0.041"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

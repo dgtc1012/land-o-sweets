@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="TokenTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2017-11-07T20:24:49" hostname="DJ" time="0.253">
+  <properties/>
+  <testcase name="testGetName" classname="TokenTest" time="0.133"/>
+  <testcase name="testSetCoords" classname="TokenTest" time="0.113"/>
+  <testcase name="testSetSize" classname="TokenTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

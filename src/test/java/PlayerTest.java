@@ -510,7 +510,7 @@ public class PlayerTest {
     public void checkMiddleCardResponse_Forward() throws Exception{
         player.moveToken(5, CardColor.RED);
         player.newCardDrawn(45, null);
-        assertEquals((WorldOfSweets.getBoardLength()-1)/2, player.getCurrentSquareValue());
+        assertEquals((WorldOfSweets.getBoardLength()-1)/2+1, player.getCurrentSquareValue());
     }
 
     @Test
@@ -519,6 +519,6 @@ public class PlayerTest {
     public void checkMiddleCardResponse_Back() throws Exception{
         player.moveToken(5*15, CardColor.RED);
         player.newCardDrawn(45, null);
-        assertEquals((WorldOfSweets.getBoardLength()-1)/2, player.getCurrentSquareValue());
+        assertEquals((WorldOfSweets.getBoardLength()-1)/2+1, player.getCurrentSquareValue());
     }
 }
