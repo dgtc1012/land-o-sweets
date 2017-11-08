@@ -22,7 +22,7 @@ public class WorldOfSweets {
     public static int currentPlayerIndex = -1;
     public static Gameboard gameboard;
 
-    
+
     public static void main(String[] args) {
         getPlayers();
         gameboard = new Gameboard();
@@ -145,12 +145,16 @@ public class WorldOfSweets {
     }
     public static int movePlayer(Card c, int index){
         int value = players[index].newCardDrawn(c.getValue(), c.getColor());
-        if (value >= gameboard.getNumberOfSquares())
-            System.exit(0);         //when someone reaches Grandmas House
+        if (value >= gameboard.getNumberOfSquares()){
+
+          players[index].getToken().setCoords(gameboard.grandmasHouse.getX(), gameboard.grandmasHouse.getY());
+          JOptionPane.showMessageDialog(null, pNames[index] + ". You win!!!");
+          System.exit(0);
+        }        //when someone reaches Grandmas House
         if (value>-1)
             players[index].getToken().setCoords(gameboard.getSquareXLocation(value), gameboard.getSquareYLocation(value));
         return value;
     }
 
-    
+
 }

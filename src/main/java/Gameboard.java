@@ -33,7 +33,7 @@ public class Gameboard {
     public Gameboard() {
         initComponents();
         //getPlayers();
-        
+
         for (int i =0; i< WorldOfSweets.players.length; i++){
 
             lPane.add(WorldOfSweets.players[i].getToken(), new Integer(i+5));
@@ -215,7 +215,7 @@ public class Gameboard {
     private JFrame _frame;
     private JPanel deckArea;
     private JPanel start;
-    private JPanel grandmasHouse;
+    public JPanel grandmasHouse;
     ArrayList<JPanel> squares = new ArrayList<JPanel>();
     ////////////////////////////////////////////////////////////////
 
