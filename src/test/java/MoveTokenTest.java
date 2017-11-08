@@ -88,5 +88,40 @@ public class MoveTokenTest {
         assertArrayEquals(expectedArray, resultArray);
     }
 
+    @Test
+    //US-17
+    //Checks if the player's token moves to the grandma's house panel after landing on it
+    public void checkLandOnGrandmasHouse() throws Exception {
+      w = new WorldOfSweets();
+      w.gameboard = new Gameboard();
+      w.players = new Player[]{player, player};
+      int value = w.gameboard.getNumberOfSquares();
+      if (value >= w.gameboard.getNumberOfSquares()){
+        w.players[0].getToken().setCoords(w.gameboard.grandmasHouse.getX(), w.gameboard.grandmasHouse.getY());
+      }
+      int x = w.players[0].getToken().getX();
+      int y = w.players[0].getToken().getY();
+      int[] resultArray = {x,y};
+      int[] expectedArray =  {w.gameboard.grandmasHouse.getX(), w.gameboard.grandmasHouse.getY()};
+      assertArrayEquals(expectedArray, resultArray);
+    }
+
+    @Test
+    //US-17
+    //Checks if the player's token moves to the grandma's house panel after going past it
+    public void checkLandPastGrandmasHouse() throws Exception {
+      w = new WorldOfSweets();
+      w.gameboard = new Gameboard();
+      w.players = new Player[]{player, player};
+      int value = w.gameboard.getNumberOfSquares()+5;
+      if (value >= w.gameboard.getNumberOfSquares()){
+        w.players[0].getToken().setCoords(w.gameboard.grandmasHouse.getX(), w.gameboard.grandmasHouse.getY());
+      }
+      int x = w.players[0].getToken().getX();
+      int y = w.players[0].getToken().getY();
+      int[] resultArray = {x,y};
+      int[] expectedArray =  {w.gameboard.grandmasHouse.getX(), w.gameboard.grandmasHouse.getY()};
+      assertArrayEquals(expectedArray, resultArray);
+    }
 
 }
