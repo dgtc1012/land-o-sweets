@@ -23,18 +23,7 @@ public class Player {
         return this.currentSquareColor;
     }
 
-    public Color getCurrentSquareColor2(){
-        if (this.currentSquareColor == CardColor.ORANGE)
-            return Color.orange;
-        else if (this.currentSquareColor == CardColor.RED)
-            return Color.red;
-        else if (this.currentSquareColor == CardColor.BLUE)
-            return Color.blue;
-        else if (this.currentSquareColor == CardColor.GREEN)
-            return Color.green;
-        else 
-            return Color.yellow;
-    }
+    
 
     public void moveToken(int newValue, CardColor newColor){
         this.currentSquareValue = newValue;
@@ -45,8 +34,6 @@ public class Player {
     public int newCardDrawn(int value, CardColor color){
         //single card
         if(value == 1) {
-            /*if (this.currentSquareValue>=39 && this.currentSquareValue<44)
-                this.currentSquareValue++;*/
             switch (currentSquareColor) {
                 case RED:
                     switch (color) {

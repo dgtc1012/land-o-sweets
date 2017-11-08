@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="DeckOfCardsTest" tests="18" skipped="0" failures="0" errors="0" timestamp="2017-11-08T01:59:41" hostname="DJ" time="0.008">
+<testsuite name="DeckOfCardsTest" tests="18" skipped="0" failures="0" errors="0" timestamp="2017-11-08T04:21:41" hostname="DJ" time="0.006">
   <properties/>
-  <testcase name="testDrawCardEmptyDeck" classname="DeckOfCardsTest" time="0.001"/>
+  <testcase name="testDrawCardEmptyDeck" classname="DeckOfCardsTest" time="0.0"/>
   <testcase name="checkDeckSize" classname="DeckOfCardsTest" time="0.0"/>
-  <testcase name="testDrawCard20" classname="DeckOfCardsTest" time="0.001"/>
+  <testcase name="testDrawCard20" classname="DeckOfCardsTest" time="0.0"/>
   <testcase name="check3GoToMiddleCards" classname="DeckOfCardsTest" time="0.0"/>
   <testcase name="check10GreenDouble" classname="DeckOfCardsTest" time="0.0"/>
   <testcase name="check10GreenSingle" classname="DeckOfCardsTest" time="0.0"/>
   <testcase name="testDrawCard" classname="DeckOfCardsTest" time="0.0"/>
   <testcase name="check10OrangeDouble" classname="DeckOfCardsTest" time="0.0"/>
-  <testcase name="check10BlueDouble" classname="DeckOfCardsTest" time="0.001"/>
+  <testcase name="check10BlueDouble" classname="DeckOfCardsTest" time="0.0"/>
   <testcase name="check10YellowDouble" classname="DeckOfCardsTest" time="0.0"/>
   <testcase name="check10OrangeSingle" classname="DeckOfCardsTest" time="0.0"/>
-  <testcase name="check10BlueSingle" classname="DeckOfCardsTest" time="0.001"/>
+  <testcase name="check10BlueSingle" classname="DeckOfCardsTest" time="0.0"/>
   <testcase name="testDrawCard2" classname="DeckOfCardsTest" time="0.0"/>
   <testcase name="check10YellowSingle" classname="DeckOfCardsTest" time="0.0"/>
   <testcase name="check10RedDouble" classname="DeckOfCardsTest" time="0.001"/>
   <testcase name="check10RedSingle" classname="DeckOfCardsTest" time="0.001"/>
   <testcase name="testDeckSizeAfterShuffle" classname="DeckOfCardsTest" time="0.0"/>
-  <testcase name="check5SkipCards" classname="DeckOfCardsTest" time="0.001"/>
+  <testcase name="check5SkipCards" classname="DeckOfCardsTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
