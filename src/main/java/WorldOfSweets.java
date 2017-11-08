@@ -145,9 +145,10 @@ public class WorldOfSweets {
     }
     public static int movePlayer(Card c, int index){
         int value = players[index].newCardDrawn(c.getValue(), c.getColor());
-        if (value > gameboard.getNumberOfSquares())
+        if (value >= gameboard.getNumberOfSquares())
             System.exit(0);         //when someone reaches Grandmas House
-        players[index].getToken().setCoords(gameboard.getSquareXLocation(value), gameboard.getSquareYLocation(value));
+        if (value>-1)
+            players[index].getToken().setCoords(gameboard.getSquareXLocation(value), gameboard.getSquareYLocation(value));
         return value;
     }
 
