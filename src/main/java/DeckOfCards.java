@@ -4,10 +4,6 @@ import java.util.Collections;
 public class DeckOfCards {
 
     private ArrayList<Card> deck = new ArrayList<>();
-    private static final int GO_TO_MIDDLE = 45;
-    private static final int SKIP = 0;
-    private static final int SINGLE = 1;
-    private static final int DOUBLE = 2;
 
     public DeckOfCards() {
         populateDeck();
@@ -23,20 +19,22 @@ public class DeckOfCards {
         // Add 12 cards of each color
         for (CardColor color : CardColor.values()) {
             for (int i = 0; i < 10; i++) {
-                deck.add(new Card(color, SINGLE));
+                deck.add(new Card(color, Constants.SINGLE));
             }
             for (int i = 0; i < 2; i++) {
-                deck.add(new Card(color, DOUBLE));
+                deck.add(new Card(color, Constants.DOUBLE));
             }
         }
         // Add 5 skip cards
         for (int i = 0; i < 5; i++) {
-            deck.add(new Card(null, SKIP));
+            deck.add(new Card(null, Constants.SKIP));
         }
-        // Add 3 Go-To-Middle cards
-        for (int i = 0; i < 3; i++) {
-            deck.add(new Card(null, GO_TO_MIDDLE));
-        }
+        // Add 5 "Go to Square X cards"
+        deck.add(new Card(null, Constants.LICORICE));
+        deck.add(new Card(null, Constants.ICECREAM));
+        deck.add(new Card(null, Constants.GINGERBREAD));
+        deck.add(new Card(null, Constants.CUPCAKE));
+        deck.add(new Card(null, Constants.PEPPERMINT));
     }
 
     public void shuffleDeck() {
