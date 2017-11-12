@@ -1,22 +1,13 @@
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
 import javax.swing.*;
-import java.awt.Graphics;
-import javax.swing.border.BevelBorder;
+import java.awt.*;
 
 public class Token extends JPanel {
-    private static final JPanel square = new JPanel();
-    public JLabel label;
     private final int num;
     private static int x;
     private static int y;
     private static int width;
     private static int height;
-    private static String name;
+    private String name;
     private Image img;
 
     public Token(int pNum, String pName) {
@@ -28,7 +19,6 @@ public class Token extends JPanel {
         name = pName;
         num = pNum;
         setBounds(x, y, width, height);
-        //setBorder(new BevelBorder(BevelBorder.RAISED));
 
         if (pNum == 1)
             img = new ImageIcon("src/main/resources/images/p1.jpg").getImage();
@@ -38,7 +28,6 @@ public class Token extends JPanel {
             img = new ImageIcon("src/main/resources/images/p3.jpg").getImage();
         else
             img = new ImageIcon("src/main/resources/images/p4.jpg").getImage();
-        //add(j);
     }
 
     public void setCoords(int newX, int newY) {
@@ -72,6 +61,7 @@ public class Token extends JPanel {
         g.drawImage(img, 0, 0, null);
     }
 
-
-
+    public Image getImage() {
+        return img;
+    }
 }

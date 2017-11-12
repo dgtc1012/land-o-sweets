@@ -81,7 +81,7 @@ public class CardDeckGUI extends JPanel implements ActionListener {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.setFont(bigFont);
-        g.drawString(message, MINSPACING, CARDHEIGHT + MINSPACING * 4);
+        g.drawString(message, MINSPACING * 5, CARDHEIGHT + MINSPACING * 4);
         try {
             drawCard(g, null, MINSPACING + CARDWIDTH / 2, MINSPACING);
         } catch (IOException e) {
