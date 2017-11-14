@@ -3,14 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-import java.util.Scanner;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.awt.BorderLayout;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
- *
  * @author Justin Keenan, Dannah Gersh
  */
 public class Gameboard {
@@ -23,20 +24,20 @@ public class Gameboard {
     int numberOfRows = 5;
     int squaresBtwnRows = 2;
     int boardWidth = 16;
-    int numberOfSquares = boardWidth*numberOfRows+squaresBtwnRows*(numberOfRows-1);
+    int numberOfSquares = boardWidth * numberOfRows + squaresBtwnRows * (numberOfRows - 1);
     JLayeredPane lPane;
     Container content;
+    Map<String, JLabel> labels = new HashMap<>();
 
     /**
      * Creates new form WorldOfCandy
      */
     public Gameboard() {
         initComponents();
-        //getPlayers();
 
-        for (int i =0; i< WorldOfSweets.players.length; i++){
+        for (int i = 0; i < WorldOfSweets.players.length; i++) {
 
-            lPane.add(WorldOfSweets.players[i].getToken(), new Integer(i+5));
+            lPane.add(WorldOfSweets.players[i].getToken(), new Integer(i + 5));
 
         }
         content.add(lPane, BorderLayout.CENTER);
@@ -54,7 +55,7 @@ public class Gameboard {
     private void initComponents() {
 
         _frame = new JFrame();
-        for(int i = 1; i<=numberOfSquares; i++){
+        for (int i = 1; i <= numberOfSquares; i++) {
             squares.add(new JPanel());
         }
 
@@ -74,12 +75,12 @@ public class Gameboard {
         GroupLayout startLayout = new GroupLayout(start);
         start.setLayout(startLayout);
         startLayout.setHorizontalGroup(
-            startLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+                startLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGap(0, 0, Short.MAX_VALUE)
         );
         startLayout.setVerticalGroup(
-            startLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+                startLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGap(0, 0, Short.MAX_VALUE)
         );
 
         //_frame.add(start);
@@ -91,8 +92,8 @@ public class Gameboard {
         int rowCount = 1;
         int colCount = 0;
         boolean rowDirection = false; //false = row is building to the right, true, row is building to the left
-        for(int i = 0; i<numberOfSquares; i++){
-            switch (colorindex){
+        for (int i = 0; i < numberOfSquares; i++) {
+            switch (colorindex) {
                 case 0:
                     squares.get(i).setBackground(Color.red);
                     colorindex++;
@@ -111,21 +112,12 @@ public class Gameboard {
                     break;
                 case 4:
                     squares.get(i).setBackground(Color.orange);
-                    colorindex=0;
+                    colorindex = 0;
                     break;
                 default:
                     break;
             }
 
-            if(i == (numberOfSquares+1)/2){
-                squares.get(i).setBackground(Color.magenta);
-                if(colorindex>0){
-                    colorindex = colorindex-1;
-                }
-                else{
-                    colorindex = 4;
-                }
-            }
             squares.get(i).setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
             squares.get(i).setPreferredSize(new Dimension(squareSize, squareSize));
 
@@ -146,21 +138,18 @@ public class Gameboard {
 
             squares.get(i).setBounds(xLoc, yLoc, squareSize, squareSize);
 
-            if(rowCount < boardWidth && !rowDirection){
+            if (rowCount < boardWidth && !rowDirection) {
                 rowCount++;
                 xLoc += squareSize;
-            }
-            else if(rowCount < boardWidth && rowDirection){
+            } else if (rowCount < boardWidth && rowDirection) {
                 rowCount++;
                 xLoc -= squareSize;
-            }
-            else if(colCount < squaresBtwnRows){
+            } else if (colCount < squaresBtwnRows) {
                 colCount++;
                 yLoc -= squareSize;
-            }
-            else{
-                rowCount=1;
-                colCount=0;
+            } else {
+                rowCount = 1;
+                colCount = 0;
                 rowDirection = !rowDirection;
                 yLoc -= squareSize;
             }
@@ -179,7 +168,7 @@ public class Gameboard {
 
         //_frame.add(grandmasHouse);
         lPane.add(grandmasHouse, new Integer(1));
-        grandmasHouse.setBounds(xLoc+squareSize, yLoc+20, 80, 80);
+        grandmasHouse.setBounds(xLoc + squareSize, yLoc + 20, 80, 80);
 
         //Current deck settings
         deckArea.setPreferredSize(new Dimension(300, 180));
@@ -189,25 +178,36 @@ public class Gameboard {
         deckArea.setBounds(780, 360, 300, 180);
         CardDeckGUILayout cardDeck = new CardDeckGUILayout();
         deckArea.add(cardDeck);
+
+        int y = 200;
+        for (int i = 0; i < WorldOfSweets.players.length; i++) {
+            JLabel label = new JLabel(WorldOfSweets.players[i].getToken().getName() + "- " + (numberOfSquares - WorldOfSweets.players[i].getCurrentSquareValue()) + " Squares Remaining!", JLabel.LEFT);
+            label.setBounds(834, y, 400, 30);
+            label.setIcon(new ImageIcon(WorldOfSweets.players[i].getToken().getImage().getScaledInstance(20, 30, Image.SCALE_SMOOTH)));
+            lPane.add(label);
+            labels.put(WorldOfSweets.players[i].getToken().getName(), label);
+            y += 40;
+        }
     }// </editor-fold>//GEN-END:initComponents
 
-//Deck event handler
+    //Deck event handler
     private void deckMouseClicked(MouseEvent evt) {//GEN-FIRST:event_deckMouseClicked
         // TODO add your handling code here:
     }
 
-    public int getNumberOfSquares(){
+    public int getNumberOfSquares() {
         return numberOfSquares;
     }
-    public Color getSquareColor(int index){
+
+    public Color getSquareColor(int index) {
         return squares.get(index).getBackground();
     }
 
-    public int getSquareXLocation(int index){
+    public int getSquareXLocation(int index) {
         return squares.get(index).getX();
     }
 
-    public int getSquareYLocation(int index){
+    public int getSquareYLocation(int index) {
         return squares.get(index).getY();
     }
 

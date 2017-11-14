@@ -31,17 +31,6 @@ public class CardDeckGUITest {
     }
 
     @Test
-    // US-27
-    public void testGoToMiddleCard() throws Exception {
-        Mockito.when(card.getColor()).thenReturn(null);
-        Mockito.when(card.getValue()).thenReturn(45);
-        cardDeckGUI.drawCard(graphics, card, 0, 0);
-        Mockito.verify(graphics, Mockito.times(1)).drawString("Go To", (CardDeckGUI.CARDWIDTH / 2 - CardDeckGUI.BLOCKSIZE / 2),
-                CardDeckGUI.CARDHEIGHT / 3 - CardDeckGUI.BLOCKSIZE / 3);
-        Mockito.verify(graphics, Mockito.times(1)).setColor(Color.MAGENTA);
-    }
-
-    @Test
     public void testGreenSingleCard() throws Exception {
         Mockito.when(card.getColor()).thenReturn(CardColor.GREEN);
         Mockito.when(card.getValue()).thenReturn(1);
@@ -125,5 +114,45 @@ public class CardDeckGUITest {
     public void testDrawCardNull() throws Exception {
         cardDeckGUI.drawCard(graphics, null, 0, 0);
         Mockito.verify(graphics, Mockito.times(1)).setColor(Color.WHITE);
+    }
+
+    @Test
+    public void testLicoriceCard() throws Exception {
+        Mockito.when(card.getColor()).thenReturn(null);
+        Mockito.when(card.getValue()).thenReturn(Constants.LICORICE);
+        cardDeckGUI.drawCard(graphics, card, 0, 0);
+        Mockito.verify(graphics, Mockito.times(1)).drawImage(Mockito.any(), Mockito.anyInt(), Mockito.anyInt(), Mockito.any());
+    }
+
+    @Test
+    public void testIcecreamCard() throws Exception {
+        Mockito.when(card.getColor()).thenReturn(null);
+        Mockito.when(card.getValue()).thenReturn(Constants.ICECREAM);
+        cardDeckGUI.drawCard(graphics, card, 0, 0);
+        Mockito.verify(graphics, Mockito.times(1)).drawImage(Mockito.any(), Mockito.anyInt(), Mockito.anyInt(), Mockito.any());
+    }
+
+    @Test
+    public void testGingerbreadCard() throws Exception {
+        Mockito.when(card.getColor()).thenReturn(null);
+        Mockito.when(card.getValue()).thenReturn(Constants.GINGERBREAD);
+        cardDeckGUI.drawCard(graphics, card, 0, 0);
+        Mockito.verify(graphics, Mockito.times(1)).drawImage(Mockito.any(), Mockito.anyInt(), Mockito.anyInt(), Mockito.any());
+    }
+
+    @Test
+    public void testCupcakeCard() throws Exception {
+        Mockito.when(card.getColor()).thenReturn(null);
+        Mockito.when(card.getValue()).thenReturn(Constants.CUPCAKE);
+        cardDeckGUI.drawCard(graphics, card, 0, 0);
+        Mockito.verify(graphics, Mockito.times(1)).drawImage(Mockito.any(), Mockito.anyInt(), Mockito.anyInt(), Mockito.any());
+    }
+
+    @Test
+    public void testPeppermintCard() throws Exception {
+        Mockito.when(card.getColor()).thenReturn(null);
+        Mockito.when(card.getValue()).thenReturn(Constants.PEPPERMINT);
+        cardDeckGUI.drawCard(graphics, card, 0, 0);
+        Mockito.verify(graphics, Mockito.times(1)).drawImage(Mockito.any(), Mockito.anyInt(), Mockito.anyInt(), Mockito.any());
     }
 }

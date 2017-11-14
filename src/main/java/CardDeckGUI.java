@@ -1,6 +1,13 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class CardDeckGUI extends JPanel implements ActionListener {
 
@@ -30,7 +37,7 @@ public class CardDeckGUI extends JPanel implements ActionListener {
                     currentPlayer = WorldOfSweets.nextPlayer();
                     doDraw();
                     message = WorldOfSweets.pNames[WorldOfSweets.nextPlayerIndex()] + "'s turn to draw";
-                    
+
                 }
             }
         });
@@ -74,17 +81,29 @@ public class CardDeckGUI extends JPanel implements ActionListener {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.setFont(bigFont);
-        g.drawString(message, MINSPACING, CARDHEIGHT + MINSPACING * 4);
-        drawCard(g, null, MINSPACING + CARDWIDTH / 2, MINSPACING);
+        g.drawString(message, MINSPACING * 5, CARDHEIGHT + MINSPACING * 4);
+        try {
+            drawCard(g, null, MINSPACING + CARDWIDTH / 2, MINSPACING);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         if (gameInProgress && cardDrawn) {
             lastCard = newCard();
-            drawCard(g, lastCard, MINSPACING + CARDWIDTH / 2 + CARDWIDTH + MINSPACING, MINSPACING);
+            try {
+                drawCard(g, lastCard, MINSPACING + CARDWIDTH / 2 + CARDWIDTH + MINSPACING, MINSPACING);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             cardDrawn = false;
             WorldOfSweets.movePlayer(lastCard, WorldOfSweets.currentPlayerIndex);
-        } else{
-            drawCard(g, lastCard, MINSPACING + CARDWIDTH / 2 + CARDWIDTH + MINSPACING, MINSPACING);
+        } else {
+            try {
+                drawCard(g, lastCard, MINSPACING + CARDWIDTH / 2 + CARDWIDTH + MINSPACING, MINSPACING);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-        
+
     }
 
     Card newCard() {
@@ -98,8 +117,8 @@ public class CardDeckGUI extends JPanel implements ActionListener {
         }
     }
 
-    void drawCard(Graphics g, Card card, int x, int y) {
-        
+    void drawCard(Graphics g, Card card, int x, int y) throws IOException {
+
         if (card == null) {
             g.setColor(Color.BLUE);
             g.fillRect(x, y, CARDWIDTH, CARDHEIGHT);
@@ -118,16 +137,26 @@ public class CardDeckGUI extends JPanel implements ActionListener {
 
             if (color == null) {
                 // Skip Card
-                if (value == 0) {
+                if (value == Constants.SKIP) {
                     g.drawString("SKIP!", x + (CARDWIDTH / 2 - BLOCKSIZE / 2), y + (CARDHEIGHT / 2));
-                } else if (value == 45) { // GoToMiddle Card
-                    g.drawString("Go To", x + (CARDWIDTH / 2 - BLOCKSIZE / 2), y + (CARDHEIGHT / 3 - BLOCKSIZE / 3));
-                    g.drawString("Middle!", x + (CARDWIDTH / 2 - BLOCKSIZE / 2) - 4, y + (CARDHEIGHT / 3 - BLOCKSIZE / 3) + 10);
-                    g.setColor(Color.MAGENTA);
-                    g.fillRect(x + (CARDWIDTH / 2 - BLOCKSIZE / 2), y + (CARDHEIGHT / 2 - BLOCKSIZE / 2), BLOCKSIZE, BLOCKSIZE);
+                } else if (value == Constants.LICORICE) { // GoToLicorice Card
+                    BufferedImage image = ImageIO.read(new File("src/main/resources/images/licorice.jpg"));
+                    g.drawImage(image, x + 4, y + (CARDHEIGHT / 2 - BLOCKSIZE / 2), null);
+                } else if (value == Constants.ICECREAM) { // GoToIcecream Card
+                    BufferedImage image = ImageIO.read(new File("src/main/resources/images/icecream.jpg"));
+                    g.drawImage(image, x + 4, y + (CARDHEIGHT / 2 - BLOCKSIZE / 2), null);
+                } else if (value == Constants.GINGERBREAD) { // GoToGingerbread Card
+                    BufferedImage image = ImageIO.read(new File("src/main/resources/images/gingerbread.jpg"));
+                    g.drawImage(image, x + 15, y + (CARDHEIGHT / 2 - BLOCKSIZE + 5), null);
+                } else if (value == Constants.CUPCAKE) { // GoToCupcake Card
+                    BufferedImage image = ImageIO.read(new File("src/main/resources/images/cupcake.jpg"));
+                    g.drawImage(image, x + 4, y + (CARDHEIGHT / 2 - BLOCKSIZE + 10), null);
+                } else if (value == Constants.PEPPERMINT) { // GoToPeppermint Card
+                    BufferedImage image = ImageIO.read(new File("src/main/resources/images/peppermint.jpg"));
+                    g.drawImage(image, x + 4, y + (CARDHEIGHT / 2 - BLOCKSIZE / 2), null);
                 }
             } else if (color == CardColor.BLUE) {
-                if (value == 1) {
+                if (value == Constants.SINGLE) {
                     g.setColor(Color.BLUE);
                     g.fillRect(x + (CARDWIDTH / 2 - BLOCKSIZE / 2), y + (CARDHEIGHT / 2 - BLOCKSIZE / 2), BLOCKSIZE, BLOCKSIZE);
                 } else {
@@ -136,7 +165,7 @@ public class CardDeckGUI extends JPanel implements ActionListener {
                     g.fillRect(x + (CARDWIDTH / 2 - BLOCKSIZE / 2), y + (CARDHEIGHT / 2 + 5), BLOCKSIZE, BLOCKSIZE);
                 }
             } else if (color == CardColor.GREEN) {
-                if (value == 1) {
+                if (value == Constants.SINGLE) {
                     g.setColor(Color.GREEN);
                     g.fillRect(x + (CARDWIDTH / 2 - BLOCKSIZE / 2), y + (CARDHEIGHT / 2 - BLOCKSIZE / 2), BLOCKSIZE, BLOCKSIZE);
                 } else {
@@ -145,7 +174,7 @@ public class CardDeckGUI extends JPanel implements ActionListener {
                     g.fillRect(x + (CARDWIDTH / 2 - BLOCKSIZE / 2), y + (CARDHEIGHT / 2 + 5), BLOCKSIZE, BLOCKSIZE);
                 }
             } else if (color == CardColor.ORANGE) {
-                if (value == 1) {
+                if (value == Constants.SINGLE) {
                     g.setColor(Color.ORANGE);
                     g.fillRect(x + (CARDWIDTH / 2 - BLOCKSIZE / 2), y + (CARDHEIGHT / 2 - BLOCKSIZE / 2), BLOCKSIZE, BLOCKSIZE);
                 } else {
@@ -154,7 +183,7 @@ public class CardDeckGUI extends JPanel implements ActionListener {
                     g.fillRect(x + (CARDWIDTH / 2 - BLOCKSIZE / 2), y + (CARDHEIGHT / 2 + 5), BLOCKSIZE, BLOCKSIZE);
                 }
             } else if (color == CardColor.RED) {
-                if (value == 1) {
+                if (value == Constants.SINGLE) {
                     g.setColor(Color.RED);
                     g.fillRect(x + (CARDWIDTH / 2 - BLOCKSIZE / 2), y + (CARDHEIGHT / 2 - BLOCKSIZE / 2), BLOCKSIZE, BLOCKSIZE);
                 } else {
@@ -163,7 +192,7 @@ public class CardDeckGUI extends JPanel implements ActionListener {
                     g.fillRect(x + (CARDWIDTH / 2 - BLOCKSIZE / 2), y + (CARDHEIGHT / 2 + 5), BLOCKSIZE, BLOCKSIZE);
                 }
             } else if (color == CardColor.YELLOW) {
-                if (value == 1) {
+                if (value == Constants.SINGLE) {
                     g.setColor(Color.YELLOW);
                     g.fillRect(x + (CARDWIDTH / 2 - BLOCKSIZE / 2), y + (CARDHEIGHT / 2 - BLOCKSIZE / 2), BLOCKSIZE, BLOCKSIZE);
                 } else {

@@ -1,18 +1,5 @@
 import javax.swing.*;
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
-
-import javax.swing.JComponent;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-import javax.swing.event.AncestorEvent;
-import javax.swing.event.AncestorListener;
+import java.awt.*;
 
 public class WorldOfSweets {
 
@@ -57,18 +44,16 @@ public class WorldOfSweets {
                         f, p, "Player Names", JOptionPane.QUESTION_MESSAGE);
                 pNames = new String[2];
 
-                Player p1 = new Player(1, p1Name.getText().toString());
+                Player p1 = new Player(1, p1Name.getText());
                 pNames[0] = p1.getToken().getName();
-                Player p2 = new Player(2, p2Name.getText().toString());
+                Player p2 = new Player(2, p2Name.getText());
                 pNames[1] = p2.getToken().getName();
-
 
                 p1.getToken().setCoords(20, 480);
                 p2.getToken().setCoords(60, 480);
                 players = new Player[2];
                 players[0] = p1;
                 players[1] = p2;
-                //players = new Token[]{p1, p2};
 
             } else if (selected.toString().equalsIgnoreCase("3")) {
                 labels.add(new JLabel("Player 1", SwingConstants.RIGHT));
