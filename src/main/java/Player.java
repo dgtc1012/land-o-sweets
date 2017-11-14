@@ -2,13 +2,12 @@ public class Player {
     private int currentSquareValue;
     private CardColor currentSquareColor;
     private Token token;
-    private boolean middle;
+    private int previousSquareValue;
 
     public Player(int pNum, String pName) {
         this.currentSquareValue = -1;
         this.currentSquareColor = CardColor.ORANGE;
         this.token = new Token(pNum, pName);
-        middle = false;
     }
 
     public Token getToken() {
@@ -28,10 +27,34 @@ public class Player {
         this.currentSquareValue = newValue;
         this.currentSquareColor = newColor;
     }
-
+    public void checkJump(){
+        int pVal = this.previousSquareValue;
+        int cVal = this.currentSquareValue;
+        if (pVal < 13 && cVal >= 13){
+            this.currentSquareValue++;
+            return;
+        }
+        if (pVal < 29 && cVal >= 29){
+            this.currentSquareValue++;
+            return;
+        }
+        if (pVal < 45 && cVal >= 45){
+            this.currentSquareValue++;
+            return;
+        }
+        if (pVal < 61 && cVal >= 61){
+            this.currentSquareValue++;
+            return;
+        }
+        if (pVal < 77 && cVal >= 77){
+            this.currentSquareValue++;
+            return;
+        }
+    }
 
     public int newCardDrawn(int value, CardColor color) {
         //single card
+        this.previousSquareValue = this.currentSquareValue;
         if (value == 1) {
             switch (currentSquareColor) {
                 case RED:
@@ -155,6 +178,7 @@ public class Player {
                     }
                     break;
             }
+            checkJump();
             WorldOfSweets.gameboard.labels.get(this.token.getName()).setText(this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares Remaining!");
             return this.currentSquareValue;
         }
@@ -282,10 +306,36 @@ public class Player {
                     }
                     break;
             }
+            checkJump();
             WorldOfSweets.gameboard.labels.get(this.token.getName()).setText(this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares Remaining!");
             return this.currentSquareValue;
         }
-
+        //special squares
+        else if(value == Constants.LICORICE){
+            this.currentSquareColor = CardColor.BLUE;
+            this.currentSquareValue = 29;
+            return this.currentSquareValue;       
+        }
+        else if(value == Constants.PEPPERMINT){
+            this.currentSquareColor = CardColor.BLUE;
+            this.currentSquareValue = 13;
+            return this.currentSquareValue;       
+        }
+         else if(value == Constants.ICECREAM){
+            this.currentSquareColor = CardColor.BLUE;
+            this.currentSquareValue = 45;
+            return this.currentSquareValue;       
+        }
+        else if(value == Constants.GINGERBREAD){
+            this.currentSquareColor = CardColor.BLUE;
+            this.currentSquareValue = 61;
+            return this.currentSquareValue;       
+        }
+         else if(value == Constants.CUPCAKE){
+            this.currentSquareColor = CardColor.BLUE;
+            this.currentSquareValue = 77;
+            return this.currentSquareValue;       
+        }
         //skip turn
         else {
             return this.currentSquareValue;

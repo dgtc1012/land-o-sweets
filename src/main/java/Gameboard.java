@@ -53,7 +53,7 @@ public class Gameboard {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
+        //System.out.println(numberOfSquares);
         _frame = new JFrame();
         for (int i = 1; i <= numberOfSquares; i++) {
             squares.add(new JPanel());
@@ -113,6 +113,31 @@ public class Gameboard {
                 case 4:
                     squares.get(i).setBackground(Color.orange);
                     colorindex = 0;
+                    break;
+                default:
+                    break;
+            }
+
+            switch (i){
+                case 77:
+                    squares.set(i, new SpecialSquare(1));
+                    colorindex--;
+                    break;
+                case 61:
+                    squares.set(i, new SpecialSquare(2));
+                    colorindex--;
+                    break;
+                case 45:
+                    squares.set(i, new SpecialSquare(3));
+                    colorindex--;
+                    break;
+                case 29:
+                    squares.set(i, new SpecialSquare(4));
+                    colorindex--;
+                    break;
+                case 13:
+                    squares.set(i, new SpecialSquare(5));
+                    colorindex--;
                     break;
                 default:
                     break;
@@ -209,6 +234,9 @@ public class Gameboard {
 
     public int getSquareYLocation(int index) {
         return squares.get(index).getY();
+    }
+    public JPanel getSquare(int index){
+        return squares.get(index);
     }
 
     // Variables declaration
