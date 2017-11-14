@@ -141,19 +141,19 @@ public class CardDeckGUI extends JPanel implements ActionListener {
                     g.drawString("SKIP!", x + (CARDWIDTH / 2 - BLOCKSIZE / 2), y + (CARDHEIGHT / 2));
                 } else if (value == Constants.LICORICE) { // GoToLicorice Card
                     BufferedImage image = ImageIO.read(new File("src/main/resources/images/licorice.jpg"));
-                    g.drawImage(image, x + 4, y + (CARDHEIGHT / 2 - BLOCKSIZE / 2), null);
+                    g.drawImage(image, x + 20, y + (CARDHEIGHT / 2 - BLOCKSIZE / 2), null);
                 } else if (value == Constants.ICECREAM) { // GoToIcecream Card
                     BufferedImage image = ImageIO.read(new File("src/main/resources/images/icecream.jpg"));
-                    g.drawImage(image, x + 4, y + (CARDHEIGHT / 2 - BLOCKSIZE / 2), null);
+                    g.drawImage(image, x + 20, y + (CARDHEIGHT / 2 - BLOCKSIZE / 2), null);
                 } else if (value == Constants.GINGERBREAD) { // GoToGingerbread Card
                     BufferedImage image = ImageIO.read(new File("src/main/resources/images/gingerbread.jpg"));
-                    g.drawImage(image, x + 15, y + (CARDHEIGHT / 2 - BLOCKSIZE + 5), null);
+                    g.drawImage(image, x + 20, y + (CARDHEIGHT / 2 - BLOCKSIZE + 5), null);
                 } else if (value == Constants.CUPCAKE) { // GoToCupcake Card
                     BufferedImage image = ImageIO.read(new File("src/main/resources/images/cupcake.jpg"));
-                    g.drawImage(image, x + 4, y + (CARDHEIGHT / 2 - BLOCKSIZE + 10), null);
+                    g.drawImage(image, x + 20, y + (CARDHEIGHT / 2 - BLOCKSIZE + 10), null);
                 } else if (value == Constants.PEPPERMINT) { // GoToPeppermint Card
                     BufferedImage image = ImageIO.read(new File("src/main/resources/images/peppermint.jpg"));
-                    g.drawImage(image, x + 4, y + (CARDHEIGHT / 2 - BLOCKSIZE / 2), null);
+                    g.drawImage(image, x + 20, y + (CARDHEIGHT / 2 - BLOCKSIZE / 2), null);
                 }
             } else if (color == CardColor.BLUE) {
                 if (value == Constants.SINGLE) {

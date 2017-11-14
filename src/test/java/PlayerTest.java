@@ -482,7 +482,7 @@ public class PlayerTest {
         player.moveToken(3, CardColor.GREEN);
         player.newCardDrawn(2, CardColor.GREEN);
         assertEquals(CardColor.GREEN, player.getCurrentSquareColor());
-        assertEquals(8 + 5, player.getCurrentSquareValue());
+        assertEquals(8 + 6, player.getCurrentSquareValue());
     }
 
     @Test

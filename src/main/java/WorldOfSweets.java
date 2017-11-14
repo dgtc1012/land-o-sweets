@@ -20,7 +20,6 @@ public class WorldOfSweets {
     }
 
     public static void getPlayers() {
-
         String[] options = {"2", "3", "4"};
         Object selected = JOptionPane.showInputDialog(null, "How many Players?", "Selection", JOptionPane.DEFAULT_OPTION, null, options, "0");
         JFrame f = new JFrame("Players");
