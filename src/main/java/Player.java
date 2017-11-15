@@ -314,26 +314,31 @@ public class Player {
         else if(value == Constants.LICORICE){
             this.currentSquareColor = CardColor.BLUE;
             this.currentSquareValue = 29;
+            WorldOfSweets.gameboard.labels.get(this.token.getName()).setText(this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares Remaining!");
             return this.currentSquareValue;       
         }
         else if(value == Constants.PEPPERMINT){
             this.currentSquareColor = CardColor.BLUE;
             this.currentSquareValue = 13;
+            WorldOfSweets.gameboard.labels.get(this.token.getName()).setText(this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares Remaining!");
             return this.currentSquareValue;       
         }
          else if(value == Constants.ICECREAM){
             this.currentSquareColor = CardColor.BLUE;
             this.currentSquareValue = 45;
+            WorldOfSweets.gameboard.labels.get(this.token.getName()).setText(this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares Remaining!");
             return this.currentSquareValue;       
         }
         else if(value == Constants.GINGERBREAD){
             this.currentSquareColor = CardColor.BLUE;
             this.currentSquareValue = 61;
+            WorldOfSweets.gameboard.labels.get(this.token.getName()).setText(this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares Remaining!");
             return this.currentSquareValue;       
         }
          else if(value == Constants.CUPCAKE){
             this.currentSquareColor = CardColor.BLUE;
             this.currentSquareValue = 77;
+            WorldOfSweets.gameboard.labels.get(this.token.getName()).setText(this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares Remaining!");
             return this.currentSquareValue;       
         }
         //skip turn
