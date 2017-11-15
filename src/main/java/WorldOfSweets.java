@@ -3,7 +3,6 @@ import java.awt.*;
 
 public class WorldOfSweets {
 
-    //public static Token[] playerTokens;
     public static String[] pNames;
     public static Player[] players;
     public static int currentPlayerIndex = -1;
@@ -15,7 +14,7 @@ public class WorldOfSweets {
         gameboard = new Gameboard();
     }
 
-    public static int getBoardLength(){
+    public static int getBoardLength() {
         return gameboard.getNumberOfSquares();
     }
 
@@ -120,22 +119,24 @@ public class WorldOfSweets {
             return pNames[currentPlayerIndex];
         }
     }
+
     public static int nextPlayerIndex() {
         if (currentPlayerIndex == pNames.length - 1) {
             return 0;
         } else {
-            return currentPlayerIndex+1;
+            return currentPlayerIndex + 1;
         }
     }
-    public static int movePlayer(Card c, int index){
-        int value = players[index].newCardDrawn(c.getValue(), c.getColor());
-        if (value >= gameboard.getNumberOfSquares()){
 
-          players[index].getToken().setCoords(gameboard.grandmasHouse.getX(), gameboard.grandmasHouse.getY());
-          JOptionPane.showMessageDialog(null, pNames[index] + ". You win!!!");
-          System.exit(0);
+    public static int movePlayer(Card c, int index) {
+        int value = players[index].newCardDrawn(c.getValue(), c.getColor());
+        if (value >= gameboard.getNumberOfSquares()) {
+
+            players[index].getToken().setCoords(gameboard.grandmasHouse.getX(), gameboard.grandmasHouse.getY());
+            JOptionPane.showMessageDialog(null, pNames[index] + ". You win!!!");
+            System.exit(0);
         }        //when someone reaches Grandmas House
-        if (value>-1)
+        if (value > -1)
             players[index].getToken().setCoords(gameboard.getSquareXLocation(value), gameboard.getSquareYLocation(value));
         return value;
     }

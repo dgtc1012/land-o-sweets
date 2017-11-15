@@ -27,26 +27,27 @@ public class Player {
         this.currentSquareValue = newValue;
         this.currentSquareColor = newColor;
     }
-    public void checkJump(){
+
+    public void checkJump() {
         int pVal = this.previousSquareValue;
         int cVal = this.currentSquareValue;
-        if (pVal < 13 && cVal >= 13){
+        if (pVal < 13 && cVal >= 13) {
             this.currentSquareValue++;
             return;
         }
-        if (pVal < 29 && cVal >= 29){
+        if (pVal < 29 && cVal >= 29) {
             this.currentSquareValue++;
             return;
         }
-        if (pVal < 45 && cVal >= 45){
+        if (pVal < 45 && cVal >= 45) {
             this.currentSquareValue++;
             return;
         }
-        if (pVal < 61 && cVal >= 61){
+        if (pVal < 61 && cVal >= 61) {
             this.currentSquareValue++;
             return;
         }
-        if (pVal < 77 && cVal >= 77){
+        if (pVal < 77 && cVal >= 77) {
             this.currentSquareValue++;
             return;
         }
@@ -311,30 +312,26 @@ public class Player {
             return this.currentSquareValue;
         }
         //special squares
-        else if(value == Constants.LICORICE){
+        else if (value == Constants.LICORICE) {
             this.currentSquareColor = CardColor.BLUE;
             this.currentSquareValue = 29;
-            return this.currentSquareValue;       
-        }
-        else if(value == Constants.PEPPERMINT){
+            return this.currentSquareValue;
+        } else if (value == Constants.PEPPERMINT) {
             this.currentSquareColor = CardColor.BLUE;
             this.currentSquareValue = 13;
-            return this.currentSquareValue;       
-        }
-         else if(value == Constants.ICECREAM){
+            return this.currentSquareValue;
+        } else if (value == Constants.ICECREAM) {
             this.currentSquareColor = CardColor.BLUE;
             this.currentSquareValue = 45;
-            return this.currentSquareValue;       
-        }
-        else if(value == Constants.GINGERBREAD){
+            return this.currentSquareValue;
+        } else if (value == Constants.GINGERBREAD) {
             this.currentSquareColor = CardColor.BLUE;
             this.currentSquareValue = 61;
-            return this.currentSquareValue;       
-        }
-         else if(value == Constants.CUPCAKE){
+            return this.currentSquareValue;
+        } else if (value == Constants.CUPCAKE) {
             this.currentSquareColor = CardColor.BLUE;
             this.currentSquareValue = 77;
-            return this.currentSquareValue;       
+            return this.currentSquareValue;
         }
         //skip turn
         else {

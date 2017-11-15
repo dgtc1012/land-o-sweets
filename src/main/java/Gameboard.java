@@ -118,7 +118,7 @@ public class Gameboard {
                     break;
             }
 
-            switch (i){
+            switch (i) {
                 case 77:
                     squares.set(i, new SpecialSquare(1));
                     colorindex--;
@@ -235,7 +235,8 @@ public class Gameboard {
     public int getSquareYLocation(int index) {
         return squares.get(index).getY();
     }
-    public JPanel getSquare(int index){
+
+    public JPanel getSquare(int index) {
         return squares.get(index);
     }
 

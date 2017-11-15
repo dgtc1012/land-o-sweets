@@ -1,17 +1,17 @@
 import org.junit.Before;
 import org.junit.Test;
-import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.NoSuchElementException;
+import org.junit.runner.RunWith;
+import org.mockito.runners.MockitoJUnitRunner;
+
 import javax.swing.*;
 import java.awt.*;
-import static org.junit.Assert.*;
 
+import static org.junit.Assert.assertEquals;
+
+@RunWith(MockitoJUnitRunner.class)
 public class SpecialSquaresTest {
 
-    WorldOfSweets w;
-	Token token;
-	Card card1;
+    Card card1;
     Card card2;
     Card card3;
     Card icecream;
@@ -20,10 +20,12 @@ public class SpecialSquaresTest {
 
     @Before
     public void setup() {
-        w = new WorldOfSweets();
         player = new Player(1, "player1");
-        w.gameboard = new Gameboard();
-        w.players = new Player[]{player};
+        WorldOfSweets.pNames = new String[2];
+        WorldOfSweets.pNames[0] = "p1";
+        WorldOfSweets.pNames[1] = "p2";
+        WorldOfSweets.players = new Player[]{player};
+        WorldOfSweets.gameboard = new Gameboard();
         card1 = new Card(CardColor.BLUE, 1);
         card2 = new Card(CardColor.BLUE, 2);
         card3 = new Card(CardColor.GREEN, 1);
@@ -36,17 +38,17 @@ public class SpecialSquaresTest {
     //US-40
     // Checks if player 1 moves to the ice cream square after recieving the ice cream card
     public void checkMoveToIceCreamSquare() throws Exception {
-        int playerSquare = w.movePlayer(icecream, 0);
+        int playerSquare = WorldOfSweets.movePlayer(icecream, 0);
         assertEquals(45, playerSquare);
 
     }
 
-    
+
     @Test
     //US-40
     // Checks if player 1 moves to the gingerbread square after recieving the gingerbread card
     public void checkMoveToGingerbreadSquare() throws Exception {
-        int playerSquare = w.movePlayer(gingerbead, 0);
+        int playerSquare = WorldOfSweets.movePlayer(gingerbead, 0);
         assertEquals(61, playerSquare);
 
     }
@@ -55,22 +57,22 @@ public class SpecialSquaresTest {
     //US-41
     // Checks if player 1 moves past the peppermint square to the next green
     public void checkMovePastPeppermintSquare() throws Exception {
-        w.movePlayer(card1, 0);
-        w.movePlayer(card2, 0);
-        int playerSquare = w.movePlayer(card3, 0);
+        WorldOfSweets.movePlayer(card1, 0);
+        WorldOfSweets.movePlayer(card2, 0);
+        int playerSquare = WorldOfSweets.movePlayer(card3, 0);
         assertEquals(14, playerSquare);
 
     }
 
-    
+
     @Test
     //US-41
     // Checks if player 1 moves past the licorice square to the next green
     public void checkMovePastLicoriceSquare() throws Exception {
-        w.movePlayer(card2, 0);
-        w.movePlayer(card2, 0);
-        w.movePlayer(card2, 0);
-        int playerSquare = w.movePlayer(card3, 0);
+        WorldOfSweets.movePlayer(card2, 0);
+        WorldOfSweets.movePlayer(card2, 0);
+        WorldOfSweets.movePlayer(card2, 0);
+        int playerSquare = WorldOfSweets.movePlayer(card3, 0);
         assertEquals(30, playerSquare);
     }
 
@@ -78,7 +80,7 @@ public class SpecialSquaresTest {
     //US-39
     // Checks if the 13th square has a peppermint image
     public void checkPeppermintSquare() throws Exception {
-        SpecialSquare s = (SpecialSquare) w.gameboard.getSquare(13);
+        SpecialSquare s = (SpecialSquare) WorldOfSweets.gameboard.getSquare(13);
         Image img = s.getImage();
         assertEquals(new ImageIcon("src/main/resources/images/peppermint.jpg").getImage(), img);
     }
@@ -87,7 +89,7 @@ public class SpecialSquaresTest {
     //US-39
     // Checks if the 77th square has a cupcake image
     public void checkCupcakeSquare() throws Exception {
-        SpecialSquare s = (SpecialSquare) w.gameboard.getSquare(77);
+        SpecialSquare s = (SpecialSquare) WorldOfSweets.gameboard.getSquare(77);
         Image img = s.getImage();
         assertEquals(new ImageIcon("src/main/resources/images/cupcake.jpg").getImage(), img);
     }

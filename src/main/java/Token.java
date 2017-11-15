@@ -31,18 +31,18 @@ public class Token extends JPanel {
     }
 
     public void setCoords(int newX, int newY) {
-        if (num == 1){
+        if (num == 1) {
             x = newX;
             y = newY;
-        }else if (num == 2){
-            x = newX+20;
+        } else if (num == 2) {
+            x = newX + 20;
             y = newY;
-        }else if (num == 3){
+        } else if (num == 3) {
             x = newX;
-            y = newY+15;
-        }else{
-            x = newX+20;
-            y = newY+15;
+            y = newY + 15;
+        } else {
+            x = newX + 20;
+            y = newY + 15;
         }
         setBounds(x, y, width, height);
     }

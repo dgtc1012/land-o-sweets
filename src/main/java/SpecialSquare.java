@@ -1,13 +1,7 @@
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
+import java.awt.*;
 
-public class SpecialSquare extends JPanel{
+public class SpecialSquare extends JPanel {
     private Image img;
 
     public SpecialSquare(int num) {
@@ -19,16 +13,16 @@ public class SpecialSquare extends JPanel{
             img = new ImageIcon("src/main/resources/images/icecream.jpg").getImage();
         else if (num == 4)
             img = new ImageIcon("src/main/resources/images/licorice.jpg").getImage();
-        else  
+        else
             img = new ImageIcon("src/main/resources/images/peppermint.jpg").getImage();
-    
+
     }
 
     public void paintComponent(Graphics g) {
         g.drawImage(img, 0, 0, null);
     }
 
-    public Image getImage(){
+    public Image getImage() {
         return img;
     }
 

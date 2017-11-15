@@ -6,7 +6,6 @@ import static org.junit.Assert.assertArrayEquals;
 public class MoveTokenTest {
 
     WorldOfSweets WorldOfSweets;
-    Token token;
     Card card;
     Player player;
 
