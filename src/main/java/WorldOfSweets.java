@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.lang.InterruptedException;
 
 public class WorldOfSweets {
 
@@ -8,10 +9,29 @@ public class WorldOfSweets {
     public static int currentPlayerIndex = -1;
     public static Gameboard gameboard;
 
-
     public static void main(String[] args) {
         getPlayers();
         gameboard = new Gameboard();
+
+        Thread t = new Thread(()->{
+            while(true){
+                try {
+                    Thread.sleep(1000);
+                    int time = gameboard.timer.incrementTime();
+                    //System.out.println(time);
+                }catch(InterruptedException iex) {
+                    //ignore
+                }
+            }
+        });
+
+        t.start();
+
+        try{
+            t.join();
+        } catch(InterruptedException iex){
+            //ignore
+        }
     }
 
     public static int getBoardLength() {

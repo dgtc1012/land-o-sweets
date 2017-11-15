@@ -28,6 +28,7 @@ public class Gameboard {
     JLayeredPane lPane;
     Container content;
     Map<String, JLabel> labels = new HashMap<>();
+    Timer timer;
 
     /**
      * Creates new form WorldOfCandy
@@ -42,7 +43,6 @@ public class Gameboard {
         }
         content.add(lPane, BorderLayout.CENTER);
         _frame.setVisible(true);
-
     }
 
     /**
@@ -213,6 +213,10 @@ public class Gameboard {
             labels.put(WorldOfSweets.players[i].getToken().getName(), label);
             y += 40;
         }
+
+        timer = new Timer(875, 100);
+        _frame.add(timer.gui);
+        _frame.add(timer.label);
     }// </editor-fold>//GEN-END:initComponents
 
     //Deck event handler
