@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.lang.InterruptedException;
 
 public class WorldOfSweets {
 
@@ -13,23 +12,21 @@ public class WorldOfSweets {
         getPlayers();
         gameboard = new Gameboard();
 
-        Thread t = new Thread(()->{
-            while(true){
+        Thread t = new Thread(() -> {
+            while (true) {
                 try {
                     Thread.sleep(1000);
                     int time = gameboard.timer.incrementTime();
                     //System.out.println(time);
-                }catch(InterruptedException iex) {
+                } catch (InterruptedException iex) {
                     //ignore
                 }
             }
         });
-
         t.start();
-
-        try{
+        try {
             t.join();
-        } catch(InterruptedException iex){
+        } catch (InterruptedException iex) {
             //ignore
         }
     }
@@ -38,6 +35,9 @@ public class WorldOfSweets {
         return gameboard.getNumberOfSquares();
     }
 
+    /**
+     * Gets the player information: number of players and their names and assigns token to them
+     */
     public static void getPlayers() {
         String[] options = {"2", "3", "4"};
         Object selected = JOptionPane.showInputDialog(null, "How many Players?", "Selection", JOptionPane.DEFAULT_OPTION, null, options, "0");
@@ -130,6 +130,11 @@ public class WorldOfSweets {
 
     }
 
+    /**
+     * Determines what player is up next
+     *
+     * @return Name of next player
+     */
     public static String nextPlayer() {
         if (currentPlayerIndex == pNames.length - 1) {
             currentPlayerIndex = 0;
@@ -140,6 +145,11 @@ public class WorldOfSweets {
         }
     }
 
+    /**
+     * Figures out index of next player up
+     *
+     * @return Int representing index of next player for pNames array
+     */
     public static int nextPlayerIndex() {
         if (currentPlayerIndex == pNames.length - 1) {
             return 0;
@@ -148,6 +158,13 @@ public class WorldOfSweets {
         }
     }
 
+    /**
+     * Moves player token
+     *
+     * @param c     card drawn to tell us where to move
+     * @param index Index of player to move
+     * @return
+     */
     public static int movePlayer(Card c, int index) {
         int value = players[index].newCardDrawn(c.getValue(), c.getColor());
         if (value >= gameboard.getNumberOfSquares()) {

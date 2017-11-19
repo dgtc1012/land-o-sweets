@@ -31,6 +31,7 @@ public class CardDeckGUITest {
     }
 
     @Test
+    // US-27
     public void testGreenSingleCard() throws Exception {
         Mockito.when(card.getColor()).thenReturn(CardColor.GREEN);
         Mockito.when(card.getValue()).thenReturn(1);
@@ -39,6 +40,7 @@ public class CardDeckGUITest {
     }
 
     @Test
+    // US-27
     public void testOrangeSingleCard() throws Exception {
         Mockito.when(card.getColor()).thenReturn(CardColor.ORANGE);
         Mockito.when(card.getValue()).thenReturn(1);
@@ -47,6 +49,7 @@ public class CardDeckGUITest {
     }
 
     @Test
+    // US-27
     public void testRedSingleCard() throws Exception {
         Mockito.when(card.getColor()).thenReturn(CardColor.RED);
         Mockito.when(card.getValue()).thenReturn(1);
@@ -55,6 +58,7 @@ public class CardDeckGUITest {
     }
 
     @Test
+    // US-27
     public void testYellowSingleCard() throws Exception {
         Mockito.when(card.getColor()).thenReturn(CardColor.YELLOW);
         Mockito.when(card.getValue()).thenReturn(1);
@@ -63,6 +67,7 @@ public class CardDeckGUITest {
     }
 
     @Test
+    // US-27
     public void testBlueSingleCard() throws Exception {
         Mockito.when(card.getColor()).thenReturn(CardColor.BLUE);
         Mockito.when(card.getValue()).thenReturn(1);
@@ -71,6 +76,7 @@ public class CardDeckGUITest {
     }
 
     @Test
+    // US-27
     public void testGreenDoubleCard() throws Exception {
         Mockito.when(card.getColor()).thenReturn(CardColor.GREEN);
         Mockito.when(card.getValue()).thenReturn(2);
@@ -79,6 +85,7 @@ public class CardDeckGUITest {
     }
 
     @Test
+    // US-27
     public void testOrangeDoubleCard() throws Exception {
         Mockito.when(card.getColor()).thenReturn(CardColor.ORANGE);
         Mockito.when(card.getValue()).thenReturn(2);
@@ -87,6 +94,7 @@ public class CardDeckGUITest {
     }
 
     @Test
+    // US-27
     public void testRedDoubleCard() throws Exception {
         Mockito.when(card.getColor()).thenReturn(CardColor.RED);
         Mockito.when(card.getValue()).thenReturn(2);
@@ -95,6 +103,7 @@ public class CardDeckGUITest {
     }
 
     @Test
+    // US-27
     public void testYellowDoubleCard() throws Exception {
         Mockito.when(card.getColor()).thenReturn(CardColor.YELLOW);
         Mockito.when(card.getValue()).thenReturn(2);
@@ -103,6 +112,7 @@ public class CardDeckGUITest {
     }
 
     @Test
+    // US-27
     public void testBlueDoubleCard() throws Exception {
         Mockito.when(card.getColor()).thenReturn(CardColor.BLUE);
         Mockito.when(card.getValue()).thenReturn(2);
@@ -111,12 +121,14 @@ public class CardDeckGUITest {
     }
 
     @Test
+    // US-27
     public void testDrawCardNull() throws Exception {
         cardDeckGUI.drawCard(graphics, null, 0, 0);
         Mockito.verify(graphics, Mockito.times(1)).setColor(Color.WHITE);
     }
 
     @Test
+    // US-36
     public void testLicoriceCard() throws Exception {
         Mockito.when(card.getColor()).thenReturn(null);
         Mockito.when(card.getValue()).thenReturn(Constants.LICORICE);
@@ -125,6 +137,7 @@ public class CardDeckGUITest {
     }
 
     @Test
+    // US-36
     public void testIcecreamCard() throws Exception {
         Mockito.when(card.getColor()).thenReturn(null);
         Mockito.when(card.getValue()).thenReturn(Constants.ICECREAM);
@@ -133,6 +146,7 @@ public class CardDeckGUITest {
     }
 
     @Test
+    // US-36
     public void testGingerbreadCard() throws Exception {
         Mockito.when(card.getColor()).thenReturn(null);
         Mockito.when(card.getValue()).thenReturn(Constants.GINGERBREAD);
@@ -141,6 +155,7 @@ public class CardDeckGUITest {
     }
 
     @Test
+    // US-36
     public void testCupcakeCard() throws Exception {
         Mockito.when(card.getColor()).thenReturn(null);
         Mockito.when(card.getValue()).thenReturn(Constants.CUPCAKE);
@@ -149,6 +164,7 @@ public class CardDeckGUITest {
     }
 
     @Test
+    // US-36
     public void testPeppermintCard() throws Exception {
         Mockito.when(card.getColor()).thenReturn(null);
         Mockito.when(card.getValue()).thenReturn(Constants.PEPPERMINT);

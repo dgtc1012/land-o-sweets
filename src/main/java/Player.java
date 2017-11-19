@@ -10,19 +10,34 @@ public class Player {
         this.token = new Token(pNum, pName);
     }
 
+    /**
+     * @return This players token
+     */
     public Token getToken() {
         return this.token;
     }
 
+    /**
+     * @return This players current square value
+     */
     public int getCurrentSquareValue() {
         return this.currentSquareValue;
     }
 
+    /**
+     * @return This players current square color
+     */
     public CardColor getCurrentSquareColor() {
         return this.currentSquareColor;
     }
 
 
+    /**
+     * Handles moving the token of this player
+     *
+     * @param newValue Value of new board space
+     * @param newColor Color of new board space
+     */
     public void moveToken(int newValue, CardColor newColor) {
         this.currentSquareValue = newValue;
         this.currentSquareColor = newColor;
@@ -53,6 +68,13 @@ public class Player {
         }
     }
 
+    /**
+     * Handles moving the player to new location after card drawn
+     *
+     * @param value Value to move
+     * @param color Color to move
+     * @return new square value
+     */
     public int newCardDrawn(int value, CardColor color) {
         //single card
         this.previousSquareValue = this.currentSquareValue;

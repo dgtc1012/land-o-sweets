@@ -204,6 +204,7 @@ public class Gameboard {
         CardDeckGUILayout cardDeck = new CardDeckGUILayout();
         deckArea.add(cardDeck);
 
+        // This part handles showing the player names, their token, and squares left to the end
         int y = 200;
         for (int i = 0; i < WorldOfSweets.players.length; i++) {
             JLabel label = new JLabel(WorldOfSweets.players[i].getToken().getName() + "- " + (numberOfSquares - WorldOfSweets.players[i].getCurrentSquareValue()) + " Squares Remaining!", JLabel.LEFT);
@@ -214,6 +215,7 @@ public class Gameboard {
             y += 40;
         }
 
+        // Timer aspect
         timer = new Timer(875, 100);
         _frame.add(timer.gui);
         _frame.add(timer.label);

@@ -1,5 +1,6 @@
 import org.junit.Before;
 import org.junit.Test;
+
 import static org.junit.Assert.assertEquals;
 
 
@@ -10,20 +11,20 @@ public class TimerTest {
     Timer timer;
 
     @Before
-    public void setup(){
+    public void setup() {
         timer = new Timer(875, 100);
     }
 
     @Test
-    public void startTimeTest() throws Exception{
+    public void startTimeTest() throws Exception {
         assertEquals(0, timer.getSeconds());
         assertEquals(0, timer.getMinutes());
         assertEquals(0, timer.getHours());
     }
 
     @Test
-    public void secondToMinTransition() throws Exception{
-        for(int i = 1; i < 60; i++){
+    public void secondToMinTransition() throws Exception {
+        for (int i = 1; i < 60; i++) {
             timer.incrementTime();
         }
 
@@ -37,8 +38,8 @@ public class TimerTest {
     }
 
     @Test
-    public void minToHourTransition() throws Exception{
-        for(int i = 1; i < 60*60; i++){
+    public void minToHourTransition() throws Exception {
+        for (int i = 1; i < 60 * 60; i++) {
             timer.incrementTime();
         }
 
@@ -54,7 +55,7 @@ public class TimerTest {
     }
 
     @Test
-    public void loadExistingTime() throws Exception{
+    public void loadExistingTime() throws Exception {
         timer = new Timer(850, 100, 12, 33, 1);
         assertEquals(12, timer.getSeconds());
         assertEquals(33, timer.getMinutes());
@@ -62,7 +63,7 @@ public class TimerTest {
     }
 
     @Test
-    public void testPaintTimer() throws Exception{
+    public void testPaintTimer() throws Exception {
         timer.paintTimer(12, 33, 1);
         assertEquals("01:33:12", timer.gui.getText());
     }

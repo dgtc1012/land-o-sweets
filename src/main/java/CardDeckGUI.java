@@ -53,6 +53,9 @@ public class CardDeckGUI extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent evt) {
     }
 
+    /**
+     * Calls repaint() for cards if game in progress
+     */
     void doDraw() {
         if (!gameInProgress) {
             cardDrawn = false;
@@ -64,6 +67,9 @@ public class CardDeckGUI extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * Initiates a new game
+     */
     void doNewGame() {
         if (gameInProgress) {
             message = "You still have to finish the game!";
@@ -78,6 +84,11 @@ public class CardDeckGUI extends JPanel implements ActionListener {
         repaint();
     }
 
+    /**
+     * Handles painting the visuals of the card deck
+     *
+     * @param g
+     */
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.setFont(bigFont);
@@ -106,6 +117,11 @@ public class CardDeckGUI extends JPanel implements ActionListener {
 
     }
 
+    /**
+     * Draws a new card from the deck
+     *
+     * @return The card drawn
+     */
     Card newCard() {
         Card card = deck.drawCard();
         if (card == null) {
@@ -117,6 +133,15 @@ public class CardDeckGUI extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * Handles drawing the newly drawn card onto the screen, determining the value/color/symbol of the card
+     *
+     * @param g
+     * @param card
+     * @param x
+     * @param y
+     * @throws IOException
+     */
     void drawCard(Graphics g, Card card, int x, int y) throws IOException {
 
         if (card == null) {
