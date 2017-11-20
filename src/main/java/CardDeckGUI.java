@@ -8,8 +8,9 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.*;
 
-public class CardDeckGUI extends JPanel implements ActionListener {
+public class CardDeckGUI extends JPanel implements ActionListener, java.io.Serializable {
 
     static final int CARDHEIGHT = 120;
     static final int CARDWIDTH = 80;
@@ -18,13 +19,13 @@ public class CardDeckGUI extends JPanel implements ActionListener {
     static final int DECKSIZE_X = 3 * CARDWIDTH + 5 * MINSPACING;
     static final int DECKSIZE_Y = CARDHEIGHT + CARDHEIGHT / 2;
 
-    DeckOfCards deck;
+    public DeckOfCards deck;
     String message;
     String currentPlayer;
 
     boolean gameInProgress;
     boolean cardDrawn;
-    Card lastCard;
+    public Card lastCard;
     boolean firstTurn;
     Font bigFont;
 
@@ -35,7 +36,7 @@ public class CardDeckGUI extends JPanel implements ActionListener {
                 super.mouseClicked(e);
                 if (e.getX() >= MINSPACING + CARDWIDTH / 2 && e.getX() < MINSPACING + CARDWIDTH / 2 + CARDWIDTH && e.getY() >= MINSPACING && e.getY() < MINSPACING + CARDHEIGHT) {
                     currentPlayer = WorldOfSweets.nextPlayer();
-                    doDraw();
+                    doDraw(false);
                     message = WorldOfSweets.pNames[WorldOfSweets.nextPlayerIndex()] + "'s turn to draw";
 
                 }
@@ -53,13 +54,19 @@ public class CardDeckGUI extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent evt) {
     }
 
-    /**
+	/**
      * Calls repaint() for cards if game in progress
      */
-    void doDraw() {
+    void doDraw(boolean loaded) {
         if (!gameInProgress) {
             cardDrawn = false;
             lastCard = null;
+            repaint();
+        }
+        else if(loaded) { //Case for the openeing to a loaded game.
+            cardDrawn = false;
+            message =   message = WorldOfSweets.pNames[WorldOfSweets.nextPlayerIndex()] + "'s turn to draw";
+            currentPlayer = WorldOfSweets.pNames[WorldOfSweets.currentPlayerIndex];
             repaint();
         } else {
             cardDrawn = true;
@@ -67,7 +74,7 @@ public class CardDeckGUI extends JPanel implements ActionListener {
         }
     }
 
-    /**
+	/**
      * Initiates a new game
      */
     void doNewGame() {
@@ -84,7 +91,7 @@ public class CardDeckGUI extends JPanel implements ActionListener {
         repaint();
     }
 
-    /**
+	/**
      * Handles painting the visuals of the card deck
      *
      * @param g
@@ -116,8 +123,7 @@ public class CardDeckGUI extends JPanel implements ActionListener {
         }
 
     }
-
-    /**
+	/**
      * Draws a new card from the deck
      *
      * @return The card drawn
@@ -132,8 +138,8 @@ public class CardDeckGUI extends JPanel implements ActionListener {
             return card;
         }
     }
-
-    /**
+	
+	/**
      * Handles drawing the newly drawn card onto the screen, determining the value/color/symbol of the card
      *
      * @param g
@@ -227,5 +233,16 @@ public class CardDeckGUI extends JPanel implements ActionListener {
                 }
             }
         }
+    }
+
+    //Returns the deck
+    ArrayList<Card> getDeck() {
+      return deck.getDeck();
+
+    }
+
+    //Gets the last flipped card
+    Card getLastCard() {
+      return lastCard;
     }
 }

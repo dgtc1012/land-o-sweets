@@ -1,14 +1,15 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.*;
 
-public class Token extends JPanel {
+public class Token extends JPanel implements java.io.Serializable{
     private final int num;
     private static int x;
     private static int y;
     private static int width;
     private static int height;
     private String name;
-    private Image img;
+    private transient Image img;
 
     public Token(int pNum, String pName) {
         JLabel j = new JLabel(pName);
@@ -28,6 +29,24 @@ public class Token extends JPanel {
             img = new ImageIcon("src/main/resources/images/p3.jpg").getImage();
         else
             img = new ImageIcon("src/main/resources/images/p4.jpg").getImage();
+    }
+
+    public Token(int pNum, String pName, int x, int y) {
+      JLabel j = new JLabel(pName);
+      width = 20;
+      height = 39;
+      name = pName;
+      num = pNum;
+      setBounds(x, y, width, height);
+
+      if (pNum == 1)
+          img = new ImageIcon("src/main/resources/images/p1.jpg").getImage();
+      else if (pNum == 2)
+          img = new ImageIcon("src/main/resources/images/p2.jpg").getImage();
+      else if (pNum == 3)
+          img = new ImageIcon("src/main/resources/images/p3.jpg").getImage();
+      else
+          img = new ImageIcon("src/main/resources/images/p4.jpg").getImage();
     }
 
     public void setCoords(int newX, int newY) {
@@ -63,5 +82,11 @@ public class Token extends JPanel {
 
     public Image getImage() {
         return img;
+    }
+
+    public String toString() {
+
+      StringBuilder sb = new StringBuilder(x + "-" + y);
+      return sb.toString();
     }
 }

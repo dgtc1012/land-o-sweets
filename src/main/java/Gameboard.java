@@ -7,9 +7,13 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.io.*;
 
 /**
  * @author Justin Keenan, Dannah Gersh
@@ -29,6 +33,7 @@ public class Gameboard {
     Container content;
     Map<String, JLabel> labels = new HashMap<>();
     Timer timer;
+    public CardDeckGUILayout cardDeck;
 
     /**
      * Creates new form WorldOfCandy
@@ -53,7 +58,6 @@ public class Gameboard {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        //System.out.println(numberOfSquares);
         _frame = new JFrame();
         for (int i = 1; i <= numberOfSquares; i++) {
             squares.add(new JPanel());
@@ -83,7 +87,6 @@ public class Gameboard {
                         .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        //_frame.add(start);
         lPane.add(start, new Integer(1));
         start.setBounds(20, 480, 80, 80);
 
@@ -158,7 +161,6 @@ public class Gameboard {
                             .addGap(0, 0, Short.MAX_VALUE)
             );
 
-            //_frame.add(squares.get(i));
             lPane.add(squares.get(i), new Integer(1));
 
             squares.get(i).setBounds(xLoc, yLoc, squareSize, squareSize);
@@ -191,20 +193,18 @@ public class Gameboard {
                         .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        //_frame.add(grandmasHouse);
         lPane.add(grandmasHouse, new Integer(1));
         grandmasHouse.setBounds(xLoc + squareSize, yLoc + 20, 80, 80);
 
         //Current deck settings
         deckArea.setPreferredSize(new Dimension(300, 180));
 
-        //_frame.add(deckArea);
         lPane.add(deckArea, new Integer(1));
         deckArea.setBounds(780, 360, 300, 180);
-        CardDeckGUILayout cardDeck = new CardDeckGUILayout();
+        cardDeck = new CardDeckGUILayout();
         deckArea.add(cardDeck);
 
-        // This part handles showing the player names, their token, and squares left to the end
+		// This part handles showing the player names, their token, and squares left to the end
         int y = 200;
         for (int i = 0; i < WorldOfSweets.players.length; i++) {
             JLabel label = new JLabel(WorldOfSweets.players[i].getToken().getName() + "- " + (numberOfSquares - WorldOfSweets.players[i].getCurrentSquareValue()) + " Squares Remaining!", JLabel.LEFT);
@@ -215,11 +215,90 @@ public class Gameboard {
             y += 40;
         }
 
-        // Timer aspect
+		// Timer aspect
         timer = new Timer(875, 100);
         _frame.add(timer.gui);
         _frame.add(timer.label);
+
+
+        //Adds save button
+        saveButton = new JButton("Save and Quit");
+        saveButton.setBounds(834, 550, 170, 25);
+        saveButton.addMouseListener(new MouseAdapter() {
+          @Override
+          public void mouseClicked(MouseEvent e) {
+
+            try {
+              save();
+            }
+            catch(Exception exc) {
+              exc.printStackTrace();
+            }
+          }
+        });
+        _frame.add(saveButton);
     }// </editor-fold>//GEN-END:initComponents
+
+    //Saves the nesscassy information to a .txt file
+    private void save() throws IOException{
+
+      String directory = "src/main/resources/gameFiles/";
+      WorldOfSweets.saveBol = true;
+      String ext = ".txt";
+      String filename;
+      File file = null;
+      boolean skip = false;
+      while(true) {
+
+        filename = JOptionPane.showInputDialog("Enter the filename for this new game save without the extension");
+
+        if(filename == null) {
+          skip = true;
+          WorldOfSweets.saveBol = false;
+          break;
+        }
+
+        filename = directory + filename;
+        filename += ext;
+        file = new File(filename);
+
+        if(file.exists()) {
+          JOptionPane.showMessageDialog(null, "That file already exists");
+        }
+        else {
+          WorldOfSweets.saveBol = false;
+          break;
+        }
+      }
+
+      if(!skip) {
+        BufferedWriter bw = new BufferedWriter(new FileWriter(file));
+
+        int numOfPlayers = WorldOfSweets.pNames.length;
+
+        bw.write(String.valueOf(numOfPlayers));
+        bw.newLine();
+
+        for(int x = 0; x < numOfPlayers; x++) {
+
+          bw.write(WorldOfSweets.pNames[x]);
+          bw.newLine();
+          bw.write(WorldOfSweets.players[x].toString());
+          bw.newLine();
+        }
+
+        bw.write(String.valueOf(WorldOfSweets.currentPlayerIndex));
+        bw.newLine();
+        bw.write(cardDeck.board.deck.toString());
+        bw.newLine();
+        bw.write(cardDeck.board.lastCard.toString());
+        bw.newLine();
+        bw.write(timer.getHours() + ":" + timer.getMinutes() + ":" + timer.getSeconds());
+        bw.close();
+        JOptionPane.showMessageDialog(null, "Game Saved");
+        System.exit(0);
+      }
+    }
 
     //Deck event handler
     private void deckMouseClicked(MouseEvent evt) {//GEN-FIRST:event_deckMouseClicked
@@ -251,6 +330,7 @@ public class Gameboard {
     private JPanel deckArea;
     private JPanel start;
     public JPanel grandmasHouse;
+    private JButton saveButton;
     ArrayList<JPanel> squares = new ArrayList<JPanel>();
     ////////////////////////////////////////////////////////////////
 

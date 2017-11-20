@@ -1,5 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class WorldOfSweets {
 
@@ -7,26 +12,57 @@ public class WorldOfSweets {
     public static Player[] players;
     public static int currentPlayerIndex = -1;
     public static Gameboard gameboard;
+    public static BufferedReader br = null;
+    public static boolean loadBol = false;
+    public static boolean saveBol = false;
 
-    public static void main(String[] args) {
-        getPlayers();
+    public static void main(String[] args) throws IOException, ClassNotFoundException{
+
+        boolean loaded = false;
+        Object[] options = {"New Game", "Load Game"};
+        int choice = JOptionPane.showOptionDialog(null,
+                        "Would you like to start a new game or load a previous one?",
+                        "World of Sweets",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.INFORMATION_MESSAGE,
+                        null,
+                        options,
+                        options[0]);
+
+        if(choice == 0)
+          getPlayers();
+        else if(choice == 1) {
+            loaded = loadGame(0);
+        }
+        else
+          System.exit(0);
+
+        if(!loaded && choice == 1)
+          getPlayers();
+
         gameboard = new Gameboard();
 
-        Thread t = new Thread(() -> {
-            while (true) {
+        if(choice == 1 && loaded)
+          loaded = loadGame(1);
+
+        Thread t = new Thread(()->{
+            while(true){
                 try {
-                    Thread.sleep(1000);
-                    int time = gameboard.timer.incrementTime();
-                    //System.out.println(time);
-                } catch (InterruptedException iex) {
+                    if(!saveBol) {
+                      Thread.sleep(1000);
+                      int time = gameboard.timer.incrementTime();
+                    }
+                }catch(InterruptedException iex) {
                     //ignore
                 }
             }
         });
+
         t.start();
-        try {
+
+        try{
             t.join();
-        } catch (InterruptedException iex) {
+        } catch(InterruptedException iex){
             //ignore
         }
     }
@@ -35,7 +71,7 @@ public class WorldOfSweets {
         return gameboard.getNumberOfSquares();
     }
 
-    /**
+	/**
      * Gets the player information: number of players and their names and assigns token to them
      */
     public static void getPlayers() {
@@ -130,7 +166,7 @@ public class WorldOfSweets {
 
     }
 
-    /**
+	/**
      * Determines what player is up next
      *
      * @return Name of next player
@@ -145,7 +181,7 @@ public class WorldOfSweets {
         }
     }
 
-    /**
+	/**
      * Figures out index of next player up
      *
      * @return Int representing index of next player for pNames array
@@ -158,7 +194,7 @@ public class WorldOfSweets {
         }
     }
 
-    /**
+	/**
      * Moves player token
      *
      * @param c     card drawn to tell us where to move
@@ -176,6 +212,104 @@ public class WorldOfSweets {
         if (value > -1)
             players[index].getToken().setCoords(gameboard.getSquareXLocation(value), gameboard.getSquareYLocation(value));
         return value;
+    }
+
+    //Loads the game file
+    public static boolean loadGame(int choice) throws IOException, ClassNotFoundException{
+
+      loadBol = true;
+      if(choice == 0) {
+        String directory = "src/main/resources/gameFiles/";
+        String ext = ".txt";
+        String filename;
+        File file;
+        while(true) {
+
+          filename = JOptionPane.showInputDialog("Enter the filename for your game without the extension");
+
+          if(filename == null) {
+            return false;
+          }
+
+          filename = directory + filename;
+          filename += ext;
+          file = new File(filename);
+
+          if(!file.exists()) {
+            JOptionPane.showMessageDialog(null, "That file does not exist");
+          }
+          else {
+            break;
+          }
+        }
+
+        br = new BufferedReader(new FileReader(file));
+
+        int numOfPlayers = Integer.parseInt(br.readLine());
+        String playerStr;
+        String[] playerSplit;
+        pNames = new String[numOfPlayers];
+        players = new Player[numOfPlayers];
+
+        //Restors players
+        for(int x = 0; x < numOfPlayers; x++) {
+
+          pNames[x] = br.readLine();
+          playerStr = br.readLine();
+          playerSplit = playerStr.split("-");
+          players[x] = new Player(x+1, pNames[x], Integer.parseInt(playerSplit[0]), getColor(playerSplit[1]), Integer.parseInt(playerSplit[2]), Integer.parseInt(playerSplit[3]), Integer.parseInt(playerSplit[4]));
+        }
+
+        currentPlayerIndex = Integer.parseInt(br.readLine());
+      }
+      else {
+        //Restores deck and timer 
+        ArrayList<Card> temp = new ArrayList<Card>();
+        int deckSize = Integer.parseInt(br.readLine());
+        String cardStr;
+
+        for(int x = 0; x < players.length; x++)
+          players[x].getToken().setCoords(gameboard.getSquareXLocation(players[x].getCurrentSquareValue()), gameboard.getSquareYLocation(players[x].getCurrentSquareValue()));
+
+        for(int x = 0; x < deckSize; x++) {
+            cardStr = br.readLine();
+
+          String[] cardSplit = cardStr.split("-");
+          temp.add(new Card(getColor(cardSplit[0]), Integer.parseInt(cardSplit[1])));
+        }
+
+        gameboard.cardDeck.board.deck.setDeck(temp);
+        String lastCardStr = br.readLine();
+        String[] lastCardSplit = lastCardStr.split("-");
+        gameboard.cardDeck.board.lastCard = new Card(getColor(lastCardSplit[0]), Integer.parseInt(lastCardSplit[1]));
+        gameboard.cardDeck.board.doDraw(true);
+        String timeStr = br.readLine();
+        String[] timeSplit = timeStr.split(":");
+        gameboard.timer.setTime(Integer.parseInt(timeSplit[2]), Integer.parseInt(timeSplit[1]), Integer.parseInt(timeSplit[0]));
+      }
+
+      return true;
+
+    }
+
+    //Changes the string color to CardColor
+    private static CardColor getColor(String color) {
+
+      switch(color) {
+
+        case "RED":
+          return CardColor.RED;
+        case "BLUE":
+          return CardColor.BLUE;
+        case "YELLOW":
+          return CardColor.YELLOW;
+        case "GREEN":
+          return CardColor.GREEN;
+        case "ORANGE":
+          return CardColor.ORANGE;
+        default:
+          return null;
+      }
     }
 
 
