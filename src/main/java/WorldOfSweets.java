@@ -1,9 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-import java.lang.InterruptedException;
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class WorldOfSweets {
 
@@ -30,8 +31,9 @@ public class WorldOfSweets {
 
         if(choice == 0)
           getPlayers();
-        else if(choice == 1)
-          loaded = loadGame(0);
+        else if(choice == 1) {
+            loaded = loadGame(0);
+        }
         else
           System.exit(0);
 
@@ -40,7 +42,7 @@ public class WorldOfSweets {
 
         gameboard = new Gameboard();
 
-        if(choice == 1)
+        if(choice == 1 && loaded)
           loaded = loadGame(1);
 
         Thread t = new Thread(()->{
