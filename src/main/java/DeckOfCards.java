@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class DeckOfCards {
+public class DeckOfCards implements java.io.Serializable {
 
     private ArrayList<Card> deck = new ArrayList<>();
 
@@ -10,7 +10,7 @@ public class DeckOfCards {
         shuffleDeck();
     }
 
-    /**
+	/**
      * Returns the whole deck of cards
      *
      * @return Deck of cards
@@ -19,7 +19,7 @@ public class DeckOfCards {
         return deck;
     }
 
-    /**
+	/**
      * Populates the deck of cards with all of the cards specified by the user
      */
     public void populateDeck() {
@@ -45,14 +45,14 @@ public class DeckOfCards {
         deck.add(new Card(null, Constants.PEPPERMINT));
     }
 
-    /**
+	/**
      * Shuffles all of the card objects into a random order
      */
     public void shuffleDeck() {
         Collections.shuffle(deck);
     }
 
-    /**
+	/**
      * Draws a card from the deck
      *
      * @return The deck drawn, or null if the deck is empty
@@ -63,5 +63,23 @@ public class DeckOfCards {
         } else {
             return null;
         }
+    }
+
+    //Sets the current deck
+    public void setDeck(ArrayList<Card> newDeck) {
+
+      deck = newDeck;
+    }
+
+    public String toString() {
+      StringBuilder sb = new StringBuilder("");
+      sb.append(deck.size());
+      for(Card c : deck) {
+
+        sb.append("\n");
+        sb.append(c.toString());
+      }
+
+      return sb.toString();
     }
 }

@@ -1,4 +1,6 @@
-public class Card {
+import java.util.*;
+
+public class Card implements java.io.Serializable {
 
     private CardColor color;
     private int value;
@@ -22,5 +24,11 @@ public class Card {
 
     public int getValue() {
         return value;
+    }
+
+    public String toString() {
+      StringBuilder sb = new StringBuilder(color + "-");
+      sb.append(value);
+      return sb.toString();
     }
 }
