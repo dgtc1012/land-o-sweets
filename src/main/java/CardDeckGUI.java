@@ -35,9 +35,9 @@ public class CardDeckGUI extends JPanel implements ActionListener, java.io.Seria
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 if (e.getX() >= MINSPACING + CARDWIDTH / 2 && e.getX() < MINSPACING + CARDWIDTH / 2 + CARDWIDTH && e.getY() >= MINSPACING && e.getY() < MINSPACING + CARDHEIGHT) {
-                    currentPlayer = WorldOfSweets.nextPlayer();
                     doDraw(false);
-                    message = WorldOfSweets.pNames[WorldOfSweets.nextPlayerIndex()] + "'s turn to draw";
+                    currentPlayer = WorldOfSweets.nextPlayer();
+                    message = WorldOfSweets.pNames[WorldOfSweets.getCurrentPlayerIndex()] + "'s turn to draw";
 
                 }
             }
@@ -66,7 +66,7 @@ public class CardDeckGUI extends JPanel implements ActionListener, java.io.Seria
         else if(loaded) { //Case for the openeing to a loaded game.
             cardDrawn = false;
             message =   message = WorldOfSweets.pNames[WorldOfSweets.nextPlayerIndex()] + "'s turn to draw";
-            currentPlayer = WorldOfSweets.pNames[WorldOfSweets.currentPlayerIndex];
+            //currentPlayer = WorldOfSweets.pNames[WorldOfSweets.currentPlayerIndex];
             repaint();
         } else {
             cardDrawn = true;
@@ -113,7 +113,12 @@ public class CardDeckGUI extends JPanel implements ActionListener, java.io.Seria
                 e.printStackTrace();
             }
             cardDrawn = false;
-            WorldOfSweets.movePlayer(lastCard, WorldOfSweets.currentPlayerIndex);
+            if(WorldOfSweets.gameboard.usingBoomerang){
+                WorldOfSweets.useBoomerang(lastCard);
+            }
+            else {
+                WorldOfSweets.movePlayer(lastCard, WorldOfSweets.currentPlayerIndex);
+            }
         } else {
             try {
                 drawCard(g, lastCard, MINSPACING + CARDWIDTH / 2 + CARDWIDTH + MINSPACING, MINSPACING);

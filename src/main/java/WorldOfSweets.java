@@ -10,11 +10,12 @@ public class WorldOfSweets {
 
     public static String[] pNames;
     public static Player[] players;
-    public static int currentPlayerIndex = -1;
+    public static int currentPlayerIndex = 0;
     public static Gameboard gameboard;
     public static BufferedReader br = null;
     public static boolean loadBol = false;
     public static boolean saveBol = false;
+    public static boolean gameModeStrategic = false;
 
     public static void main(String[] args) throws IOException, ClassNotFoundException{
 
@@ -29,16 +30,20 @@ public class WorldOfSweets {
                         options,
                         options[0]);
 
-        if(choice == 0)
-          getPlayers();
+        if(choice == 0) {
+            chooseMode();
+            getPlayers();
+        }
         else if(choice == 1) {
             loaded = loadGame(0);
         }
         else
           System.exit(0);
 
-        if(!loaded && choice == 1)
-          getPlayers();
+        if(!loaded && choice == 1) {
+            chooseMode();
+            getPlayers();
+        }
 
         gameboard = new Gameboard();
 
@@ -71,6 +76,26 @@ public class WorldOfSweets {
         return gameboard.getNumberOfSquares();
     }
 
+    public static boolean getGameMode(){ return gameModeStrategic; }
+
+    public static void chooseMode(){
+        Object[] options = {"Classic", "Strategic"};
+        int choice = JOptionPane.showOptionDialog(null,
+                "Would you like to play Classic or Strategic mode?",
+                "World of Sweets",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.INFORMATION_MESSAGE,
+                null,
+                options,
+                options[0]);
+
+        if(choice == 0){
+            gameModeStrategic = false;
+        }
+        else{
+            gameModeStrategic = true;
+        }
+    }
 	/**
      * Gets the player information: number of players and their names and assigns token to them
      */
@@ -194,6 +219,10 @@ public class WorldOfSweets {
         }
     }
 
+    public static int getCurrentPlayerIndex(){
+        return currentPlayerIndex;
+    }
+
 	/**
      * Moves player token
      *
@@ -212,6 +241,19 @@ public class WorldOfSweets {
         if (value > -1)
             players[index].getToken().setCoords(gameboard.getSquareXLocation(value), gameboard.getSquareYLocation(value));
         return value;
+    }
+
+    public static void useBoomerang(Card c){
+        int value = players[gameboard.getBoomerangPlayerIndex()].useBoomerang(c.getValue(), c.getColor());
+        if(value < 0){
+            players[gameboard.getBoomerangPlayerIndex()].getToken().setCoords(gameboard.start.getX(), gameboard.start.getY());
+            players[gameboard.getBoomerangPlayerIndex()].moveToken(-1, CardColor.ORANGE);
+        }
+        else{
+            players[gameboard.getBoomerangPlayerIndex()].getToken().setCoords(gameboard.getSquareXLocation(value), gameboard.getSquareYLocation(value));
+        }
+
+        gameboard.usingBoomerang = false;
     }
 
     //Loads the game file
