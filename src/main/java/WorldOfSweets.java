@@ -18,7 +18,6 @@ public class WorldOfSweets {
     public static boolean gameModeStrategic = false;
 
     public static void main(String[] args) throws IOException, ClassNotFoundException{
-
         boolean loaded = false;
         Object[] options = {"New Game", "Load Game"};
         int choice = JOptionPane.showOptionDialog(null,

@@ -213,7 +213,14 @@ public class Gameboard {
 		// This part handles showing the player names, their token, and squares left to the end
         int y = 190;
         for (int i = 0; i < WorldOfSweets.players.length; i++) {
-            JLabel label = new JLabel(WorldOfSweets.players[i].getToken().getName() + "- " + (numberOfSquares - WorldOfSweets.players[i].getCurrentSquareValue()) + " Squares Remaining!", JLabel.LEFT);
+            String msg;
+            if(WorldOfSweets.gameModeStrategic){
+                msg = WorldOfSweets.players[i].getToken().getName() + "- " + (numberOfSquares - WorldOfSweets.players[i].getCurrentSquareValue()) + " Squares remaining and " + WorldOfSweets.players[i].getBoomerangs() + " Boomerangs remaining!";
+            }
+            else{
+                msg = WorldOfSweets.players[i].getToken().getName() + "- " + (numberOfSquares - WorldOfSweets.players[i].getCurrentSquareValue()) + " Squares remaining!";
+            }
+            JLabel label = new JLabel(msg, JLabel.LEFT);
             label.setBounds(845, y, 400, 30);
             label.setIcon(new ImageIcon(WorldOfSweets.players[i].getToken().getImage().getScaledInstance(20, 30, Image.SCALE_SMOOTH)));
             lPane.add(label);
@@ -276,7 +283,6 @@ public class Gameboard {
             int numPlayers = WorldOfSweets.players.length;
 
             int curPlayer = WorldOfSweets.getCurrentPlayerIndex();
-            System.out.println("current player number: " + curPlayer);
             Object[] options = new Object[numPlayers - 1];
 
             int j = 0;
@@ -297,8 +303,16 @@ public class Gameboard {
 
             if(boomerangPlayer != null && boomerangPlayer.length() > 0 ){
                 usingBoomerang = true;
-                int count = WorldOfSweets.players[WorldOfSweets.currentPlayerIndex].decrementBoomerangCount();
-                System.out.println(WorldOfSweets.pNames[WorldOfSweets.currentPlayerIndex] + " has " + count + " boomerangs");
+                WorldOfSweets.players[WorldOfSweets.currentPlayerIndex].decrementBoomerangCount();
+                String msg;
+                if(WorldOfSweets.gameModeStrategic){
+                    msg = WorldOfSweets.players[WorldOfSweets.currentPlayerIndex].getToken().getName() + "- " + (numberOfSquares - WorldOfSweets.players[WorldOfSweets.currentPlayerIndex].getCurrentSquareValue()) + " Squares remaining and " + WorldOfSweets.players[WorldOfSweets.currentPlayerIndex].getBoomerangs() + " Boomerangs remaining!";
+                }
+                else{
+                    msg = WorldOfSweets.players[WorldOfSweets.currentPlayerIndex].getToken().getName() + "- " + (numberOfSquares - WorldOfSweets.players[WorldOfSweets.currentPlayerIndex].getCurrentSquareValue()) + " Squares remaining!";
+                }
+                WorldOfSweets.gameboard.labels.get(WorldOfSweets.players[WorldOfSweets.currentPlayerIndex].getToken().getName()).setText(msg);
+
                 for(int i = 0; i < numPlayers; i++){
                     if(WorldOfSweets.pNames[i].equalsIgnoreCase(boomerangPlayer)){
                         boomerangPlayerIndex = i;

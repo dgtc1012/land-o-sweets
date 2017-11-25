@@ -24,7 +24,8 @@ public class Player implements java.io.Serializable {
     }
 
     public int decrementBoomerangCount() {
-        this.boomerangs--;
+        if(this.boomerangs > 0)
+            this.boomerangs--;
         return this.boomerangs;
     }
 
@@ -236,7 +237,14 @@ public class Player implements java.io.Serializable {
                     break;
             }
             checkJump();
-            WorldOfSweets.gameboard.labels.get(this.token.getName()).setText(this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares Remaining!");
+            String msg;
+            if(WorldOfSweets.gameModeStrategic){
+                msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining and " + this.boomerangs + " Boomerangs remaining!";
+            }
+            else{
+                msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining!";
+            }
+            WorldOfSweets.gameboard.labels.get(this.token.getName()).setText(msg);
             return this.currentSquareValue;
         }
         //double card
@@ -364,10 +372,82 @@ public class Player implements java.io.Serializable {
                     break;
             }
             checkJump();
-            WorldOfSweets.gameboard.labels.get(this.token.getName()).setText(this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares Remaining!");
+            String msg;
+            if(WorldOfSweets.gameModeStrategic){
+                msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining and " + this.boomerangs + " Boomerangs remaining!";
+            }
+            else{
+                msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining!";
+            }
+            WorldOfSweets.gameboard.labels.get(this.token.getName()).setText(msg);
             return this.currentSquareValue;
         }
-        return this.currentSquareValue;
+        //special squares
+        else if (value == Constants.LICORICE) {
+            this.currentSquareColor = CardColor.BLUE;
+            this.currentSquareValue = 29;
+            String msg;
+            if(WorldOfSweets.gameModeStrategic){
+                msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining and " + this.boomerangs + " Boomerangs remaining!";
+            }
+            else{
+                msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining!";
+            }
+            WorldOfSweets.gameboard.labels.get(this.token.getName()).setText(msg);
+            return this.currentSquareValue;
+        } else if (value == Constants.PEPPERMINT) {
+            this.currentSquareColor = CardColor.BLUE;
+            this.currentSquareValue = 13;
+            String msg;
+            if(WorldOfSweets.gameModeStrategic){
+                msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining and " + this.boomerangs + " Boomerangs remaining!";
+            }
+            else{
+                msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining!";
+            }
+            WorldOfSweets.gameboard.labels.get(this.token.getName()).setText(msg);
+            return this.currentSquareValue;
+        } else if (value == Constants.ICECREAM) {
+            this.currentSquareColor = CardColor.BLUE;
+            this.currentSquareValue = 45;
+            String msg;
+            if(WorldOfSweets.gameModeStrategic){
+                msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining and " + this.boomerangs + " Boomerangs remaining!";
+            }
+            else{
+                msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining!";
+            }
+            WorldOfSweets.gameboard.labels.get(this.token.getName()).setText(msg);
+            return this.currentSquareValue;
+        } else if (value == Constants.GINGERBREAD) {
+            this.currentSquareColor = CardColor.BLUE;
+            this.currentSquareValue = 61;
+            String msg;
+            if(WorldOfSweets.gameModeStrategic){
+                msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining and " + this.boomerangs + " Boomerangs remaining!";
+            }
+            else{
+                msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining!";
+            }
+            WorldOfSweets.gameboard.labels.get(this.token.getName()).setText(msg);
+            return this.currentSquareValue;
+        } else if (value == Constants.CUPCAKE) {
+            this.currentSquareColor = CardColor.BLUE;
+            this.currentSquareValue = 77;
+            String msg;
+            if(WorldOfSweets.gameModeStrategic){
+                msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining and " + this.boomerangs + " Boomerangs remaining!";
+            }
+            else{
+                msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining!";
+            }
+            WorldOfSweets.gameboard.labels.get(this.token.getName()).setText(msg);
+            return this.currentSquareValue;
+        }
+        //skip turn
+        else {
+            return this.currentSquareValue;
+        }
     }
 
 	/**
@@ -504,7 +584,14 @@ public class Player implements java.io.Serializable {
                     break;
             }
             checkJump();
-            WorldOfSweets.gameboard.labels.get(this.token.getName()).setText(this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares Remaining!");
+            String msg;
+            if(WorldOfSweets.gameModeStrategic){
+                msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining and " + this.boomerangs + " Boomerangs remaining!";
+            }
+            else{
+                msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining!";
+            }
+            WorldOfSweets.gameboard.labels.get(this.token.getName()).setText(msg);
             return this.currentSquareValue;
         }
         //double card
@@ -632,34 +719,76 @@ public class Player implements java.io.Serializable {
                     break;
             }
             checkJump();
-            WorldOfSweets.gameboard.labels.get(this.token.getName()).setText(this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares Remaining!");
+            String msg;
+            if(WorldOfSweets.gameModeStrategic){
+                msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining and " + this.boomerangs + " Boomerangs remaining!";
+            }
+            else{
+                msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining!";
+            }
+            WorldOfSweets.gameboard.labels.get(this.token.getName()).setText(msg);
             return this.currentSquareValue;
         }
         //special squares
         else if (value == Constants.LICORICE) {
             this.currentSquareColor = CardColor.BLUE;
             this.currentSquareValue = 29;
-            WorldOfSweets.gameboard.labels.get(this.token.getName()).setText(this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares Remaining!");
+            String msg;
+            if(WorldOfSweets.gameModeStrategic){
+                msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining and " + this.boomerangs + " Boomerangs remaining!";
+            }
+            else{
+                msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining!";
+            }
+            WorldOfSweets.gameboard.labels.get(this.token.getName()).setText(msg);
             return this.currentSquareValue;
         } else if (value == Constants.PEPPERMINT) {
             this.currentSquareColor = CardColor.BLUE;
             this.currentSquareValue = 13;
-            WorldOfSweets.gameboard.labels.get(this.token.getName()).setText(this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares Remaining!");
+            String msg;
+            if(WorldOfSweets.gameModeStrategic){
+                msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining and " + this.boomerangs + " Boomerangs remaining!";
+            }
+            else{
+                msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining!";
+            }
+            WorldOfSweets.gameboard.labels.get(this.token.getName()).setText(msg);
             return this.currentSquareValue;
         } else if (value == Constants.ICECREAM) {
             this.currentSquareColor = CardColor.BLUE;
             this.currentSquareValue = 45;
-            WorldOfSweets.gameboard.labels.get(this.token.getName()).setText(this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares Remaining!");
+            String msg;
+            if(WorldOfSweets.gameModeStrategic){
+                msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining and " + this.boomerangs + " Boomerangs remaining!";
+            }
+            else{
+                msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining!";
+            }
+            WorldOfSweets.gameboard.labels.get(this.token.getName()).setText(msg);
             return this.currentSquareValue;
         } else if (value == Constants.GINGERBREAD) {
             this.currentSquareColor = CardColor.BLUE;
             this.currentSquareValue = 61;
-            WorldOfSweets.gameboard.labels.get(this.token.getName()).setText(this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares Remaining!");
+            String msg;
+            if(WorldOfSweets.gameModeStrategic){
+                msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining and " + this.boomerangs + " Boomerangs remaining!";
+            }
+            else{
+                msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining!";
+            }
+            WorldOfSweets.gameboard.labels.get(this.token.getName()).setText(msg);
             return this.currentSquareValue;
         } else if (value == Constants.CUPCAKE) {
             this.currentSquareColor = CardColor.BLUE;
             this.currentSquareValue = 77;
-            WorldOfSweets.gameboard.labels.get(this.token.getName()).setText(this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares Remaining!");
+            String msg;
+            if(WorldOfSweets.gameModeStrategic){
+                msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining and " + this.boomerangs + " Boomerangs remaining!";
+            }
+            else{
+                msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining!";
+            }
+            WorldOfSweets.gameboard.labels.get(this.token.getName()).setText(msg);
             return this.currentSquareValue;
         }
         //skip turn
