@@ -5,11 +5,16 @@ public class Player implements java.io.Serializable {
     private CardColor currentSquareColor;
     private Token token;
     private int previousSquareValue;
+    private boolean dad;
 
     public Player(int pNum, String pName) {
         this.currentSquareValue = -1;
         this.currentSquareColor = CardColor.ORANGE;
         this.token = new Token(pNum, pName);
+        if (pName.equalsIgnoreCase("dad"))
+          dad = true;
+        else
+          dad = false;
     }
 
     public Player(int pNum, String pName, int currentSquareValue, CardColor currentSquareColor, int x, int y, int previousSquareValue) {
@@ -40,6 +45,12 @@ public class Player implements java.io.Serializable {
         return this.currentSquareColor;
     }
 
+    /**
+       * @return if this player is dad
+       */
+      public boolean isDad() {
+          return dad;
+      }
 	/**
      * Handles moving the token of this player
      *
@@ -51,7 +62,7 @@ public class Player implements java.io.Serializable {
         this.currentSquareColor = newColor;
     }
 
-	
+
     public void checkJump() {
         int pVal = this.previousSquareValue;
         int cVal = this.currentSquareValue;
@@ -76,7 +87,7 @@ public class Player implements java.io.Serializable {
             return;
         }
     }
-	
+
 	/**
      * Handles moving the player to new location after card drawn
      *

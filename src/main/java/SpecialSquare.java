@@ -17,7 +17,6 @@ public class SpecialSquare extends JPanel {
             img = new ImageIcon("src/main/resources/images/peppermint.jpg").getImage();
 
     }
-
     public void paintComponent(Graphics g) {
         g.drawImage(img, 0, 0, null);
     }
@@ -27,8 +26,3 @@ public class SpecialSquare extends JPanel {
     }
 
 }
-
-
-
-
-

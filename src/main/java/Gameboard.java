@@ -309,8 +309,35 @@ public class Gameboard {
         return numberOfSquares;
     }
 
-    public Color getSquareColor(int index) {
+    public static Color getSquareColor(int index) {
         return squares.get(index).getBackground();
+    }
+
+    public static CardColor getSquareCardColor(int index) {
+        Color c = squares.get(index).getBackground();
+
+        if (index == 77)
+          return CardColor.CUPCAKE;
+        if (index == 61)
+          return CardColor.GINGERBREAD;
+        if (index == 45)
+          return CardColor.ICECREAM;
+        if (index == 29)
+          return CardColor.LICORICE;
+        if (index == 13)
+          return CardColor.PEPPERMINT;
+
+        if (c == Color.red)
+          return CardColor.RED;
+        if (c == Color.blue)
+          return CardColor.BLUE;
+        if (c == Color.green)
+          return CardColor.GREEN;
+        if (c == Color.orange)
+          return CardColor.ORANGE;
+        if (c == Color.yellow)
+          return CardColor.YELLOW;
+        return null;
     }
 
     public int getSquareXLocation(int index) {
@@ -331,7 +358,7 @@ public class Gameboard {
     private JPanel start;
     public JPanel grandmasHouse;
     private JButton saveButton;
-    ArrayList<JPanel> squares = new ArrayList<JPanel>();
+    static ArrayList<JPanel> squares = new ArrayList<JPanel>();
     ////////////////////////////////////////////////////////////////
 
     // End of variables declaration//GEN-END:variables

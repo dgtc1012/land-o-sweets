@@ -129,16 +129,23 @@ public class CardDeckGUI extends JPanel implements ActionListener, java.io.Seria
      * @return The card drawn
      */
     Card newCard() {
-        Card card = deck.drawCard();
+      Card card;
+        if (WorldOfSweets.players[WorldOfSweets.currentPlayerIndex].isDad())
+          card = deck.drawWorstCard(WorldOfSweets.players[WorldOfSweets.currentPlayerIndex].getCurrentSquareValue());
+        else
+          card = deck.drawCard();
         if (card == null) {
             deck.populateDeck();
             deck.shuffleDeck();
-            return deck.drawCard();
+            if (WorldOfSweets.players[WorldOfSweets.currentPlayerIndex].isDad())
+              return deck.drawWorstCard(WorldOfSweets.players[WorldOfSweets.currentPlayerIndex].getCurrentSquareValue());
+            else
+              return deck.drawCard();
         } else {
             return card;
         }
     }
-	
+
 	/**
      * Handles drawing the newly drawn card onto the screen, determining the value/color/symbol of the card
      *
