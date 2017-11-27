@@ -22,6 +22,7 @@ public class BoomerangTest {
         WorldOfSweets.pNames[0] = "p1";
         WorldOfSweets.pNames[1] = "p2";
         WorldOfSweets.gameboard = new Gameboard();
+        WorldOfSweets.gameModeStrategic = true;
     }
 
     @Test

@@ -62,13 +62,13 @@ public class WorldOfSweets {
                         while (aiRunning) {
                             //do stuff
                             if (currentPlayer.isAiPlayer()) {
-                                gameboard.cardDeck.board.getMouseListeners()[0].mouseClicked(null);
+                                currentPlayer.makeMove();
                             }
                             if (Thread.interrupted()) {
                                 return;
                             }
                             try {
-                                Thread.sleep(600);
+                                Thread.sleep(1000);
                             } catch (InterruptedException e) {
                                 Thread.currentThread().interrupt();
                             }
@@ -303,7 +303,7 @@ public class WorldOfSweets {
         } else {
             players[gameboard.getBoomerangPlayerIndex()].getToken().setCoords(gameboard.getSquareXLocation(value), gameboard.getSquareYLocation(value));
         }
-
+        aiRunning = true;
         gameboard.usingBoomerang = false;
     }
 
