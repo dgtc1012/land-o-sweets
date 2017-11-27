@@ -1,5 +1,6 @@
 import org.junit.Before;
 import org.junit.Test;
+
 import static org.junit.Assert.assertEquals;
 
 /************************************************
@@ -11,9 +12,9 @@ public class BoomerangTest {
     Player player2;
 
     @Before
-    public void setup(){
-        player1 = new Player(1, "p1");
-        player2 = new Player(2, "p2");
+    public void setup() {
+        player1 = new Player(1, "p1", false);
+        player2 = new Player(2, "p2", false);
         WorldOfSweets.players = new Player[2];
         WorldOfSweets.players[0] = player1;
         WorldOfSweets.players[1] = player2;
@@ -25,13 +26,13 @@ public class BoomerangTest {
 
     @Test
     //US-46
-    public void testStartBoomerangCount(){
+    public void testStartBoomerangCount() {
         assertEquals(3, player1.getBoomerangs());
     }
 
     @Test
     //US-46
-    public void testBoomerangDecrementing(){
+    public void testBoomerangDecrementing() {
         assertEquals(3, player1.getBoomerangs());
         player1.decrementBoomerangCount();
         assertEquals(2, player1.getBoomerangs());
@@ -282,7 +283,7 @@ public class BoomerangTest {
     @Test
     //Orange to Red Double
     public void checkOrangetoRedDoubleTransition() throws Exception {
-        player1.moveToken(4+5+5, CardColor.ORANGE);
+        player1.moveToken(4 + 5 + 5, CardColor.ORANGE);
         player1.useBoomerang(2, CardColor.RED);
         assertEquals(CardColor.RED, player1.getCurrentSquareColor());
         assertEquals(5, player1.getCurrentSquareValue());
@@ -291,7 +292,7 @@ public class BoomerangTest {
     @Test
     //Orange to Yellow Double
     public void checkOrangetoYellowDoubleTransition() throws Exception {
-        player1.moveToken(4+5+5, CardColor.ORANGE);
+        player1.moveToken(4 + 5 + 5, CardColor.ORANGE);
         player1.useBoomerang(2, CardColor.YELLOW);
         assertEquals(CardColor.YELLOW, player1.getCurrentSquareColor());
         assertEquals(6, player1.getCurrentSquareValue());
@@ -300,7 +301,7 @@ public class BoomerangTest {
     @Test
     //Orange to Blue Double
     public void checkOrangetoBlueDoubleTransition() throws Exception {
-        player1.moveToken(4+5+5, CardColor.ORANGE);
+        player1.moveToken(4 + 5 + 5, CardColor.ORANGE);
         player1.useBoomerang(2, CardColor.BLUE);
         assertEquals(CardColor.BLUE, player1.getCurrentSquareColor());
         assertEquals(7, player1.getCurrentSquareValue());
@@ -309,7 +310,7 @@ public class BoomerangTest {
     @Test
     //Orange to Green Double
     public void checkOrangetoGreenDoubleTransition() throws Exception {
-        player1.moveToken(4+5+5, CardColor.ORANGE);
+        player1.moveToken(4 + 5 + 5, CardColor.ORANGE);
         player1.useBoomerang(2, CardColor.GREEN);
         assertEquals(CardColor.GREEN, player1.getCurrentSquareColor());
         assertEquals(8, player1.getCurrentSquareValue());
@@ -318,7 +319,7 @@ public class BoomerangTest {
     @Test
     //Orange to Orange Double
     public void checkOrangetoOrangeDoubleTransition() throws Exception {
-        player1.moveToken(4+5+5, CardColor.ORANGE);
+        player1.moveToken(4 + 5 + 5, CardColor.ORANGE);
         player1.useBoomerang(2, CardColor.ORANGE);
         assertEquals(CardColor.ORANGE, player1.getCurrentSquareColor());
         assertEquals(4, player1.getCurrentSquareValue());
@@ -328,7 +329,7 @@ public class BoomerangTest {
     @Test
     //Red to Red Double
     public void checkRedtoRedDoubleTransition() throws Exception {
-        player1.moveToken(0+5+5, CardColor.RED);
+        player1.moveToken(0 + 5 + 5, CardColor.RED);
         player1.useBoomerang(2, CardColor.RED);
         assertEquals(CardColor.RED, player1.getCurrentSquareColor());
         assertEquals(0, player1.getCurrentSquareValue());
@@ -337,7 +338,7 @@ public class BoomerangTest {
     @Test
     //Red to Yellow Double
     public void checkRedtoYellowDoubleTransition() throws Exception {
-        player1.moveToken(0+5+5, CardColor.RED);
+        player1.moveToken(0 + 5 + 5, CardColor.RED);
         player1.useBoomerang(2, CardColor.YELLOW);
         assertEquals(CardColor.YELLOW, player1.getCurrentSquareColor());
         assertEquals(1, player1.getCurrentSquareValue());
@@ -346,7 +347,7 @@ public class BoomerangTest {
     @Test
     //Red to Blue Double
     public void checkRedtoBlueDoubleTransition() throws Exception {
-        player1.moveToken(0+5+5, CardColor.RED);
+        player1.moveToken(0 + 5 + 5, CardColor.RED);
         player1.useBoomerang(2, CardColor.BLUE);
         assertEquals(CardColor.BLUE, player1.getCurrentSquareColor());
         assertEquals(2, player1.getCurrentSquareValue());
@@ -355,7 +356,7 @@ public class BoomerangTest {
     @Test
     //Red to Green Double
     public void checkRedtoGreenDoubleTransition() throws Exception {
-        player1.moveToken(0+5+5, CardColor.RED);
+        player1.moveToken(0 + 5 + 5, CardColor.RED);
         player1.useBoomerang(2, CardColor.GREEN);
         assertEquals(CardColor.GREEN, player1.getCurrentSquareColor());
         assertEquals(3, player1.getCurrentSquareValue());
@@ -364,7 +365,7 @@ public class BoomerangTest {
     @Test
     //Red to Orange Double
     public void checkRedtoOrangeDoubleTransition() throws Exception {
-        player1.moveToken(0+5+5, CardColor.RED);
+        player1.moveToken(0 + 5 + 5, CardColor.RED);
         player1.useBoomerang(2, CardColor.ORANGE);
         assertEquals(CardColor.ORANGE, player1.getCurrentSquareColor());
         assertEquals(4, player1.getCurrentSquareValue());
@@ -374,7 +375,7 @@ public class BoomerangTest {
     @Test
     //Yellow to Red Double
     public void checkYellowtoRedDoubleTransition() throws Exception {
-        player1.moveToken(1+5+5, CardColor.YELLOW);
+        player1.moveToken(1 + 5 + 5, CardColor.YELLOW);
         player1.useBoomerang(2, CardColor.RED);
         assertEquals(CardColor.RED, player1.getCurrentSquareColor());
         assertEquals(5, player1.getCurrentSquareValue());
@@ -383,7 +384,7 @@ public class BoomerangTest {
     @Test
     //Yellow to Yellow Double
     public void checkYellowtoYellowDoubleTransition() throws Exception {
-        player1.moveToken(1+5+5, CardColor.YELLOW);
+        player1.moveToken(1 + 5 + 5, CardColor.YELLOW);
         player1.useBoomerang(2, CardColor.YELLOW);
         assertEquals(CardColor.YELLOW, player1.getCurrentSquareColor());
         assertEquals(1, player1.getCurrentSquareValue());
@@ -392,7 +393,7 @@ public class BoomerangTest {
     @Test
     //Yellow to Blue Double
     public void checkYellowtoBlueDoubleTransition() throws Exception {
-        player1.moveToken(1+5+5, CardColor.YELLOW);
+        player1.moveToken(1 + 5 + 5, CardColor.YELLOW);
         player1.useBoomerang(2, CardColor.BLUE);
         assertEquals(CardColor.BLUE, player1.getCurrentSquareColor());
         assertEquals(2, player1.getCurrentSquareValue());
@@ -401,7 +402,7 @@ public class BoomerangTest {
     @Test
     //Yellow to Green Double
     public void checkYellowtoGreenDoubleTransition() throws Exception {
-        player1.moveToken(1+5+5, CardColor.YELLOW);
+        player1.moveToken(1 + 5 + 5, CardColor.YELLOW);
         player1.useBoomerang(2, CardColor.GREEN);
         assertEquals(CardColor.GREEN, player1.getCurrentSquareColor());
         assertEquals(3, player1.getCurrentSquareValue());
@@ -410,7 +411,7 @@ public class BoomerangTest {
     @Test
     //Yellow to Orange Double
     public void checkYellowtoOrangeDoubleTransition() throws Exception {
-        player1.moveToken(1+5+5, CardColor.YELLOW);
+        player1.moveToken(1 + 5 + 5, CardColor.YELLOW);
         player1.useBoomerang(2, CardColor.ORANGE);
         assertEquals(CardColor.ORANGE, player1.getCurrentSquareColor());
         assertEquals(4, player1.getCurrentSquareValue());
@@ -420,7 +421,7 @@ public class BoomerangTest {
     @Test
     //Blue to Red Double
     public void checkBluetoRedDoubleTransition() throws Exception {
-        player1.moveToken(2+5+5, CardColor.BLUE);
+        player1.moveToken(2 + 5 + 5, CardColor.BLUE);
         player1.useBoomerang(2, CardColor.RED);
         assertEquals(CardColor.RED, player1.getCurrentSquareColor());
         assertEquals(5, player1.getCurrentSquareValue());
@@ -429,7 +430,7 @@ public class BoomerangTest {
     @Test
     //Blue to Yellow Double
     public void checkBluetoYellowDoubleTransition() throws Exception {
-        player1.moveToken(2+5+5, CardColor.BLUE);
+        player1.moveToken(2 + 5 + 5, CardColor.BLUE);
         player1.useBoomerang(2, CardColor.YELLOW);
         assertEquals(CardColor.YELLOW, player1.getCurrentSquareColor());
         assertEquals(6, player1.getCurrentSquareValue());
@@ -438,7 +439,7 @@ public class BoomerangTest {
     @Test
     //Blue to Blue Double
     public void checkBluetoBlueDoubleTransition() throws Exception {
-        player1.moveToken(2+5+5, CardColor.BLUE);
+        player1.moveToken(2 + 5 + 5, CardColor.BLUE);
         player1.useBoomerang(2, CardColor.BLUE);
         assertEquals(CardColor.BLUE, player1.getCurrentSquareColor());
         assertEquals(2, player1.getCurrentSquareValue());
@@ -447,7 +448,7 @@ public class BoomerangTest {
     @Test
     //Blue to Green Double
     public void checkBluetoGreenDoubleTransition() throws Exception {
-        player1.moveToken(2+5+5, CardColor.BLUE);
+        player1.moveToken(2 + 5 + 5, CardColor.BLUE);
         player1.useBoomerang(2, CardColor.GREEN);
         assertEquals(CardColor.GREEN, player1.getCurrentSquareColor());
         assertEquals(3, player1.getCurrentSquareValue());
@@ -456,7 +457,7 @@ public class BoomerangTest {
     @Test
     //Blue to Orange Double
     public void checkBluetoOrangeDoubleTransition() throws Exception {
-        player1.moveToken(2+5+5, CardColor.BLUE);
+        player1.moveToken(2 + 5 + 5, CardColor.BLUE);
         player1.useBoomerang(2, CardColor.ORANGE);
         assertEquals(CardColor.ORANGE, player1.getCurrentSquareColor());
         assertEquals(4, player1.getCurrentSquareValue());
@@ -466,7 +467,7 @@ public class BoomerangTest {
     @Test
     //Green to Red Double
     public void checkGreentoRedDoubleTransition() throws Exception {
-        player1.moveToken(3+5+5, CardColor.GREEN);
+        player1.moveToken(3 + 5 + 5, CardColor.GREEN);
         player1.useBoomerang(2, CardColor.RED);
         assertEquals(CardColor.RED, player1.getCurrentSquareColor());
         assertEquals(5, player1.getCurrentSquareValue());
@@ -475,7 +476,7 @@ public class BoomerangTest {
     @Test
     //Green to Yellow Double
     public void checkGreentoYellowDoubleTransition() throws Exception {
-        player1.moveToken(3+5+5, CardColor.GREEN);
+        player1.moveToken(3 + 5 + 5, CardColor.GREEN);
         player1.useBoomerang(2, CardColor.YELLOW);
         assertEquals(CardColor.YELLOW, player1.getCurrentSquareColor());
         assertEquals(6, player1.getCurrentSquareValue());
@@ -484,7 +485,7 @@ public class BoomerangTest {
     @Test
     //Green to Blue Double
     public void checkGreentoBlueDoubleTransition() throws Exception {
-        player1.moveToken(3+5+5, CardColor.GREEN);
+        player1.moveToken(3 + 5 + 5, CardColor.GREEN);
         player1.useBoomerang(2, CardColor.BLUE);
         assertEquals(CardColor.BLUE, player1.getCurrentSquareColor());
         assertEquals(7, player1.getCurrentSquareValue());
@@ -493,7 +494,7 @@ public class BoomerangTest {
     @Test
     //Green to Green Double
     public void checkGreentoGreenDoubleTransition() throws Exception {
-        player1.moveToken(3+5+5, CardColor.GREEN);
+        player1.moveToken(3 + 5 + 5, CardColor.GREEN);
         player1.useBoomerang(2, CardColor.GREEN);
         assertEquals(CardColor.GREEN, player1.getCurrentSquareColor());
         assertEquals(3, player1.getCurrentSquareValue());
@@ -502,7 +503,7 @@ public class BoomerangTest {
     @Test
     //Green to Orange Double
     public void checkGreentoOrangeDoubleTransition() throws Exception {
-        player1.moveToken(3+5+5, CardColor.GREEN);
+        player1.moveToken(3 + 5 + 5, CardColor.GREEN);
         player1.useBoomerang(2, CardColor.ORANGE);
         assertEquals(CardColor.ORANGE, player1.getCurrentSquareColor());
         assertEquals(4, player1.getCurrentSquareValue());
@@ -513,35 +514,35 @@ public class BoomerangTest {
     * */
 
     @Test
-    public void checkCupcakeTransition() throws Exception{
+    public void checkCupcakeTransition() throws Exception {
         player1.useBoomerang(Constants.CUPCAKE, CardColor.ORANGE);
         assertEquals(CardColor.BLUE, player1.getCurrentSquareColor());
         assertEquals(77, player1.getCurrentSquareValue());
     }
 
     @Test
-    public void checkLicoriceTransition() throws Exception{
+    public void checkLicoriceTransition() throws Exception {
         player1.useBoomerang(Constants.LICORICE, CardColor.ORANGE);
         assertEquals(CardColor.BLUE, player1.getCurrentSquareColor());
         assertEquals(29, player1.getCurrentSquareValue());
     }
 
     @Test
-    public void checkIcecreamTransition() throws Exception{
+    public void checkIcecreamTransition() throws Exception {
         player1.useBoomerang(Constants.ICECREAM, CardColor.ORANGE);
         assertEquals(CardColor.BLUE, player1.getCurrentSquareColor());
         assertEquals(45, player1.getCurrentSquareValue());
     }
 
     @Test
-    public void checkPeppermintTransition() throws Exception{
+    public void checkPeppermintTransition() throws Exception {
         player1.useBoomerang(Constants.PEPPERMINT, CardColor.ORANGE);
         assertEquals(CardColor.BLUE, player1.getCurrentSquareColor());
         assertEquals(13, player1.getCurrentSquareValue());
     }
 
     @Test
-    public void checkGingerbreadTransition() throws Exception{
+    public void checkGingerbreadTransition() throws Exception {
         player1.useBoomerang(Constants.GINGERBREAD, CardColor.ORANGE);
         assertEquals(CardColor.BLUE, player1.getCurrentSquareColor());
         assertEquals(61, player1.getCurrentSquareValue());

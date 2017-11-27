@@ -19,11 +19,11 @@ public class Player implements java.io.Serializable {
     }
 
     public int decrementBoomerangCount() {
-        if(this.boomerangs > 0)
+        if (this.boomerangs > 0)
             this.boomerangs--;
         return this.boomerangs;
     }
-  
+
     public Player(int pNum, String pName, int currentSquareValue, CardColor currentSquareColor, int x, int y, int previousSquareValue, boolean aiPlayer) {
         this.boomerangs = 3;
         this.currentSquareValue = currentSquareValue;
@@ -181,7 +181,7 @@ public class Player implements java.io.Serializable {
                             this.currentSquareColor = CardColor.YELLOW;
                             break;
                         case BLUE:
-                            if(!(this.currentSquareValue == 13 || this.currentSquareValue == 29 || this.currentSquareValue == 45 || this.currentSquareValue == 77 || this.currentSquareValue == 61)){
+                            if (!(this.currentSquareValue == 13 || this.currentSquareValue == 29 || this.currentSquareValue == 45 || this.currentSquareValue == 77 || this.currentSquareValue == 61)) {
                                 this.currentSquareValue -= 5;
                             }
                             this.currentSquareColor = CardColor.BLUE;
@@ -247,10 +247,9 @@ public class Player implements java.io.Serializable {
             }
             checkJump();
             String msg;
-            if(WorldOfSweets.gameModeStrategic){
+            if (WorldOfSweets.gameModeStrategic) {
                 msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining and " + this.boomerangs + " Boomerangs remaining!";
-            }
-            else{
+            } else {
                 msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining!";
             }
             WorldOfSweets.gameboard.labels.get(this.token.getName()).setText(msg);
@@ -318,11 +317,10 @@ public class Player implements java.io.Serializable {
                             this.currentSquareColor = CardColor.YELLOW;
                             break;
                         case BLUE:
-                            if((this.currentSquareValue == 13 || this.currentSquareValue == 29 || this.currentSquareValue == 45 || this.currentSquareValue == 77 || this.currentSquareValue == 61)) {
+                            if ((this.currentSquareValue == 13 || this.currentSquareValue == 29 || this.currentSquareValue == 45 || this.currentSquareValue == 77 || this.currentSquareValue == 61)) {
                                 this.currentSquareValue -= 5;
-                            }
-                            else{
-                                this.currentSquareValue -= 5+5;
+                            } else {
+                                this.currentSquareValue -= 5 + 5;
                             }
 
                             this.currentSquareColor = CardColor.BLUE;
@@ -388,10 +386,9 @@ public class Player implements java.io.Serializable {
             }
             checkJump();
             String msg;
-            if(WorldOfSweets.gameModeStrategic){
+            if (WorldOfSweets.gameModeStrategic) {
                 msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining and " + this.boomerangs + " Boomerangs remaining!";
-            }
-            else{
+            } else {
                 msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining!";
             }
             WorldOfSweets.gameboard.labels.get(this.token.getName()).setText(msg);
@@ -402,10 +399,9 @@ public class Player implements java.io.Serializable {
             this.currentSquareColor = CardColor.BLUE;
             this.currentSquareValue = 29;
             String msg;
-            if(WorldOfSweets.gameModeStrategic){
+            if (WorldOfSweets.gameModeStrategic) {
                 msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining and " + this.boomerangs + " Boomerangs remaining!";
-            }
-            else{
+            } else {
                 msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining!";
             }
             WorldOfSweets.gameboard.labels.get(this.token.getName()).setText(msg);
@@ -414,10 +410,9 @@ public class Player implements java.io.Serializable {
             this.currentSquareColor = CardColor.BLUE;
             this.currentSquareValue = 13;
             String msg;
-            if(WorldOfSweets.gameModeStrategic){
+            if (WorldOfSweets.gameModeStrategic) {
                 msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining and " + this.boomerangs + " Boomerangs remaining!";
-            }
-            else{
+            } else {
                 msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining!";
             }
             WorldOfSweets.gameboard.labels.get(this.token.getName()).setText(msg);
@@ -426,10 +421,9 @@ public class Player implements java.io.Serializable {
             this.currentSquareColor = CardColor.BLUE;
             this.currentSquareValue = 45;
             String msg;
-            if(WorldOfSweets.gameModeStrategic){
+            if (WorldOfSweets.gameModeStrategic) {
                 msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining and " + this.boomerangs + " Boomerangs remaining!";
-            }
-            else{
+            } else {
                 msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining!";
             }
             WorldOfSweets.gameboard.labels.get(this.token.getName()).setText(msg);
@@ -438,10 +432,9 @@ public class Player implements java.io.Serializable {
             this.currentSquareColor = CardColor.BLUE;
             this.currentSquareValue = 61;
             String msg;
-            if(WorldOfSweets.gameModeStrategic){
+            if (WorldOfSweets.gameModeStrategic) {
                 msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining and " + this.boomerangs + " Boomerangs remaining!";
-            }
-            else{
+            } else {
                 msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining!";
             }
             WorldOfSweets.gameboard.labels.get(this.token.getName()).setText(msg);
@@ -450,10 +443,9 @@ public class Player implements java.io.Serializable {
             this.currentSquareColor = CardColor.BLUE;
             this.currentSquareValue = 77;
             String msg;
-            if(WorldOfSweets.gameModeStrategic){
+            if (WorldOfSweets.gameModeStrategic) {
                 msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining and " + this.boomerangs + " Boomerangs remaining!";
-            }
-            else{
+            } else {
                 msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining!";
             }
             WorldOfSweets.gameboard.labels.get(this.token.getName()).setText(msg);
@@ -600,10 +592,9 @@ public class Player implements java.io.Serializable {
             }
             checkJump();
             String msg;
-            if(WorldOfSweets.gameModeStrategic){
+            if (WorldOfSweets.gameModeStrategic) {
                 msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining and " + this.boomerangs + " Boomerangs remaining!";
-            }
-            else{
+            } else {
                 msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining!";
             }
             WorldOfSweets.gameboard.labels.get(this.token.getName()).setText(msg);
@@ -735,10 +726,9 @@ public class Player implements java.io.Serializable {
             }
             checkJump();
             String msg;
-            if(WorldOfSweets.gameModeStrategic){
+            if (WorldOfSweets.gameModeStrategic) {
                 msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining and " + this.boomerangs + " Boomerangs remaining!";
-            }
-            else{
+            } else {
                 msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining!";
             }
             WorldOfSweets.gameboard.labels.get(this.token.getName()).setText(msg);
@@ -749,10 +739,9 @@ public class Player implements java.io.Serializable {
             this.currentSquareColor = CardColor.BLUE;
             this.currentSquareValue = 29;
             String msg;
-            if(WorldOfSweets.gameModeStrategic){
+            if (WorldOfSweets.gameModeStrategic) {
                 msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining and " + this.boomerangs + " Boomerangs remaining!";
-            }
-            else{
+            } else {
                 msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining!";
             }
             WorldOfSweets.gameboard.labels.get(this.token.getName()).setText(msg);
@@ -761,10 +750,9 @@ public class Player implements java.io.Serializable {
             this.currentSquareColor = CardColor.BLUE;
             this.currentSquareValue = 13;
             String msg;
-            if(WorldOfSweets.gameModeStrategic){
+            if (WorldOfSweets.gameModeStrategic) {
                 msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining and " + this.boomerangs + " Boomerangs remaining!";
-            }
-            else{
+            } else {
                 msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining!";
             }
             WorldOfSweets.gameboard.labels.get(this.token.getName()).setText(msg);
@@ -773,10 +761,9 @@ public class Player implements java.io.Serializable {
             this.currentSquareColor = CardColor.BLUE;
             this.currentSquareValue = 45;
             String msg;
-            if(WorldOfSweets.gameModeStrategic){
+            if (WorldOfSweets.gameModeStrategic) {
                 msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining and " + this.boomerangs + " Boomerangs remaining!";
-            }
-            else{
+            } else {
                 msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining!";
             }
             WorldOfSweets.gameboard.labels.get(this.token.getName()).setText(msg);
@@ -785,10 +772,9 @@ public class Player implements java.io.Serializable {
             this.currentSquareColor = CardColor.BLUE;
             this.currentSquareValue = 61;
             String msg;
-            if(WorldOfSweets.gameModeStrategic){
+            if (WorldOfSweets.gameModeStrategic) {
                 msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining and " + this.boomerangs + " Boomerangs remaining!";
-            }
-            else{
+            } else {
                 msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining!";
             }
             WorldOfSweets.gameboard.labels.get(this.token.getName()).setText(msg);
@@ -797,10 +783,9 @@ public class Player implements java.io.Serializable {
             this.currentSquareColor = CardColor.BLUE;
             this.currentSquareValue = 77;
             String msg;
-            if(WorldOfSweets.gameModeStrategic){
+            if (WorldOfSweets.gameModeStrategic) {
                 msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining and " + this.boomerangs + " Boomerangs remaining!";
-            }
-            else{
+            } else {
                 msg = this.token.getName() + "- " + (WorldOfSweets.gameboard.numberOfSquares - this.currentSquareValue) + " Squares remaining!";
             }
             WorldOfSweets.gameboard.labels.get(this.token.getName()).setText(msg);

@@ -43,7 +43,7 @@ public class WorldOfSweets {
             System.exit(0);
         }
 
-        if(!loaded && choice == 1) {
+        if (!loaded && choice == 1) {
             chooseMode();
             getPlayers();
         }
@@ -103,9 +103,11 @@ public class WorldOfSweets {
         return gameboard.getNumberOfSquares();
     }
 
-    public static boolean getGameMode(){ return gameModeStrategic; }
+    public static boolean getGameMode() {
+        return gameModeStrategic;
+    }
 
-    public static void chooseMode(){
+    public static void chooseMode() {
         Object[] options = {"Classic", "Strategic"};
         int choice = JOptionPane.showOptionDialog(null,
                 "Would you like to play Classic or Strategic mode?",
@@ -116,14 +118,13 @@ public class WorldOfSweets {
                 options,
                 options[0]);
 
-        if(choice == 0){
+        if (choice == 0) {
             gameModeStrategic = false;
-        }
-        else{
+        } else {
             gameModeStrategic = true;
         }
     }
-  
+
     /**
      * Gets the player information: number of players and their names and assigns token to them
      */
@@ -267,7 +268,7 @@ public class WorldOfSweets {
         }
     }
 
-    public static int getCurrentPlayerIndex(){
+    public static int getCurrentPlayerIndex() {
         return currentPlayerIndex;
     }
 
@@ -294,13 +295,12 @@ public class WorldOfSweets {
         return value;
     }
 
-    public static void useBoomerang(Card c){
+    public static void useBoomerang(Card c) {
         int value = players[gameboard.getBoomerangPlayerIndex()].useBoomerang(c.getValue(), c.getColor());
-        if(value < 0){
+        if (value < 0) {
             players[gameboard.getBoomerangPlayerIndex()].getToken().setCoords(gameboard.start.getX(), gameboard.start.getY());
             players[gameboard.getBoomerangPlayerIndex()].moveToken(-1, CardColor.ORANGE);
-        }
-        else{
+        } else {
             players[gameboard.getBoomerangPlayerIndex()].getToken().setCoords(gameboard.getSquareXLocation(value), gameboard.getSquareYLocation(value));
         }
 
@@ -351,7 +351,7 @@ public class WorldOfSweets {
                 playerSplit = playerStr.split("-");
                 players[x] = new Player(x + 1, pNames[x], Integer.parseInt(playerSplit[0]), getColor(playerSplit[1]), Integer.parseInt(playerSplit[2]), Integer.parseInt(playerSplit[3]), Integer.parseInt(playerSplit[4]), Boolean.parseBoolean(playerSplit[5]));
             }
-          
+
             currentPlayerIndex = Integer.parseInt(br.readLine());
             currentPlayer = players[currentPlayerIndex];
         } else {

@@ -16,7 +16,6 @@ public class Card implements java.io.Serializable {
         return color;
     }
 
-
     public int getValue() {
         return value;
     }
