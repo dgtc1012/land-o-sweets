@@ -21,6 +21,10 @@ import java.util.Map;
  */
 public class Gameboard {
 
+    boolean strategic;
+    boolean usingBoomerang;
+    String boomerangPlayer;
+    int boomerangPlayerIndex;
 
     int startloc_x = 100;
     int startloc_y = 500;
@@ -59,6 +63,8 @@ public class Gameboard {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        usingBoomerang = false;
+
         _frame = new JFrame();
         for (int i = 1; i <= numberOfSquares; i++) {
             squares.add(new JPanel());
@@ -201,15 +207,22 @@ public class Gameboard {
         deckArea.setPreferredSize(new Dimension(300, 180));
 
         lPane.add(deckArea, new Integer(1));
-        deckArea.setBounds(780, 360, 300, 180);
+        deckArea.setBounds(800, 360, 300, 180);
         cardDeck = new CardDeckGUILayout();
         deckArea.add(cardDeck);
 
-        // This part handles showing the player names, their token, and squares left to the end
-        int y = 200;
+		// This part handles showing the player names, their token, and squares left to the end
+        int y = 190;
         for (int i = 0; i < WorldOfSweets.players.length; i++) {
-            JLabel label = new JLabel(WorldOfSweets.players[i].getToken().getName() + "- " + (numberOfSquares - WorldOfSweets.players[i].getCurrentSquareValue()) + " Squares Remaining!", JLabel.LEFT);
-            label.setBounds(834, y, 400, 30);
+            String msg;
+            if(WorldOfSweets.gameModeStrategic){
+                msg = WorldOfSweets.players[i].getToken().getName() + "- " + (numberOfSquares - WorldOfSweets.players[i].getCurrentSquareValue()) + " Squares remaining and " + WorldOfSweets.players[i].getBoomerangs() + " Boomerangs remaining!";
+            }
+            else{
+                msg = WorldOfSweets.players[i].getToken().getName() + "- " + (numberOfSquares - WorldOfSweets.players[i].getCurrentSquareValue()) + " Squares remaining!";
+            }
+            JLabel label = new JLabel(msg, JLabel.LEFT);
+            label.setBounds(845, y, 400, 30);
             label.setIcon(new ImageIcon(WorldOfSweets.players[i].getToken().getImage().getScaledInstance(20, 30, Image.SCALE_SMOOTH)));
             lPane.add(label);
             labels.put(WorldOfSweets.players[i].getToken().getName(), label);
@@ -224,7 +237,7 @@ public class Gameboard {
 
         //Adds save button
         saveButton = new JButton("Save and Quit");
-        saveButton.setBounds(834, 550, 170, 25);
+        saveButton.setBounds(855, 550, 170, 25);
         saveButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -237,8 +250,81 @@ public class Gameboard {
             }
         });
         _frame.add(saveButton);
+
+        boomerangButton = new JButton("Do you want to use a boomerang?");
+        boomerangButton.setBounds (800, 350, 300, 25);
+        boomerangButton.addMouseListener(new MouseAdapter() {
+                                             @Override
+                                             public void mouseClicked(MouseEvent e) {
+                    try{
+                        useBoomerang();
+                    }
+                    catch(Exception exc){
+                        exc.printStackTrace();
+                    }
+                }
+            }
+        );
+
+        if(WorldOfSweets.getGameMode()){
+            _frame.add(boomerangButton);
+        }
     }// </editor-fold>//GEN-END:initComponents
 
+    //use a boomerang
+    private void useBoomerang() {
+        if (usingBoomerang) {
+            JOptionPane.showMessageDialog(_frame, "You are already using a boomerang, pick a card!");
+        }
+        else if(WorldOfSweets.players[WorldOfSweets.getCurrentPlayerIndex()].getBoomerangs() == 0){
+            JOptionPane.showMessageDialog(_frame, "You have already used all of your boomerangs!");
+        }
+        else {
+            int numPlayers = WorldOfSweets.players.length;
+
+            int curPlayer = WorldOfSweets.getCurrentPlayerIndex();
+            Object[] options = new Object[numPlayers - 1];
+
+            int j = 0;
+            for (int i = 0; i < numPlayers; i++) {
+                if (i != curPlayer) {
+                    options[j] = WorldOfSweets.pNames[i];
+                    j++;
+                }
+            }
+
+            boomerangPlayer = (String)JOptionPane.showInputDialog(_frame,
+                    "Who do you want to use your boomerang on?",
+                    "World of Sweets",
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    options,
+                    options[0]);
+
+            if(boomerangPlayer != null && boomerangPlayer.length() > 0 ){
+                usingBoomerang = true;
+                WorldOfSweets.players[WorldOfSweets.currentPlayerIndex].decrementBoomerangCount();
+                String msg;
+                if(WorldOfSweets.gameModeStrategic){
+                    msg = WorldOfSweets.players[WorldOfSweets.currentPlayerIndex].getToken().getName() + "- " + (numberOfSquares - WorldOfSweets.players[WorldOfSweets.currentPlayerIndex].getCurrentSquareValue()) + " Squares remaining and " + WorldOfSweets.players[WorldOfSweets.currentPlayerIndex].getBoomerangs() + " Boomerangs remaining!";
+                }
+                else{
+                    msg = WorldOfSweets.players[WorldOfSweets.currentPlayerIndex].getToken().getName() + "- " + (numberOfSquares - WorldOfSweets.players[WorldOfSweets.currentPlayerIndex].getCurrentSquareValue()) + " Squares remaining!";
+                }
+                WorldOfSweets.gameboard.labels.get(WorldOfSweets.players[WorldOfSweets.currentPlayerIndex].getToken().getName()).setText(msg);
+
+                for(int i = 0; i < numPlayers; i++){
+                    if(WorldOfSweets.pNames[i].equalsIgnoreCase(boomerangPlayer)){
+                        boomerangPlayerIndex = i;
+                    }
+                }
+            }
+        }
+    }
+
+    public int getBoomerangPlayerIndex(){
+        return this.boomerangPlayerIndex;
+    }
     //Saves the nesscassy information to a .txt file
     private void save() throws IOException, InterruptedException {
 
@@ -328,9 +414,10 @@ public class Gameboard {
     // Variables declaration
     private JFrame _frame;
     private JPanel deckArea;
-    private JPanel start;
+    public JPanel start;
     public JPanel grandmasHouse;
     private JButton saveButton;
+    private JButton boomerangButton;
     ArrayList<JPanel> squares = new ArrayList<JPanel>();
     ////////////////////////////////////////////////////////////////
 
