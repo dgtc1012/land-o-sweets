@@ -12,6 +12,7 @@ public class WorldOfSweets {
     public static Player[] players;
     public static int currentPlayerIndex = 0;
     public static Player currentPlayer;
+
     public static Gameboard gameboard;
     public static BufferedReader br = null;
     public static boolean loadBol = false;
@@ -350,7 +351,7 @@ public class WorldOfSweets {
                 playerSplit = playerStr.split("-");
                 players[x] = new Player(x + 1, pNames[x], Integer.parseInt(playerSplit[0]), getColor(playerSplit[1]), Integer.parseInt(playerSplit[2]), Integer.parseInt(playerSplit[3]), Integer.parseInt(playerSplit[4]), Boolean.parseBoolean(playerSplit[5]));
             }
-
+          
             currentPlayerIndex = Integer.parseInt(br.readLine());
             currentPlayer = players[currentPlayerIndex];
         } else {
