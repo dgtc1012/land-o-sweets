@@ -10,7 +10,7 @@ public class DeckOfCards implements java.io.Serializable {
         shuffleDeck();
     }
 
-	/**
+    /**
      * Returns the whole deck of cards
      *
      * @return Deck of cards
@@ -19,7 +19,7 @@ public class DeckOfCards implements java.io.Serializable {
         return deck;
     }
 
-	/**
+    /**
      * Populates the deck of cards with all of the cards specified by the user
      */
     public void populateDeck() {
@@ -45,14 +45,14 @@ public class DeckOfCards implements java.io.Serializable {
         deck.add(new Card(null, Constants.PEPPERMINT));
     }
 
-	/**
+    /**
      * Shuffles all of the card objects into a random order
      */
     public void shuffleDeck() {
         Collections.shuffle(deck);
     }
 
-	/**
+    /**
      * Draws a card from the deck
      *
      * @return The deck drawn, or null if the deck is empty
@@ -68,18 +68,18 @@ public class DeckOfCards implements java.io.Serializable {
     //Sets the current deck
     public void setDeck(ArrayList<Card> newDeck) {
 
-      deck = newDeck;
+        deck = newDeck;
     }
 
     public String toString() {
-      StringBuilder sb = new StringBuilder("");
-      sb.append(deck.size());
-      for(Card c : deck) {
+        StringBuilder sb = new StringBuilder("");
+        sb.append(deck.size());
+        for (Card c : deck) {
 
-        sb.append("\n");
-        sb.append(c.toString());
-      }
+            sb.append("\n");
+            sb.append(c.toString());
+        }
 
-      return sb.toString();
+        return sb.toString();
     }
 }

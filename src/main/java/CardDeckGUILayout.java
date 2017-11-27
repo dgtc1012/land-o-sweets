@@ -11,6 +11,6 @@ public class CardDeckGUILayout extends JPanel implements java.io.Serializable {
     }
 
     public CardDeckGUI getBoard() {
-      return board;
+        return board;
     }
 }
