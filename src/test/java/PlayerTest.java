@@ -11,10 +11,10 @@ public class PlayerTest {
 
     @Before
     public void setup() {
-        player = new Player(1, "player1");
+        player = new Player(1, "player1", false);
         WorldOfSweets.players = new Player[2];
         WorldOfSweets.players[0] = player;
-        WorldOfSweets.players[1] = new Player(2, "p2");
+        WorldOfSweets.players[1] = new Player(2, "p2", false);
         WorldOfSweets.pNames = new String[2];
         WorldOfSweets.pNames[0] = "p1";
         WorldOfSweets.pNames[1] = "p2";

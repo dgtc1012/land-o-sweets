@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class Timer{
+public class Timer {
     private final int xLoc;
     private final int yLoc;
     private final int width;
@@ -15,7 +15,8 @@ public class Timer{
     JLabel label;
     private Font timerFont;
     private Font textFont;
-    public Timer(int x, int y){
+
+    public Timer(int x, int y) {
         xLoc = x;
         yLoc = y;
         width = 200;
@@ -32,17 +33,17 @@ public class Timer{
         label = new JLabel("Time Elapsed:");
         label.setBackground(Color.WHITE);
         label.setFont(textFont);
-        label.setBounds(xLoc-15, yLoc-45, width*2, height);
+        label.setBounds(xLoc - 15, yLoc - 45, width * 2, height);
 
         gui = new JLabel();
         gui.setBackground(Color.WHITE);
         gui.setFont(timerFont);
-        gui.setBounds(xLoc, yLoc, width*2, height);
+        gui.setBounds(xLoc, yLoc, width * 2, height);
 
         paintTimer(this.seconds, this.minutes, this.hours);
     }
 
-    public Timer(int x, int y, int sec, int min, int hrs){
+    public Timer(int x, int y, int sec, int min, int hrs) {
         xLoc = x;
         yLoc = y;
         width = 200;
@@ -59,76 +60,73 @@ public class Timer{
         label = new JLabel("Time Elapsed:");
         label.setBackground(Color.WHITE);
         label.setFont(textFont);
-        label.setBounds(xLoc-15, yLoc-45, width*2, height);
+        label.setBounds(xLoc - 15, yLoc - 45, width * 2, height);
 
         gui = new JLabel();
         gui.setBackground(Color.WHITE);
         gui.setFont(timerFont);
-        gui.setBounds(xLoc, yLoc, width*2, height);
+        gui.setBounds(xLoc, yLoc, width * 2, height);
 
         paintTimer(this.seconds, this.minutes, this.hours);
     }
 
-    public void paintTimer(int sec, int min, int hr){
+    public void paintTimer(int sec, int min, int hr) {
         this.time = "";
-        if(hr < 10){
+        if (hr < 10) {
             this.time = this.time + "0" + hr;
-        }
-        else{
+        } else {
             this.time = this.time + hr;
         }
-        if(min < 10){
+        if (min < 10) {
             this.time = this.time + ":0" + min;
-        }
-        else{
+        } else {
             this.time = this.time + ":" + min;
         }
-        if(sec < 10){
+        if (sec < 10) {
             this.time = this.time + ":0" + sec;
-        }
-        else{
+        } else {
             this.time = this.time + ":" + sec;
         }
         gui.setText(this.time);
     }
 
-    public int getSeconds(){
+    public int getSeconds() {
         return this.seconds;
     }
-    public int getMinutes(){
+
+    public int getMinutes() {
         return this.minutes;
     }
-    public int getHours(){
+
+    public int getHours() {
         return this.hours;
     }
 
-    public int incrementTime(){
-        if(this.seconds == 59){
+    public int incrementTime() {
+        if (this.seconds == 59) {
             this.seconds = 0;
-            if(this.minutes == 59){
+            if (this.minutes == 59) {
                 this.minutes = 0;
                 this.hours++;
-            }
-            else{
+            } else {
                 this.minutes++;
             }
-        }
-        else{
+        } else {
             this.seconds++;
         }
 
         paintTimer(this.seconds, this.minutes, this.hours);
 
-        return this.seconds + this.minutes*60 + this.hours*60*60;
+        return this.seconds + this.minutes * 60 + this.hours * 60 * 60;
     }
 
     //Set the time
     public void setTime(int seconds, int minutes, int hours) {
 
-      this.seconds = seconds;
-      this.minutes = minutes;
-      this.hours = hours;
+        this.seconds = seconds;
+        this.minutes = minutes;
+        this.hours = hours;
 
-      paintTimer(seconds, minutes, hours);
+        paintTimer(seconds, minutes, hours);
     }
 }

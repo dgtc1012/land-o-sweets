@@ -6,14 +6,15 @@
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.io.*;
 
 /**
  * @author Justin Keenan, Dannah Gersh
@@ -228,7 +229,7 @@ public class Gameboard {
             y += 40;
         }
 
-		// Timer aspect
+        // Timer aspect
         timer = new Timer(875, 100);
         _frame.add(timer.gui);
         _frame.add(timer.label);
@@ -238,16 +239,15 @@ public class Gameboard {
         saveButton = new JButton("Save and Quit");
         saveButton.setBounds(855, 550, 170, 25);
         saveButton.addMouseListener(new MouseAdapter() {
-          @Override
-          public void mouseClicked(MouseEvent e) {
+            @Override
+            public void mouseClicked(MouseEvent e) {
 
-            try {
-              save();
+                try {
+                    save();
+                } catch (Exception exc) {
+                    exc.printStackTrace();
+                }
             }
-            catch(Exception exc) {
-              exc.printStackTrace();
-            }
-          }
         });
         _frame.add(saveButton);
 
@@ -326,64 +326,64 @@ public class Gameboard {
         return this.boomerangPlayerIndex;
     }
     //Saves the nesscassy information to a .txt file
-    private void save() throws IOException{
+    private void save() throws IOException, InterruptedException {
 
-      String directory = "src/main/resources/gameFiles/";
-      WorldOfSweets.saveBol = true;
-      String ext = ".txt";
-      String filename;
-      File file = null;
-      boolean skip = false;
-      while(true) {
+        String directory = "src/main/resources/gameFiles/";
+        WorldOfSweets.saveBol = true;
+        String ext = ".txt";
+        String filename;
+        File file = null;
+        boolean skip = false;
+        while (true) {
+            WorldOfSweets.aiRunning = false;
+            filename = JOptionPane.showInputDialog("Enter the filename for this new game save without the extension");
 
-        filename = JOptionPane.showInputDialog("Enter the filename for this new game save without the extension");
+            if (filename == null) {
+                skip = true;
+                WorldOfSweets.saveBol = false;
+                WorldOfSweets.aiRunning = true;
+                break;
+            }
 
-        if(filename == null) {
-          skip = true;
-          WorldOfSweets.saveBol = false;
-          break;
+            filename = directory + filename;
+            filename += ext;
+            file = new File(filename);
+
+            if (file.exists()) {
+                JOptionPane.showMessageDialog(null, "That file already exists");
+            } else {
+                WorldOfSweets.saveBol = false;
+                break;
+            }
         }
 
-        filename = directory + filename;
-        filename += ext;
-        file = new File(filename);
+        if (!skip) {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(file));
 
-        if(file.exists()) {
-          JOptionPane.showMessageDialog(null, "That file already exists");
+            int numOfPlayers = WorldOfSweets.pNames.length;
+
+            bw.write(String.valueOf(numOfPlayers));
+            bw.newLine();
+
+            for (int x = 0; x < numOfPlayers; x++) {
+
+                bw.write(WorldOfSweets.pNames[x]);
+                bw.newLine();
+                bw.write(WorldOfSweets.players[x].toString());
+                bw.newLine();
+            }
+
+            bw.write(String.valueOf(WorldOfSweets.currentPlayerIndex));
+            bw.newLine();
+            bw.write(cardDeck.board.deck.toString());
+            bw.newLine();
+            bw.write(cardDeck.board.lastCard.toString());
+            bw.newLine();
+            bw.write(timer.getHours() + ":" + timer.getMinutes() + ":" + timer.getSeconds());
+            bw.close();
+            JOptionPane.showMessageDialog(null, "Game Saved");
+            System.exit(0);
         }
-        else {
-          WorldOfSweets.saveBol = false;
-          break;
-        }
-      }
-
-      if(!skip) {
-        BufferedWriter bw = new BufferedWriter(new FileWriter(file));
-
-        int numOfPlayers = WorldOfSweets.pNames.length;
-
-        bw.write(String.valueOf(numOfPlayers));
-        bw.newLine();
-
-        for(int x = 0; x < numOfPlayers; x++) {
-
-          bw.write(WorldOfSweets.pNames[x]);
-          bw.newLine();
-          bw.write(WorldOfSweets.players[x].toString());
-          bw.newLine();
-        }
-
-        bw.write(String.valueOf(WorldOfSweets.currentPlayerIndex));
-        bw.newLine();
-        bw.write(cardDeck.board.deck.toString());
-        bw.newLine();
-        bw.write(cardDeck.board.lastCard.toString());
-        bw.newLine();
-        bw.write(timer.getHours() + ":" + timer.getMinutes() + ":" + timer.getSeconds());
-        bw.close();
-        JOptionPane.showMessageDialog(null, "Game Saved");
-        System.exit(0);
-      }
     }
 
     //Deck event handler

@@ -1,8 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
-import java.util.*;
 
-public class Token extends JPanel implements java.io.Serializable{
+public class Token extends JPanel implements java.io.Serializable {
     private final int num;
     private static int x;
     private static int y;
@@ -32,21 +31,21 @@ public class Token extends JPanel implements java.io.Serializable{
     }
 
     public Token(int pNum, String pName, int x, int y) {
-      JLabel j = new JLabel(pName);
-      width = 20;
-      height = 39;
-      name = pName;
-      num = pNum;
-      setBounds(x, y, width, height);
+        JLabel j = new JLabel(pName);
+        width = 20;
+        height = 39;
+        name = pName;
+        num = pNum;
+        setBounds(x, y, width, height);
 
-      if (pNum == 1)
-          img = new ImageIcon("src/main/resources/images/p1.jpg").getImage();
-      else if (pNum == 2)
-          img = new ImageIcon("src/main/resources/images/p2.jpg").getImage();
-      else if (pNum == 3)
-          img = new ImageIcon("src/main/resources/images/p3.jpg").getImage();
-      else
-          img = new ImageIcon("src/main/resources/images/p4.jpg").getImage();
+        if (pNum == 1)
+            img = new ImageIcon("src/main/resources/images/p1.jpg").getImage();
+        else if (pNum == 2)
+            img = new ImageIcon("src/main/resources/images/p2.jpg").getImage();
+        else if (pNum == 3)
+            img = new ImageIcon("src/main/resources/images/p3.jpg").getImage();
+        else
+            img = new ImageIcon("src/main/resources/images/p4.jpg").getImage();
     }
 
     public void setCoords(int newX, int newY) {
@@ -86,7 +85,7 @@ public class Token extends JPanel implements java.io.Serializable{
 
     public String toString() {
 
-      StringBuilder sb = new StringBuilder(x + "-" + y);
-      return sb.toString();
+        StringBuilder sb = new StringBuilder(x + "-" + y);
+        return sb.toString();
     }
 }

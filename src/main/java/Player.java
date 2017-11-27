@@ -4,19 +4,14 @@ public class Player implements java.io.Serializable {
     private Token token;
     private int previousSquareValue;
     private int boomerangs;
+    private boolean aiPlayer;
 
-    public Player(int pNum, String pName) {
+    public Player(int pNum, String pName, boolean aiPlayer) {
         this.boomerangs = 3;
         this.currentSquareValue = -1;
         this.currentSquareColor = CardColor.ORANGE;
+        this.aiPlayer = aiPlayer;
         this.token = new Token(pNum, pName);
-    }
-
-    public Player(int pNum, String pName, int currentSquareValue, CardColor currentSquareColor, int x, int y, int previousSquareValue) {
-        this.boomerangs = 3;
-        this.currentSquareValue = currentSquareValue;
-        this.currentSquareColor = currentSquareColor;
-        token = new Token(pNum, pName, x, y);
     }
 
     public int getBoomerangs() {
@@ -27,6 +22,18 @@ public class Player implements java.io.Serializable {
         if(this.boomerangs > 0)
             this.boomerangs--;
         return this.boomerangs;
+    }
+  
+    public Player(int pNum, String pName, int currentSquareValue, CardColor currentSquareColor, int x, int y, int previousSquareValue, boolean aiPlayer) {
+        this.boomerangs = 3;
+        this.currentSquareValue = currentSquareValue;
+        this.currentSquareColor = currentSquareColor;
+        this.aiPlayer = aiPlayer;
+        token = new Token(pNum, pName, x, y);
+    }
+
+    public boolean isAiPlayer() {
+        return this.aiPlayer;
     }
 
     /**
@@ -458,7 +465,7 @@ public class Player implements java.io.Serializable {
         }
     }
 
-	/**
+    /**
      * Handles moving the player to new location after card drawn
      *
      * @param value Value to move
@@ -806,12 +813,13 @@ public class Player implements java.io.Serializable {
     }
 
     public String toString() {
-      StringBuilder sb = new StringBuilder("");
-      sb.append(currentSquareValue + "-");
-      sb.append(currentSquareColor + "-");
-      sb.append(token.toString() + "-");
-      sb.append(previousSquareValue);
+        StringBuilder sb = new StringBuilder("");
+        sb.append(currentSquareValue + "-");
+        sb.append(currentSquareColor + "-");
+        sb.append(token.toString() + "-");
+        sb.append(previousSquareValue + "-");
+        sb.append(aiPlayer);
 
-      return sb.toString();
+        return sb.toString();
     }
 }

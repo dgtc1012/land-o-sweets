@@ -1,5 +1,3 @@
-import java.util.*;
-
 public class Card implements java.io.Serializable {
 
     private CardColor color;
@@ -18,17 +16,14 @@ public class Card implements java.io.Serializable {
         return color;
     }
 
-    public void setValue(int value) {
-        this.value = value;
-    }
 
     public int getValue() {
         return value;
     }
 
     public String toString() {
-      StringBuilder sb = new StringBuilder(color + "-");
-      sb.append(value);
-      return sb.toString();
+        StringBuilder sb = new StringBuilder(color + "-");
+        sb.append(value);
+        return sb.toString();
     }
 }
