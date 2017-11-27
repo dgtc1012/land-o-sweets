@@ -174,7 +174,9 @@ public class Player implements java.io.Serializable {
                             this.currentSquareColor = CardColor.YELLOW;
                             break;
                         case BLUE:
-                            this.currentSquareValue -= 5;
+                            if(!(this.currentSquareValue == 13 || this.currentSquareValue == 29 || this.currentSquareValue == 45 || this.currentSquareValue == 77 || this.currentSquareValue == 61)){
+                                this.currentSquareValue -= 5;
+                            }
                             this.currentSquareColor = CardColor.BLUE;
                             break;
                         case GREEN:
@@ -309,7 +311,13 @@ public class Player implements java.io.Serializable {
                             this.currentSquareColor = CardColor.YELLOW;
                             break;
                         case BLUE:
-                            this.currentSquareValue -= 5 + 5;
+                            if((this.currentSquareValue == 13 || this.currentSquareValue == 29 || this.currentSquareValue == 45 || this.currentSquareValue == 77 || this.currentSquareValue == 61)) {
+                                this.currentSquareValue -= 5;
+                            }
+                            else{
+                                this.currentSquareValue -= 5+5;
+                            }
+
                             this.currentSquareColor = CardColor.BLUE;
                             break;
                         case GREEN:
