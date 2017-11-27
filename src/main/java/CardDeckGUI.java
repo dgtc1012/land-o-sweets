@@ -35,7 +35,6 @@ public class CardDeckGUI extends JPanel implements ActionListener, java.io.Seria
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 if (e == null || e.getX() >= MINSPACING + CARDWIDTH / 2 && e.getX() < MINSPACING + CARDWIDTH / 2 + CARDWIDTH && e.getY() >= MINSPACING && e.getY() < MINSPACING + CARDHEIGHT) {
-                    currentPlayer = WorldOfSweets.nextPlayer();
                     doDraw(false);
                     int nextPlayerIndex = WorldOfSweets.nextPlayerIndex();
                     WorldOfSweets.currentPlayer = WorldOfSweets.players[nextPlayerIndex];
@@ -90,6 +89,7 @@ public class CardDeckGUI extends JPanel implements ActionListener, java.io.Seria
         gameInProgress = true;
         lastCard = null;
         cardDrawn = false;
+        WorldOfSweets.currentPlayer = WorldOfSweets.players[0];
         currentPlayer = WorldOfSweets.pNames[0];
         repaint();
     }

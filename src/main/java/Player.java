@@ -73,23 +73,23 @@ public class Player implements java.io.Serializable {
         int pVal = this.previousSquareValue;
         int cVal = this.currentSquareValue;
         if (WorldOfSweets.gameboard.usingBoomerang) {
-            if (cVal < 13 && pVal >= 13) {
+            if (cVal <= 13 && pVal >= 13) {
                 this.currentSquareValue--;
                 return;
             }
-            if (cVal < 29 && pVal >= 29) {
+            if (cVal <= 29 && pVal >= 29) {
                 this.currentSquareValue--;
                 return;
             }
-            if (cVal < 45 && pVal >= 45) {
+            if (cVal <= 45 && pVal >= 45) {
                 this.currentSquareValue--;
                 return;
             }
-            if (cVal < 61 && pVal >= 61) {
+            if (cVal <= 61 && pVal >= 61) {
                 this.currentSquareValue--;
                 return;
             }
-            if (cVal < 77 && pVal >= 77) {
+            if (cVal <= 77 && pVal >= 77) {
                 this.currentSquareValue--;
                 return;
             }

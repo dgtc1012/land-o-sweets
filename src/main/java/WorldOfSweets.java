@@ -34,6 +34,7 @@ public class WorldOfSweets {
                 options[0]);
 
         if (choice == 0) {
+            chooseMode();
             getPlayers();
         } else if (choice == 1) {
             loaded = loadGame(0);
