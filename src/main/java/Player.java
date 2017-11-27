@@ -1,46 +1,52 @@
-import java.util.*;
 
 public class Player implements java.io.Serializable {
     private int currentSquareValue;
     private CardColor currentSquareColor;
     private Token token;
     private int previousSquareValue;
+    private boolean aiPlayer;
 
-    public Player(int pNum, String pName) {
+    public Player(int pNum, String pName, boolean aiPlayer) {
         this.currentSquareValue = -1;
         this.currentSquareColor = CardColor.ORANGE;
+        this.aiPlayer = aiPlayer;
         this.token = new Token(pNum, pName);
     }
 
-    public Player(int pNum, String pName, int currentSquareValue, CardColor currentSquareColor, int x, int y, int previousSquareValue) {
+    public Player(int pNum, String pName, int currentSquareValue, CardColor currentSquareColor, int x, int y, int previousSquareValue, boolean aiPlayer) {
 
-      this.currentSquareValue = currentSquareValue;
-      this.currentSquareColor = currentSquareColor;
-      token = new Token(pNum, pName, x, y);
+        this.currentSquareValue = currentSquareValue;
+        this.currentSquareColor = currentSquareColor;
+        this.aiPlayer = aiPlayer;
+        token = new Token(pNum, pName, x, y);
     }
 
-	/**
+    public boolean isAiPlayer() {
+        return this.aiPlayer;
+    }
+
+    /**
      * @return This players token
      */
     public Token getToken() {
         return this.token;
     }
 
-	/**
+    /**
      * @return This players current square value
      */
     public int getCurrentSquareValue() {
         return this.currentSquareValue;
     }
 
-	/**
+    /**
      * @return This players current square color
      */
     public CardColor getCurrentSquareColor() {
         return this.currentSquareColor;
     }
 
-	/**
+    /**
      * Handles moving the token of this player
      *
      * @param newValue Value of new board space
@@ -51,7 +57,7 @@ public class Player implements java.io.Serializable {
         this.currentSquareColor = newColor;
     }
 
-	
+
     public void checkJump() {
         int pVal = this.previousSquareValue;
         int cVal = this.currentSquareValue;
@@ -76,8 +82,8 @@ public class Player implements java.io.Serializable {
             return;
         }
     }
-	
-	/**
+
+    /**
      * Handles moving the player to new location after card drawn
      *
      * @param value Value to move
@@ -376,12 +382,13 @@ public class Player implements java.io.Serializable {
     }
 
     public String toString() {
-      StringBuilder sb = new StringBuilder("");
-      sb.append(currentSquareValue + "-");
-      sb.append(currentSquareColor + "-");
-      sb.append(token.toString() + "-");
-      sb.append(previousSquareValue);
+        StringBuilder sb = new StringBuilder("");
+        sb.append(currentSquareValue + "-");
+        sb.append(currentSquareColor + "-");
+        sb.append(token.toString() + "-");
+        sb.append(previousSquareValue + "-");
+        sb.append(aiPlayer);
 
-      return sb.toString();
+        return sb.toString();
     }
 }

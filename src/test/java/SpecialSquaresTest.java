@@ -20,7 +20,7 @@ public class SpecialSquaresTest {
 
     @Before
     public void setup() {
-        player = new Player(1, "player1");
+        player = new Player(1, "player1", false);
         WorldOfSweets.pNames = new String[2];
         WorldOfSweets.pNames[0] = "p1";
         WorldOfSweets.pNames[1] = "p2";
