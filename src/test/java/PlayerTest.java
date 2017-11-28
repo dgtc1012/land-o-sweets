@@ -495,7 +495,6 @@ public class PlayerTest {
     }
 
 //Special cards
-
     @Test
     //US-30
     //skip card
@@ -503,5 +502,11 @@ public class PlayerTest {
         player.moveToken(5, CardColor.RED);
         player.newCardDrawn(0, null);
         assertEquals(5, player.getCurrentSquareValue());
+    }
+
+    @Test
+    public void makeMoveClassic() {
+        WorldOfSweets.gameModeStrategic = false;
+        player.makeMove();
     }
 }

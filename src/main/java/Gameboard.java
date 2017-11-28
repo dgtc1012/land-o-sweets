@@ -256,7 +256,7 @@ public class Gameboard {
                                              @Override
                                              public void mouseClicked(MouseEvent e) {
                                                  try {
-                                                     useBoomerang();
+                                                     useBoomerang(null, false);
                                                  } catch (Exception exc) {
                                                      exc.printStackTrace();
                                                  }
@@ -270,7 +270,7 @@ public class Gameboard {
     }// </editor-fold>//GEN-END:initComponents
 
     //use a boomerang
-    private void useBoomerang() {
+    protected void useBoomerang(String name, boolean aiPlayer) {
         if (usingBoomerang) {
             JOptionPane.showMessageDialog(_frame, "You are already using a boomerang, pick a card!");
         } else if (WorldOfSweets.players[WorldOfSweets.getCurrentPlayerIndex()].getBoomerangs() == 0) {
@@ -289,13 +289,18 @@ public class Gameboard {
                 }
             }
 
-            boomerangPlayer = (String) JOptionPane.showInputDialog(_frame,
-                    "Who do you want to use your boomerang on?",
-                    "World of Sweets",
-                    JOptionPane.QUESTION_MESSAGE,
-                    null,
-                    options,
-                    options[0]);
+            if (name == null) {
+                boomerangPlayer = (String) JOptionPane.showInputDialog(_frame,
+                        "Who do you want to use your boomerang on?",
+                        "World of Sweets",
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        options,
+                        options[0]);
+            } else {
+                WorldOfSweets.aiRunning = false;
+                boomerangPlayer = name;
+            }
 
             if (boomerangPlayer != null && boomerangPlayer.length() > 0) {
                 usingBoomerang = true;
@@ -313,6 +318,9 @@ public class Gameboard {
                         boomerangPlayerIndex = i;
                     }
                 }
+            }
+            if (aiPlayer) {
+                cardDeck.board.getMouseListeners()[0].mouseClicked(null);
             }
         }
     }

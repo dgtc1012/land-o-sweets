@@ -3,11 +3,13 @@ public class Player implements java.io.Serializable {
     private CardColor currentSquareColor;
     private Token token;
     private int previousSquareValue;
-    private int boomerangs;
+    private int boomerangs = 0;
     private boolean aiPlayer;
 
     public Player(int pNum, String pName, boolean aiPlayer) {
-        this.boomerangs = 3;
+        if (WorldOfSweets.getGameMode()) {
+            this.boomerangs = 3;
+        }
         this.currentSquareValue = -1;
         this.currentSquareColor = CardColor.ORANGE;
         this.aiPlayer = aiPlayer;
@@ -25,7 +27,9 @@ public class Player implements java.io.Serializable {
     }
 
     public Player(int pNum, String pName, int currentSquareValue, CardColor currentSquareColor, int x, int y, int previousSquareValue, boolean aiPlayer) {
-        this.boomerangs = 3;
+        if (WorldOfSweets.getGameMode()) {
+            this.boomerangs = 3;
+        }
         this.currentSquareValue = currentSquareValue;
         this.currentSquareColor = currentSquareColor;
         this.aiPlayer = aiPlayer;
@@ -34,6 +38,34 @@ public class Player implements java.io.Serializable {
 
     public boolean isAiPlayer() {
         return this.aiPlayer;
+    }
+
+    /**
+     * This method makes a move for the AI Player
+     * They will use a boomerang under these conditions:
+     * - They have a boomerang left
+     * - The current leader is at square 70 or beyond
+     * - The current leader is not them
+     */
+    public void makeMove() {
+        if (this.boomerangs == 0) {
+            WorldOfSweets.gameboard.cardDeck.board.getMouseListeners()[0].mouseClicked(null);
+        } else {
+            Player[] players = WorldOfSweets.players;
+            int currentLeaderSquareValue = 0;
+            String currentLeaderName = "";
+            for (int i = 0; i < players.length; i++) {
+                if (players[i].currentSquareValue > currentLeaderSquareValue) {
+                    currentLeaderSquareValue = players[i].currentSquareValue;
+                    currentLeaderName = players[i].token.getName();
+                }
+            }
+            if (this.currentSquareValue < currentLeaderSquareValue && currentLeaderSquareValue >= 70) {
+                WorldOfSweets.gameboard.useBoomerang(currentLeaderName, true);
+            } else {
+                WorldOfSweets.gameboard.cardDeck.board.getMouseListeners()[0].mouseClicked(null);
+            }
+        }
     }
 
     /**
