@@ -6,20 +6,25 @@
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.io.*;
 
 /**
  * @author Justin Keenan, Dannah Gersh
  */
 public class Gameboard {
 
+    boolean strategic;
+    boolean usingBoomerang;
+    String boomerangPlayer;
+    int boomerangPlayerIndex;
 
     int startloc_x = 100;
     int startloc_y = 500;
@@ -58,6 +63,8 @@ public class Gameboard {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        usingBoomerang = false;
+
         _frame = new JFrame();
         for (int i = 1; i <= numberOfSquares; i++) {
             squares.add(new JPanel());
@@ -200,22 +207,28 @@ public class Gameboard {
         deckArea.setPreferredSize(new Dimension(300, 180));
 
         lPane.add(deckArea, new Integer(1));
-        deckArea.setBounds(780, 360, 300, 180);
+        deckArea.setBounds(800, 360, 300, 180);
         cardDeck = new CardDeckGUILayout();
         deckArea.add(cardDeck);
 
-		// This part handles showing the player names, their token, and squares left to the end
-        int y = 200;
+        // This part handles showing the player names, their token, and squares left to the end
+        int y = 190;
         for (int i = 0; i < WorldOfSweets.players.length; i++) {
-            JLabel label = new JLabel(WorldOfSweets.players[i].getToken().getName() + "- " + (numberOfSquares - WorldOfSweets.players[i].getCurrentSquareValue()) + " Squares Remaining!", JLabel.LEFT);
-            label.setBounds(834, y, 400, 30);
+            String msg;
+            if (WorldOfSweets.gameModeStrategic) {
+                msg = WorldOfSweets.players[i].getToken().getName() + "- " + (numberOfSquares - WorldOfSweets.players[i].getCurrentSquareValue()) + " Squares remaining and " + WorldOfSweets.players[i].getBoomerangs() + " Boomerangs remaining!";
+            } else {
+                msg = WorldOfSweets.players[i].getToken().getName() + "- " + (numberOfSquares - WorldOfSweets.players[i].getCurrentSquareValue()) + " Squares remaining!";
+            }
+            JLabel label = new JLabel(msg, JLabel.LEFT);
+            label.setBounds(845, y, 400, 30);
             label.setIcon(new ImageIcon(WorldOfSweets.players[i].getToken().getImage().getScaledInstance(20, 30, Image.SCALE_SMOOTH)));
             lPane.add(label);
             labels.put(WorldOfSweets.players[i].getToken().getName(), label);
             y += 40;
         }
 
-		// Timer aspect
+        // Timer aspect
         timer = new Timer(875, 100);
         _frame.add(timer.gui);
         _frame.add(timer.label);
@@ -223,81 +236,158 @@ public class Gameboard {
 
         //Adds save button
         saveButton = new JButton("Save and Quit");
-        saveButton.setBounds(834, 550, 170, 25);
+        saveButton.setBounds(855, 550, 170, 25);
         saveButton.addMouseListener(new MouseAdapter() {
-          @Override
-          public void mouseClicked(MouseEvent e) {
+            @Override
+            public void mouseClicked(MouseEvent e) {
 
-            try {
-              save();
+                try {
+                    save();
+                } catch (Exception exc) {
+                    exc.printStackTrace();
+                }
             }
-            catch(Exception exc) {
-              exc.printStackTrace();
-            }
-          }
         });
         _frame.add(saveButton);
+
+        boomerangButton = new JButton("Do you want to use a boomerang?");
+        boomerangButton.setBounds(800, 350, 300, 25);
+        boomerangButton.addMouseListener(new MouseAdapter() {
+                                             @Override
+                                             public void mouseClicked(MouseEvent e) {
+                                                 try {
+                                                     useBoomerang(null, false);
+                                                 } catch (Exception exc) {
+                                                     exc.printStackTrace();
+                                                 }
+                                             }
+                                         }
+        );
+
+        if (WorldOfSweets.getGameMode()) {
+            _frame.add(boomerangButton);
+        }
     }// </editor-fold>//GEN-END:initComponents
 
+    //use a boomerang
+    protected void useBoomerang(String name, boolean aiPlayer) {
+        if (usingBoomerang) {
+            JOptionPane.showMessageDialog(_frame, "You are already using a boomerang, pick a card!");
+        } else if (WorldOfSweets.players[WorldOfSweets.getCurrentPlayerIndex()].getBoomerangs() == 0) {
+            JOptionPane.showMessageDialog(_frame, "You have already used all of your boomerangs!");
+        } else {
+            int numPlayers = WorldOfSweets.players.length;
+
+            int curPlayer = WorldOfSweets.getCurrentPlayerIndex();
+            Object[] options = new Object[numPlayers - 1];
+
+            int j = 0;
+            for (int i = 0; i < numPlayers; i++) {
+                if (i != curPlayer) {
+                    options[j] = WorldOfSweets.pNames[i];
+                    j++;
+                }
+            }
+
+            if (name == null) {
+                boomerangPlayer = (String) JOptionPane.showInputDialog(_frame,
+                        "Who do you want to use your boomerang on?",
+                        "World of Sweets",
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        options,
+                        options[0]);
+            } else {
+                WorldOfSweets.aiRunning = false;
+                boomerangPlayer = name;
+            }
+
+            if (boomerangPlayer != null && boomerangPlayer.length() > 0) {
+                usingBoomerang = true;
+                WorldOfSweets.players[WorldOfSweets.currentPlayerIndex].decrementBoomerangCount();
+                String msg;
+                if (WorldOfSweets.gameModeStrategic) {
+                    msg = WorldOfSweets.players[WorldOfSweets.currentPlayerIndex].getToken().getName() + "- " + (numberOfSquares - WorldOfSweets.players[WorldOfSweets.currentPlayerIndex].getCurrentSquareValue()) + " Squares remaining and " + WorldOfSweets.players[WorldOfSweets.currentPlayerIndex].getBoomerangs() + " Boomerangs remaining!";
+                } else {
+                    msg = WorldOfSweets.players[WorldOfSweets.currentPlayerIndex].getToken().getName() + "- " + (numberOfSquares - WorldOfSweets.players[WorldOfSweets.currentPlayerIndex].getCurrentSquareValue()) + " Squares remaining!";
+                }
+                WorldOfSweets.gameboard.labels.get(WorldOfSweets.players[WorldOfSweets.currentPlayerIndex].getToken().getName()).setText(msg);
+
+                for (int i = 0; i < numPlayers; i++) {
+                    if (WorldOfSweets.pNames[i].equalsIgnoreCase(boomerangPlayer)) {
+                        boomerangPlayerIndex = i;
+                    }
+                }
+            }
+            if (aiPlayer) {
+                cardDeck.board.getMouseListeners()[0].mouseClicked(null);
+            }
+        }
+    }
+
+    public int getBoomerangPlayerIndex() {
+        return this.boomerangPlayerIndex;
+    }
+
     //Saves the nesscassy information to a .txt file
-    private void save() throws IOException{
+    private void save() throws IOException, InterruptedException {
 
-      String directory = "src/main/resources/gameFiles/";
-      WorldOfSweets.saveBol = true;
-      String ext = ".txt";
-      String filename;
-      File file = null;
-      boolean skip = false;
-      while(true) {
+        String directory = "src/main/resources/gameFiles/";
+        WorldOfSweets.saveBol = true;
+        String ext = ".txt";
+        String filename;
+        File file = null;
+        boolean skip = false;
+        while (true) {
+            WorldOfSweets.aiRunning = false;
+            filename = JOptionPane.showInputDialog("Enter the filename for this new game save without the extension");
 
-        filename = JOptionPane.showInputDialog("Enter the filename for this new game save without the extension");
+            if (filename == null) {
+                skip = true;
+                WorldOfSweets.saveBol = false;
+                WorldOfSweets.aiRunning = true;
+                break;
+            }
 
-        if(filename == null) {
-          skip = true;
-          WorldOfSweets.saveBol = false;
-          break;
+            filename = directory + filename;
+            filename += ext;
+            file = new File(filename);
+
+            if (file.exists()) {
+                JOptionPane.showMessageDialog(null, "That file already exists");
+            } else {
+                WorldOfSweets.saveBol = false;
+                break;
+            }
         }
 
-        filename = directory + filename;
-        filename += ext;
-        file = new File(filename);
+        if (!skip) {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(file));
 
-        if(file.exists()) {
-          JOptionPane.showMessageDialog(null, "That file already exists");
+            int numOfPlayers = WorldOfSweets.pNames.length;
+
+            bw.write(String.valueOf(numOfPlayers));
+            bw.newLine();
+
+            for (int x = 0; x < numOfPlayers; x++) {
+
+                bw.write(WorldOfSweets.pNames[x]);
+                bw.newLine();
+                bw.write(WorldOfSweets.players[x].toString());
+                bw.newLine();
+            }
+
+            bw.write(String.valueOf(WorldOfSweets.currentPlayerIndex));
+            bw.newLine();
+            bw.write(cardDeck.board.deck.toString());
+            bw.newLine();
+            bw.write(cardDeck.board.lastCard.toString());
+            bw.newLine();
+            bw.write(timer.getHours() + ":" + timer.getMinutes() + ":" + timer.getSeconds());
+            bw.close();
+            JOptionPane.showMessageDialog(null, "Game Saved");
+            System.exit(0);
         }
-        else {
-          WorldOfSweets.saveBol = false;
-          break;
-        }
-      }
-
-      if(!skip) {
-        BufferedWriter bw = new BufferedWriter(new FileWriter(file));
-
-        int numOfPlayers = WorldOfSweets.pNames.length;
-
-        bw.write(String.valueOf(numOfPlayers));
-        bw.newLine();
-
-        for(int x = 0; x < numOfPlayers; x++) {
-
-          bw.write(WorldOfSweets.pNames[x]);
-          bw.newLine();
-          bw.write(WorldOfSweets.players[x].toString());
-          bw.newLine();
-        }
-
-        bw.write(String.valueOf(WorldOfSweets.currentPlayerIndex));
-        bw.newLine();
-        bw.write(cardDeck.board.deck.toString());
-        bw.newLine();
-        bw.write(cardDeck.board.lastCard.toString());
-        bw.newLine();
-        bw.write(timer.getHours() + ":" + timer.getMinutes() + ":" + timer.getSeconds());
-        bw.close();
-        JOptionPane.showMessageDialog(null, "Game Saved");
-        System.exit(0);
-      }
     }
 
     //Deck event handler
@@ -309,10 +399,9 @@ public class Gameboard {
         return numberOfSquares;
     }
 
-    public static Color getSquareColor(int index) {
+    public Color getSquareColor(int index) {
         return squares.get(index).getBackground();
     }
-
     public static CardColor getSquareCardColor(int index) {
         Color c = squares.get(index).getBackground();
 
@@ -339,7 +428,6 @@ public class Gameboard {
           return CardColor.YELLOW;
         return null;
     }
-
     public int getSquareXLocation(int index) {
         return squares.get(index).getX();
     }
@@ -355,9 +443,10 @@ public class Gameboard {
     // Variables declaration
     private JFrame _frame;
     private JPanel deckArea;
-    private JPanel start;
+    public JPanel start;
     public JPanel grandmasHouse;
     private JButton saveButton;
+    private JButton boomerangButton;
     static ArrayList<JPanel> squares = new ArrayList<JPanel>();
     ////////////////////////////////////////////////////////////////
 
