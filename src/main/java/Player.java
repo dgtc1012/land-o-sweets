@@ -5,6 +5,7 @@ public class Player implements java.io.Serializable {
     private int previousSquareValue;
     private int boomerangs = 0;
     private boolean aiPlayer;
+    private boolean dad;
 
     public Player(int pNum, String pName, boolean aiPlayer) {
         if (WorldOfSweets.getGameMode()) {
@@ -14,6 +15,10 @@ public class Player implements java.io.Serializable {
         this.currentSquareColor = CardColor.ORANGE;
         this.aiPlayer = aiPlayer;
         this.token = new Token(pNum, pName);
+        if (pName.equalsIgnoreCase("dad"))
+          dad = true;
+        else
+          dad = false;
     }
 
     public int getBoomerangs() {
@@ -25,6 +30,12 @@ public class Player implements java.io.Serializable {
             this.boomerangs--;
         return this.boomerangs;
     }
+  /**
+     * @return if this player is dad
+     */
+    public boolean isDad() {
+        return dad;
+    }
 
     public Player(int pNum, String pName, int currentSquareValue, CardColor currentSquareColor, int x, int y, int previousSquareValue, boolean aiPlayer) {
         if (WorldOfSweets.getGameMode()) {
@@ -34,6 +45,10 @@ public class Player implements java.io.Serializable {
         this.currentSquareColor = currentSquareColor;
         this.aiPlayer = aiPlayer;
         token = new Token(pNum, pName, x, y);
+        if (pName.equalsIgnoreCase("dad"))
+          dad = true;
+        else
+          dad = false;
     }
 
     public boolean isAiPlayer() {
