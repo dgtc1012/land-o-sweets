@@ -12,7 +12,7 @@ public class MoveTokenTest {
     @Before
     public void setup() {
         WorldOfSweets = new WorldOfSweets();
-        player = new Player(1, "player1");
+        player = new Player(1, "player1", false);
         WorldOfSweets.players = new Player[]{player};
         card = new Card(null, 0);
         WorldOfSweets.pNames = new String[2];

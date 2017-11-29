@@ -25,7 +25,6 @@ public class TurnTest {
 
     }
 
-
     @Test
     //US-11
     // Checks if turns will cycle from the first player to the second player
@@ -43,7 +42,6 @@ public class TurnTest {
         WorldOfSweets.currentPlayerIndex = 3;
         String playerTurn = WorldOfSweets.nextPlayer();
         assertEquals("player1", playerTurn);
-
     }
 
 }
