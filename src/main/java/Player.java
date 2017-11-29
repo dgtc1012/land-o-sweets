@@ -16,9 +16,9 @@ public class Player implements java.io.Serializable {
         this.aiPlayer = aiPlayer;
         this.token = new Token(pNum, pName);
         if (pName.equalsIgnoreCase("dad"))
-          dad = true;
+            dad = true;
         else
-          dad = false;
+            dad = false;
     }
 
     public int getBoomerangs() {
@@ -30,7 +30,8 @@ public class Player implements java.io.Serializable {
             this.boomerangs--;
         return this.boomerangs;
     }
-  /**
+
+    /**
      * @return if this player is dad
      */
     public boolean isDad() {
@@ -46,9 +47,9 @@ public class Player implements java.io.Serializable {
         this.aiPlayer = aiPlayer;
         token = new Token(pNum, pName, x, y);
         if (pName.equalsIgnoreCase("dad"))
-          dad = true;
+            dad = true;
         else
-          dad = false;
+            dad = false;
     }
 
     public boolean isAiPlayer() {

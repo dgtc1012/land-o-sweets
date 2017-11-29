@@ -402,32 +402,34 @@ public class Gameboard {
     public Color getSquareColor(int index) {
         return squares.get(index).getBackground();
     }
+
     public static CardColor getSquareCardColor(int index) {
         Color c = squares.get(index).getBackground();
 
         if (index == 77)
-          return CardColor.CUPCAKE;
+            return CardColor.CUPCAKE;
         if (index == 61)
-          return CardColor.GINGERBREAD;
+            return CardColor.GINGERBREAD;
         if (index == 45)
-          return CardColor.ICECREAM;
+            return CardColor.ICECREAM;
         if (index == 29)
-          return CardColor.LICORICE;
+            return CardColor.LICORICE;
         if (index == 13)
-          return CardColor.PEPPERMINT;
+            return CardColor.PEPPERMINT;
 
         if (c == Color.red)
-          return CardColor.RED;
+            return CardColor.RED;
         if (c == Color.blue)
-          return CardColor.BLUE;
+            return CardColor.BLUE;
         if (c == Color.green)
-          return CardColor.GREEN;
+            return CardColor.GREEN;
         if (c == Color.orange)
-          return CardColor.ORANGE;
+            return CardColor.ORANGE;
         if (c == Color.yellow)
-          return CardColor.YELLOW;
+            return CardColor.YELLOW;
         return null;
     }
+
     public int getSquareXLocation(int index) {
         return squares.get(index).getX();
     }
