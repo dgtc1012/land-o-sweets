@@ -55,9 +55,9 @@ public class Player implements java.io.Serializable {
             int currentLeaderSquareValue = 0;
             String currentLeaderName = "";
             for (int i = 0; i < players.length; i++) {
-                if (players[i].currentSquareValue > currentLeaderSquareValue) {
-                    currentLeaderSquareValue = players[i].currentSquareValue;
-                    currentLeaderName = players[i].token.getName();
+                if (players[i].getCurrentSquareValue() > currentLeaderSquareValue) {
+                    currentLeaderSquareValue = players[i].getCurrentSquareValue();
+                    currentLeaderName = players[i].getToken().getName();
                 }
             }
             if (this.currentSquareValue < currentLeaderSquareValue && currentLeaderSquareValue >= 70) {

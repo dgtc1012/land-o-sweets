@@ -1,5 +1,6 @@
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import static org.junit.Assert.assertEquals;
 
@@ -494,7 +495,7 @@ public class PlayerTest {
         assertEquals(4 + 5, player.getCurrentSquareValue());
     }
 
-//Special cards
+    //Special cards
     @Test
     //US-30
     //skip card
@@ -505,8 +506,44 @@ public class PlayerTest {
     }
 
     @Test
+    public void makeMoveStrategicNoBoomerang() {
+        WorldOfSweets.gameModeStrategic = true;
+        Player player = new Player(2, "Tim", false);
+        Player player1 = Mockito.mock(Player.class);
+        Player player2 = Mockito.mock(Player.class);
+        Mockito.when(player1.getCurrentSquareValue()).thenReturn(30);
+        Mockito.when(player1.getToken()).thenReturn(new Token(0, "Kevin"));
+        Mockito.when(player2.getCurrentSquareValue()).thenReturn(40);
+        Mockito.when(player2.getToken()).thenReturn(new Token(1, "Nancy"));
+        WorldOfSweets.players = new Player[]{player1, player2, player};
+        player.makeMove();
+        assertEquals(3, player.getBoomerangs());
+    }
+
+    @Test
     public void makeMoveClassic() {
         WorldOfSweets.gameModeStrategic = false;
+        Player player = new Player(2, "Tim", false);
+        assertEquals(0, player.getBoomerangs());
         player.makeMove();
+        assertEquals(0, player.getBoomerangs());
+    }
+
+    @Test
+    public void makeMoveStrategicNoBommerangs() {
+        WorldOfSweets.gameModeStrategic = true;
+        Player player = Mockito.mock(Player.class);
+        Mockito.when(player.getBoomerangs()).thenReturn(0);
+        assertEquals(0, player.getBoomerangs());
+        player.makeMove();
+        assertEquals(0, player.getBoomerangs());
+    }
+
+    @Test
+    public void testDecrementBommerangCount() {
+        WorldOfSweets.gameModeStrategic = true;
+        Player player = new Player(2, "Tim", false);
+        player.decrementBoomerangCount();
+        assertEquals(2, player.getBoomerangs());
     }
 }
