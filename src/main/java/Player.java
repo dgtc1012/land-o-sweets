@@ -21,6 +21,32 @@ public class Player implements java.io.Serializable {
             dad = false;
     }
 
+    public Player(int pNum, String pName, int currentSquareValue, CardColor currentSquareColor, int x, int y, int previousSquareValue, boolean aiPlayer) {
+        if (WorldOfSweets.getGameMode()) {
+            this.boomerangs = 3;
+        }
+        this.currentSquareValue = currentSquareValue;
+        this.currentSquareColor = currentSquareColor;
+        this.aiPlayer = aiPlayer;
+        token = new Token(pNum, pName, x, y);
+        if (pName.equalsIgnoreCase("dad"))
+            dad = true;
+        else
+            dad = false;
+    }
+
+    public Player(int pNum, String pName, int currentSquareValue, CardColor currentSquareColor, int x, int y, int previousSquareValue, int boomerangs, boolean aiPlayer) {
+        this.currentSquareValue = currentSquareValue;
+        this.currentSquareColor = currentSquareColor;
+        this.boomerangs = boomerangs;
+        this.aiPlayer = aiPlayer;
+        token = new Token(pNum, pName, x, y);
+        if (pName.equalsIgnoreCase("dad"))
+            dad = true;
+        else
+            dad = false;
+    }
+
     public int getBoomerangs() {
         return this.boomerangs;
     }
@@ -36,20 +62,6 @@ public class Player implements java.io.Serializable {
      */
     public boolean isDad() {
         return dad;
-    }
-
-    public Player(int pNum, String pName, int currentSquareValue, CardColor currentSquareColor, int x, int y, int previousSquareValue, boolean aiPlayer) {
-        if (WorldOfSweets.getGameMode()) {
-            this.boomerangs = 3;
-        }
-        this.currentSquareValue = currentSquareValue;
-        this.currentSquareColor = currentSquareColor;
-        this.aiPlayer = aiPlayer;
-        token = new Token(pNum, pName, x, y);
-        if (pName.equalsIgnoreCase("dad"))
-            dad = true;
-        else
-            dad = false;
     }
 
     public boolean isAiPlayer() {
@@ -847,10 +859,14 @@ public class Player implements java.io.Serializable {
 
     public String toString() {
         StringBuilder sb = new StringBuilder("");
-        sb.append(currentSquareValue + "-");
-        sb.append(currentSquareColor + "-");
-        sb.append(token.toString() + "-");
-        sb.append(previousSquareValue + "-");
+        sb.append(currentSquareValue + "#");
+        sb.append(currentSquareColor + "#");
+        sb.append(token.toString() + "#");
+        if(currentSquareValue <= 0)
+          sb.append(0 + "#");
+        else
+          sb.append(previousSquareValue + "#");
+        sb.append(boomerangs + "#");
         sb.append(aiPlayer);
 
         return sb.toString();

@@ -21,7 +21,7 @@ public class Card implements java.io.Serializable {
     }
 
     public String toString() {
-        StringBuilder sb = new StringBuilder(color + "-");
+        StringBuilder sb = new StringBuilder(color + "#");
         sb.append(value);
         return sb.toString();
     }

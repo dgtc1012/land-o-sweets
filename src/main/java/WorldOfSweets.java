@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.security.MessageDigest;
 
 public class WorldOfSweets {
 
@@ -20,6 +21,7 @@ public class WorldOfSweets {
     public static boolean gameModeStrategic = false;
     public static Thread aiThread = null;
     public static boolean aiRunning = true;
+    public static StringBuilder forMD = new StringBuilder("");
 
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
 
@@ -51,7 +53,8 @@ public class WorldOfSweets {
         gameboard = new Gameboard();
 
         if (choice == 1 && loaded)
-            loadGame(1);
+            if(!loadGame(1))
+              System.exit(0);
 
         // If there's an AI player, a thread is created to check when it is that player's turn
         // When it's the AI player's turn, the mouse listener on the card deck is activated
@@ -308,76 +311,126 @@ public class WorldOfSweets {
     }
 
     //Loads the game file
+    //Also creates a string of the necessary information and turns it into a MessageDigest
+    //This loaded MessageDigest is compared to the MessageDigest which was saved in the game file
+    //If the two match the game is loaded
+    //If they don't the file has been tampered with and the game ends
     public static boolean loadGame(int choice) throws IOException, ClassNotFoundException {
 
-        loadBol = true;
-        if (choice == 0) {
-            String directory = "src/main/resources/gameFiles/";
-            String ext = ".txt";
-            String filename;
-            File file;
-            while (true) {
+      try {
+          loadBol = true;
+          if (choice == 0) {
+              String directory = "src/main/resources/gameFiles/";
+              String ext = ".txt";
+              String filename;
+              File file;
+              while (true) {
 
-                filename = JOptionPane.showInputDialog("Enter the filename for your game without the extension");
+                  filename = JOptionPane.showInputDialog("Enter the filename for your game without the extension");
 
-                if (filename == null) {
-                    return false;
+                  if (filename == null) {
+                      return false;
+                  }
+
+                  filename = directory + filename;
+                  filename += ext;
+                  file = new File(filename);
+
+                  if (!file.exists()) {
+                      JOptionPane.showMessageDialog(null, "That file does not exist");
+                  } else {
+                      break;
+                  }
+              }
+
+              br = new BufferedReader(new FileReader(file));
+
+              String gameBol = br.readLine();
+              forMD.append(gameBol);
+
+              if(gameBol.equals("true"))
+                gameModeStrategic = true;
+
+              int numOfPlayers = Integer.parseInt(br.readLine());
+              forMD.append(numOfPlayers);
+              String playerStr;
+              String[] playerSplit;
+              pNames = new String[numOfPlayers];
+              players = new Player[numOfPlayers];
+
+              //Restores players
+              for (int x = 0; x < numOfPlayers; x++) {
+
+                  pNames[x] = br.readLine();
+                  forMD.append(pNames[x]);
+                  playerStr = br.readLine();
+                  forMD.append(playerStr);
+                  playerSplit = playerStr.split("#");
+                  if(!gameModeStrategic) {
+                    players[x] = new Player(x + 1, pNames[x], Integer.parseInt(playerSplit[0]), getColor(playerSplit[1]), Integer.parseInt(playerSplit[2]), Integer.parseInt(playerSplit[3]), Integer.parseInt(playerSplit[4]), Boolean.parseBoolean(playerSplit[6]));
+
+                  }
+                  else
+                    players[x] = new Player(x + 1, pNames[x], Integer.parseInt(playerSplit[0]), getColor(playerSplit[1]), Integer.parseInt(playerSplit[2]), Integer.parseInt(playerSplit[3]), Integer.parseInt(playerSplit[4]), Integer.parseInt(playerSplit[5]), Boolean.parseBoolean(playerSplit[6]));
+              }
+
+              currentPlayerIndex = Integer.parseInt(br.readLine());
+              forMD.append(currentPlayerIndex);
+              currentPlayer = players[currentPlayerIndex];
+          } else {
+              //Restores deck and timer
+              ArrayList<Card> temp = new ArrayList<Card>();
+              int deckSize = Integer.parseInt(br.readLine());
+              forMD.append(deckSize + "\n");
+              String cardStr;
+              int xcor = 0, ycor = 0;
+
+              for (int x = 0; x < players.length; x++) {
+                if(players[x].getCurrentSquareValue() != -1)
+                  players[x].getToken().setCoords(gameboard.getSquareXLocation(players[x].getCurrentSquareValue()), gameboard.getSquareYLocation(players[x].getCurrentSquareValue()));
+                else {
+                  //For players that have not left the start square
+                  if(x == 0 )
+                    players[x].getToken().setCoords(20, 480);
+                  else if(x == 1)
+                    players[x].getToken().setCoords(60, 480);
+                  else if(x == 2)
+                    players[x].getToken().setCoords(20, 520);
+                  else if(x == 3)
+                    players[x].getToken().setCoords(60, 520);
                 }
+              }
 
-                filename = directory + filename;
-                filename += ext;
-                file = new File(filename);
+              for (int x = 0; x < deckSize; x++) {
+                  cardStr = br.readLine();
+                  forMD.append(cardStr + "\n");
+                  String[] cardSplit = cardStr.split("#");
+                  temp.add(new Card(getColor(cardSplit[0]), Integer.parseInt(cardSplit[1])));
+              }
 
-                if (!file.exists()) {
-                    JOptionPane.showMessageDialog(null, "That file does not exist");
-                } else {
-                    break;
+              gameboard.cardDeck.board.deck.setDeck(temp);
+              String lastCardStr = br.readLine();
+              forMD.append(lastCardStr);
+              String[] lastCardSplit = lastCardStr.split("#");
+              gameboard.cardDeck.board.lastCard = new Card(getColor(lastCardSplit[0]), Integer.parseInt(lastCardSplit[1]));
+              gameboard.cardDeck.board.doDraw(true);
+              String timeStr = br.readLine();
+              forMD.append(timeStr);
+              String[] timeSplit = timeStr.split(":");
+              gameboard.timer.setTime(Integer.parseInt(timeSplit[2]), Integer.parseInt(timeSplit[1]), Integer.parseInt(timeSplit[0]));
+                if(verifyMD(br.readLine())) {
+                  return true;
                 }
-            }
-
-            br = new BufferedReader(new FileReader(file));
-
-            int numOfPlayers = Integer.parseInt(br.readLine());
-            String playerStr;
-            String[] playerSplit;
-            pNames = new String[numOfPlayers];
-            players = new Player[numOfPlayers];
-
-            //Restores players
-            for (int x = 0; x < numOfPlayers; x++) {
-
-                pNames[x] = br.readLine();
-                playerStr = br.readLine();
-                playerSplit = playerStr.split("-");
-                players[x] = new Player(x + 1, pNames[x], Integer.parseInt(playerSplit[0]), getColor(playerSplit[1]), Integer.parseInt(playerSplit[2]), Integer.parseInt(playerSplit[3]), Integer.parseInt(playerSplit[4]), Boolean.parseBoolean(playerSplit[5]));
-            }
-
-            currentPlayerIndex = Integer.parseInt(br.readLine());
-            currentPlayer = players[currentPlayerIndex];
-        } else {
-            //Restores deck and timer
-            ArrayList<Card> temp = new ArrayList<Card>();
-            int deckSize = Integer.parseInt(br.readLine());
-            String cardStr;
-
-            for (int x = 0; x < players.length; x++)
-                players[x].getToken().setCoords(gameboard.getSquareXLocation(players[x].getCurrentSquareValue()), gameboard.getSquareYLocation(players[x].getCurrentSquareValue()));
-
-            for (int x = 0; x < deckSize; x++) {
-                cardStr = br.readLine();
-
-                String[] cardSplit = cardStr.split("-");
-                temp.add(new Card(getColor(cardSplit[0]), Integer.parseInt(cardSplit[1])));
-            }
-
-            gameboard.cardDeck.board.deck.setDeck(temp);
-            String lastCardStr = br.readLine();
-            String[] lastCardSplit = lastCardStr.split("-");
-            gameboard.cardDeck.board.lastCard = new Card(getColor(lastCardSplit[0]), Integer.parseInt(lastCardSplit[1]));
-            gameboard.cardDeck.board.doDraw(true);
-            String timeStr = br.readLine();
-            String[] timeSplit = timeStr.split(":");
-            gameboard.timer.setTime(Integer.parseInt(timeSplit[2]), Integer.parseInt(timeSplit[1]), Integer.parseInt(timeSplit[0]));
+                else {
+                  JOptionPane.showMessageDialog(null, "File tampered with");
+                  System.exit(0);
+                }
+          }
+        }
+        catch(Exception e) {
+          e.printStackTrace();
+          JOptionPane.showMessageDialog(null, "File tampered with");
+          System.exit(0);
         }
 
         return true;
@@ -402,5 +455,32 @@ public class WorldOfSweets {
             default:
                 return null;
         }
+    }
+
+    //Verifys the files MessageDigest with the loaded MessageDigest
+    private static boolean verifyMD(String savedMD) {
+
+      byte[] digestBytes = null;
+
+      try {
+        MessageDigest md = MessageDigest.getInstance("SHA");
+        md.update(forMD.toString().getBytes());
+        digestBytes = md.digest();
+      }
+      catch(Exception e) {
+        e.printStackTrace();
+      }
+
+      StringBuffer sb = new StringBuffer("");
+      for (int i = 0; i < digestBytes.length; i++) {
+      	sb.append(Integer.toString((digestBytes[i] & 0xff) + 0x100, 16).substring(1));
+      }
+
+      String createdMD = sb.toString();
+
+      if(createdMD.equals(savedMD))
+        return true;
+      else
+        return false;
     }
 }

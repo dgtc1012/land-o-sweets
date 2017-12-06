@@ -85,7 +85,7 @@ public class Token extends JPanel implements java.io.Serializable {
 
     public String toString() {
 
-        StringBuilder sb = new StringBuilder(x + "-" + y);
+        StringBuilder sb = new StringBuilder(x + "#" + y);
         return sb.toString();
     }
 }
