@@ -7,6 +7,8 @@ import static org.junit.Assert.assertEquals;
 public class IntegrityTest {
 
   @Test
+  //US-51
+  //This loads and untouched game file and the MessageDigests should match
   public void untounchedFile() throws Exception {
 
     boolean unTampered = false;
@@ -59,6 +61,8 @@ public class IntegrityTest {
   }
 
   @Test
+  //US-51
+  //This loads a file with deleted data and will either end with an error or the MessageDigests will not match
   public void deletedData() throws Exception {
 
     boolean unTampered = true;
@@ -113,6 +117,8 @@ public class IntegrityTest {
   }
 
   @Test
+  //US-51
+  //This loads a file with modified data and will either end with an error or the MessageDigests will not match
   public void modifiedData() throws Exception {
 
     boolean unTampered = true;
@@ -167,6 +173,8 @@ public class IntegrityTest {
   }
 
   @Test
+  //US-51
+  //This loads a file with additional data and will either end with an error or the MessageDigests will not match
   public void addedData() throws Exception {
 
     boolean unTampered = true;
@@ -220,6 +228,7 @@ public class IntegrityTest {
       assertEquals(false, unTampered);
   }
 
+  //Verifys the file MessageDigest with the created MessageDigest
   public boolean verifyMD(String forMD, String savedMD) {
 
     byte[] digestBytes = null;
