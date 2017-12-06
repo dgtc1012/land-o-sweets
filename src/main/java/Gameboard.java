@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.security.MessageDigest;
 
 /**
  * @author Justin Keenan, Dannah Gersh
@@ -329,10 +330,12 @@ public class Gameboard {
         return this.boomerangPlayerIndex;
     }
 
-    //Saves the nesscassy information to a .txt file
+    //Saves the necessary information to a .txt file
+    //Also creates the String of the necessary information to be turned into a MessageDigest
     private void save() throws IOException, InterruptedException {
 
         String directory = "src/main/resources/gameFiles/";
+        StringBuilder forMD = new StringBuilder("");  //The string turned into a MessageDigest
         WorldOfSweets.saveBol = true;
         String ext = ".txt";
         String filename;
@@ -364,7 +367,16 @@ public class Gameboard {
         if (!skip) {
             BufferedWriter bw = new BufferedWriter(new FileWriter(file));
 
+            if(WorldOfSweets.getGameMode())
+              bw.write("true");
+            else
+              bw.write("false");
+
+            bw.newLine();
+            forMD.append(WorldOfSweets.getGameMode());
+
             int numOfPlayers = WorldOfSweets.pNames.length;
+            forMD.append(numOfPlayers);
 
             bw.write(String.valueOf(numOfPlayers));
             bw.newLine();
@@ -373,18 +385,31 @@ public class Gameboard {
 
                 bw.write(WorldOfSweets.pNames[x]);
                 bw.newLine();
+                forMD.append(WorldOfSweets.pNames[x]);
                 bw.write(WorldOfSweets.players[x].toString());
                 bw.newLine();
+                forMD.append(WorldOfSweets.players[x].toString());
             }
 
             bw.write(String.valueOf(WorldOfSweets.currentPlayerIndex));
             bw.newLine();
+            forMD.append(String.valueOf(WorldOfSweets.currentPlayerIndex));
+
             bw.write(cardDeck.board.deck.toString());
             bw.newLine();
+            forMD.append(cardDeck.board.deck.toString() + "\n");
+
             bw.write(cardDeck.board.lastCard.toString());
             bw.newLine();
+            forMD.append(cardDeck.board.lastCard.toString());
+
             bw.write(timer.getHours() + ":" + timer.getMinutes() + ":" + timer.getSeconds());
+            bw.newLine();
+            forMD.append(timer.getHours() + ":" + timer.getMinutes() + ":" + timer.getSeconds());
+
+            bw.write(createMD(forMD.toString()));
             bw.close();
+
             JOptionPane.showMessageDialog(null, "Game Saved");
             System.exit(0);
         }
@@ -441,6 +466,28 @@ public class Gameboard {
     public JPanel getSquare(int index) {
         return squares.get(index);
     }
+
+    //Creates the MessageDigest and returns it in hexadecimal
+    private String createMD(String input) {
+
+     byte[] digestBytes = null;
+
+     try {
+       MessageDigest md = MessageDigest.getInstance("SHA");
+       md.update(input.getBytes());
+       digestBytes = md.digest();
+     }
+     catch(Exception e) {
+       e.printStackTrace();
+     }
+
+     StringBuffer sb = new StringBuffer("");
+     for (int i = 0; i < digestBytes.length; i++) {
+       sb.append(Integer.toString((digestBytes[i] & 0xff) + 0x100, 16).substring(1));
+     }
+
+     return sb.toString();
+   }
 
     // Variables declaration
     private JFrame _frame;
