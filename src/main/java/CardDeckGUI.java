@@ -66,7 +66,7 @@ public class CardDeckGUI extends JPanel implements ActionListener, java.io.Seria
             repaint();
         } else if (loaded) { //Case for the openeing to a loaded game.
             cardDrawn = false;
-            message = WorldOfSweets.pNames[WorldOfSweets.nextPlayerIndex()] + "'s turn to draw";
+            message = WorldOfSweets.pNames[WorldOfSweets.currentPlayerIndex] + "'s turn to draw";
             currentPlayer = WorldOfSweets.pNames[WorldOfSweets.currentPlayerIndex];
             repaint();
         } else {
